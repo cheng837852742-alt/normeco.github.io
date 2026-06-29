@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NORMECO 产品中心 | 工业套筒与起子头目录框架</title>
+  <meta name="description" content="NORMECO 产品中心目录框架，按方驱尺寸、起子套筒、起子头分类，支持模糊搜索，便于客户查找专业装配工具目录。">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://www.normeco.com/products.html">
+
+  <script>
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            graphite: "#fff7f7",
+            steel: "#fee2e2",
+            normBlue: "#b91c1c",
+            normGold: "#dc2626"
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 14% 10%, rgba(185,28,28,.12), transparent 30rem),
+        radial-gradient(circle at 88% 14%, rgba(220,38,38,.08), transparent 28rem),
+        linear-gradient(135deg, #fff, #fff7f7 48%, #ffffff);
+      color: #1f2933;
+      font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
+      line-height: 1.6;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      background-image:
+        linear-gradient(rgba(185,28,28,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(185,28,28,.04) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, transparent, #000 12%, #000 86%, transparent);
+      opacity: .7;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.86);
+      border: 1px solid rgba(185,28,28,.16);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 80px rgba(127,29,29,.08);
+    }
+
+    .brand-logo {
+      width: min(50vw, 230px);
+      height: 72px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .footer-logo {
+      width: min(62vw, 220px);
+      height: auto;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .language-menu {
+      opacity: 0;
+      transform: translateY(8px);
+      visibility: hidden;
+      transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+    }
+
+    .language-switcher:hover .language-menu,
+    .language-switcher:focus-within .language-menu,
+    .language-switcher.is-open .language-menu {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    .catalog-link.is-active {
+      background: #b91c1c;
+      border-color: #b91c1c;
+      color: #fff;
+    }
+
+    .catalog-link.is-active .muted {
+      color: rgba(255,255,255,.78);
+    }
+
+    .result-card mark {
+      background: rgba(220,38,38,.14);
+      color: #991b1b;
+      padding: 0 .16rem;
+    }
+  </style>
+</head>
+<body class="antialiased">
+  <header class="sticky top-0 z-50 border-b border-red-900/10 bg-white/94 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="主导航">
+      <a href="index.html" class="flex items-center" aria-label="NORMECO 首页">
+        <img class="brand-logo" src="assets/normeco-logo.png" alt="NORMECO 公司 logo" width="230" height="72" decoding="async">
+      </a>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden items-center gap-8 text-sm text-slate-600 md:flex">
+          <a class="font-bold text-red-800" href="products.html" aria-current="page" data-i18n="navProducts">产品中心</a>
+          <a class="hover:text-red-800" href="custom.html" data-i18n="navCustom">定制服务</a>
+          <a class="hover:text-red-800" href="solutions.html" data-i18n="navSolutions">产线方案</a>
+          <a class="hover:text-red-800" href="about.html" data-i18n="navAbout">关于我们</a>
+          <a class="hover:text-red-800" href="contact.html" data-i18n="navContact">联系我们</a>
+        </div>
+
+        <button id="menuToggle" type="button" class="inline-flex items-center border border-red-900/15 px-3 py-2 text-sm text-slate-700 md:hidden" aria-controls="mobileMenu" aria-expanded="false">
+          <span data-i18n="menu">菜单</span>
+        </button>
+
+        <div id="languageSwitcher" class="language-switcher relative">
+          <button id="languageButton" type="button" class="grid h-11 w-11 place-items-center rounded-full border border-red-900/15 bg-white shadow-lg shadow-red-950/10" aria-haspopup="true" aria-expanded="false" aria-label="选择语言">
+            <img id="languageFlag" class="h-6 w-6 rounded-full object-cover" width="24" height="24" src="https://flagcdn.com/cn.svg" alt="中国国旗">
+          </button>
+          <div class="language-menu absolute right-0 top-12 z-50 min-w-36 overflow-hidden border border-red-900/15 bg-white/96 text-sm text-slate-700 shadow-2xl shadow-red-950/15 backdrop-blur-xl">
+            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-red-50" data-lang="zh">
+              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/cn.svg" alt="">
+              <span>中文</span>
+            </button>
+            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-red-50" data-lang="en">
+              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/us.svg" alt="">
+              <span>English</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden border-t border-red-900/10 px-4 pb-4 md:hidden">
+      <div class="grid gap-2 text-sm text-slate-700">
+        <a class="py-2 font-bold text-red-800" href="products.html" aria-current="page" data-i18n="navProducts">产品中心</a>
+        <a class="py-2" href="custom.html" data-i18n="navCustom">定制服务</a>
+        <a class="py-2" href="solutions.html" data-i18n="navSolutions">产线方案</a>
+        <a class="py-2" href="about.html" data-i18n="navAbout">关于我们</a>
+        <a class="py-2" href="contact.html" data-i18n="navContact">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <div class="mx-auto max-w-7xl">
+        <p class="text-sm font-bold uppercase tracking-[.26em] text-red-700" data-i18n="eyebrow">Product Center</p>
+        <div class="mt-5 grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
+          <div>
+            <h1 class="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl" data-i18n="heroTitle">产品中心框架</h1>
+            <p class="mt-5 max-w-3xl text-lg text-slate-600" data-i18n="heroDesc">
+              基于已上传 PDF 产品目录，先建立产品目录/子目录导航与模糊搜索框架。当前页面仅展示分类结构，不展示具体产品型号、参数或价格信息。
+            </p>
+          </div>
+          <div class="glass p-5">
+            <label for="catalogSearch" class="block text-sm font-bold text-slate-800" data-i18n="searchLabel">搜索目录</label>
+            <div class="mt-3 flex gap-3">
+              <input id="catalogSearch" type="search" class="min-h-12 w-full border border-red-900/15 bg-white px-4 text-base text-slate-900 outline-none focus:border-red-700" placeholder="输入方驱尺寸、套筒、起子头、Torx、Adapter 等关键词" aria-describedby="searchHint" data-i18n-placeholder="searchPlaceholder">
+              <button id="clearSearch" type="button" class="border border-red-900/15 px-4 font-bold text-red-800 hover:bg-red-50" data-i18n="clear">清除</button>
+            </div>
+            <p id="searchHint" class="mt-3 text-sm text-slate-500" data-i18n="searchHint">支持中英文、尺寸、目录页码和近似拼写匹配。示例：1/2、起子、bit、adapter、torx。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 pb-16 sm:px-6 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[320px_1fr]">
+        <aside class="glass self-start p-4 lg:sticky lg:top-28" aria-label="产品目录侧边栏">
+          <div class="flex items-center justify-between gap-4 border-b border-red-900/10 pb-4">
+            <div>
+              <h2 class="text-lg font-bold" data-i18n="sidebarTitle">产品目录</h2>
+              <p class="text-sm text-slate-500">Catalog / Subcatalog</p>
+            </div>
+            <span id="catalogCount" class="rounded-full bg-red-50 px-3 py-1 text-sm font-bold text-red-800"></span>
+          </div>
+          <nav id="catalogSidebar" class="mt-4 grid gap-2" aria-label="产品目录"></nav>
+        </aside>
+
+        <section class="grid gap-6" aria-label="产品分类内容">
+          <div id="activeCategoryPanel" class="glass p-6"></div>
+          <div class="glass p-6">
+            <div class="flex flex-col gap-3 border-b border-red-900/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
+              <div>
+                <h2 class="text-2xl font-bold" data-i18n="resultTitle">目录匹配结果</h2>
+                <p id="resultSummary" class="mt-1 text-sm text-slate-500">显示全部目录分类。</p>
+              </div>
+              <p class="text-sm font-bold text-red-800" data-i18n="frameworkOnly">仅分类框架，产品明细待上传</p>
+            </div>
+            <div id="resultGrid" class="mt-6 grid gap-4 md:grid-cols-2"></div>
+            <div id="emptyState" class="mt-6 hidden border border-dashed border-red-900/20 bg-red-50/60 p-8 text-center">
+              <h3 class="text-xl font-bold" data-i18n="emptyTitle">未找到匹配目录</h3>
+              <p class="mt-2 text-slate-600" data-i18n="emptyDesc">请尝试输入方驱尺寸、中文分类或英文关键词，例如 “1/2”、 “起子套筒”、 “torx”。</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-red-900/10 px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
+      <div>
+        <img class="footer-logo" src="assets/normeco-logo.png" alt="NORMECO 公司 logo" width="220" height="69" loading="lazy" decoding="async">
+        <p class="mt-3 max-w-md text-sm text-slate-600" data-i18n="footerDesc">NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。</p>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-slate-700">Pages</h2>
+        <div class="mt-4 grid gap-2 text-sm text-slate-600">
+          <a href="index.html" data-i18n="home">首页</a>
+          <a href="products.html" data-i18n="navProducts">产品中心</a>
+          <a href="custom.html" data-i18n="navCustom">定制服务</a>
+          <a href="contact.html" data-i18n="navContact">联系我们</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-slate-700" data-i18n="statusTitle">Catalog Status</h2>
+        <p class="mt-4 text-sm text-slate-600" data-i18n="statusDesc">PDF 目录已用于分类框架；产品明细、参数表、下载入口待后续接入。</p>
+      </div>
+    </div>
+    <div class="mx-auto mt-8 max-w-7xl border-t border-red-900/10 pt-6 text-sm text-slate-500">
+      © 2026 NORMECO. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    const translations = {
+      zh: {
+        pageTitle: "NORMECO 产品中心 | 工业套筒与起子头目录框架",
+        metaDescription: "NORMECO 产品中心目录框架，按方驱尺寸、起子套筒、起子头分类，支持模糊搜索，便于客户查找专业装配工具目录。",
+        navProducts: "产品中心",
+        navCustom: "定制服务",
+        navSolutions: "产线方案",
+        navAbout: "关于我们",
+        navContact: "联系我们",
+        menu: "菜单",
+        eyebrow: "Product Center",
+        heroTitle: "产品中心框架",
+        heroDesc: "基于已上传 PDF 产品目录，先建立产品目录/子目录导航与模糊搜索框架。当前页面仅展示分类结构，不展示具体产品型号、参数或价格信息。",
+        searchLabel: "搜索目录",
+        searchPlaceholder: "输入方驱尺寸、套筒、起子头、Torx、Adapter 等关键词",
+        clear: "清除",
+        searchHint: "支持中英文、尺寸、目录页码和近似拼写匹配。示例：1/2、起子、bit、adapter、torx。",
+        sidebarTitle: "产品目录",
+        resultTitle: "目录匹配结果",
+        frameworkOnly: "仅分类框架，产品明细待上传",
+        allResults: "显示全部目录分类。",
+        foundResults: (count, query) => `找到 ${count} 个匹配目录：“${query}”。`,
+        catalogCount: (count) => `${count} 类`,
+        selectedCatalog: "Selected Catalog",
+        detailPending: "产品资料待上传",
+        emptyTitle: "未找到匹配目录",
+        emptyDesc: "请尝试输入方驱尺寸、中文分类或英文关键词，例如 “1/2”、 “起子套筒”、 “torx”。",
+        footerDesc: "NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。",
+        home: "首页",
+        statusTitle: "Catalog Status",
+        statusDesc: "PDF 目录已用于分类框架；产品明细、参数表、下载入口待后续接入。"
+      },
+      en: {
+        pageTitle: "NORMECO Product Center | Industrial Sockets and Bits Catalog Framework",
+        metaDescription: "NORMECO product center framework organized by square drive size, bit sockets, and industrial bits, with fuzzy search for professional assembly tool catalog navigation.",
+        navProducts: "Products",
+        navCustom: "Customization",
+        navSolutions: "Line Solutions",
+        navAbout: "About",
+        navContact: "Contact",
+        menu: "Menu",
+        eyebrow: "Product Center",
+        heroTitle: "Product Center Framework",
+        heroDesc: "Based on the uploaded PDF catalog, this page first builds the catalog/subcatalog navigation and fuzzy search framework. It currently shows category structure only, without product models, specifications, or pricing.",
+        searchLabel: "Search Catalog",
+        searchPlaceholder: "Search drive size, sockets, bits, Torx, Adapter, etc.",
+        clear: "Clear",
+        searchHint: "Supports Chinese/English terms, sizes, catalog page ranges, and approximate spelling. Try: 1/2, bit, socket, adapter, torx.",
+        sidebarTitle: "Product Catalog",
+        resultTitle: "Catalog Matches",
+        frameworkOnly: "Framework only, product details pending",
+        allResults: "Showing all catalog categories.",
+        foundResults: (count, query) => `${count} matching catalog categories found for “${query}”.`,
+        catalogCount: (count) => `${count} groups`,
+        selectedCatalog: "Selected Catalog",
+        detailPending: "Product details pending",
+        emptyTitle: "No matching catalog found",
+        emptyDesc: "Try a drive size, Chinese category, or English keyword such as “1/2”, “bit socket”, or “torx”.",
+        footerDesc: "NORMECO provides professional assembly tool standards and customization, headquartered in Chongqing, China and serving global customers.",
+        home: "Home",
+        statusTitle: "Catalog Status",
+        statusDesc: "The PDF catalog has been used for classification only. Product details, specification tables, and downloads will be connected later."
+      }
+    };
+
+    let currentLanguage = localStorage.getItem("normeco-language") || "zh";
+
+    function t(key, ...args) {
+      const value = (translations[currentLanguage] || translations.zh)[key];
+      return typeof value === "function" ? value(...args) : value;
+    }
+
+    const catalog = [
+      {
+        id: "drive-1-4",
+        title: "1/4\" 方驱套筒",
+        titleEn: "1/4\" Square Drive",
+        range: "P1-10",
+        description: "小规格冲击套筒与外星型套筒目录入口。",
+        children: ["外星型标准套筒 / External Torx Sockets", "外星型薄壁套筒 / Thin Wall", "外星型加长套筒 / Deep", "小规格附件 / Accessories"]
+      },
+      {
+        id: "drive-3-8",
+        title: "3/8\" 方驱套筒",
+        titleEn: "3/8\" Square Drive",
+        range: "P11-44",
+        description: "中小规格冲击套筒、外星型套筒与附件目录入口。",
+        children: ["六角冲击套筒 / 6-Point Impact Sockets", "加长冲击套筒 / Deep Impact Sockets", "外星型套筒 / External Torx", "转换头 / Adapter", "延长杆 / Extension Bars"]
+      },
+      {
+        id: "drive-1-2",
+        title: "1/2\" 方驱套筒",
+        titleEn: "1/2\" Square Drive",
+        range: "P45-92",
+        description: "常用工业装配规格，覆盖标准、深型、薄壁与连接附件。",
+        children: ["标准冲击套筒 / Standard Impact Sockets", "薄壁套筒 / Thin Wall", "加长套筒 / Deep", "外星型套筒 / External Torx", "万向接头 / Universal Joint", "转换头与延长杆 / Adapter & Extension Bars"]
+      },
+      {
+        id: "drive-5-8",
+        title: "5/8\" 方驱套筒",
+        titleEn: "5/8\" Square Drive",
+        range: "P93-94",
+        description: "特殊方驱规格的工业冲击套筒目录入口。",
+        children: ["特殊冲击套筒 / Specialty Impact Sockets", "定制接口预留 / Custom Interface Placeholder"]
+      },
+      {
+        id: "drive-3-4",
+        title: "3/4\" 方驱套筒",
+        titleEn: "3/4\" Square Drive",
+        range: "P95-112",
+        description: "重载装配场景常用规格，适配大型设备和产线维护。",
+        children: ["标准冲击套筒 / Standard Impact Sockets", "加长冲击套筒 / Deep Impact Sockets", "转换头 / Adapter", "延长杆 / Extension Bars", "万向接头 / Universal Joint"]
+      },
+      {
+        id: "drive-1",
+        title: "1\" 方驱套筒",
+        titleEn: "1\" Square Drive",
+        range: "P113-128",
+        description: "重型工业装配与维护类套筒目录入口。",
+        children: ["重型冲击套筒 / Heavy-Duty Impact Sockets", "加长套筒 / Deep Sockets", "连接附件 / Accessories", "延长杆 / Extension Bars"]
+      },
+      {
+        id: "drive-1-1-2",
+        title: "1-1/2\" 方驱套筒",
+        titleEn: "1-1/2\" Square Drive",
+        range: "P129-132",
+        description: "大规格重载冲击套筒及延长连接件目录入口。",
+        children: ["重载冲击套筒 / Heavy-Duty Sockets", "延长杆 / Extension Bars", "销孔式连接 / Pin Hole Connection"]
+      },
+      {
+        id: "drive-2-1-2",
+        title: "2-1/2\" 方驱套筒",
+        titleEn: "2-1/2\" Square Drive",
+        range: "P133-136",
+        description: "超重载工业装配场景的套筒目录入口。",
+        children: ["超重载冲击套筒 / Extra Heavy-Duty Sockets", "大型设备维护 / Heavy Equipment Maintenance"]
+      },
+      {
+        id: "bit-sockets",
+        title: "起子套筒",
+        titleEn: "Bit Sockets",
+        range: "P137-145",
+        description: "面向冲击工具的起子套筒分类目录。",
+        children: ["带磁起子套筒 / Bit Sockets with Magnet", "不带磁起子套筒 / Bit Sockets without Magnet", "六角起子套筒 / Hex Bit Sockets", "定制长度预留 / Custom Length Placeholder"]
+      },
+      {
+        id: "industrial-bits",
+        title: "起子头",
+        titleEn: "Industrial Bits",
+        range: "P146-164",
+        description: "工业装配级起子头目录入口。",
+        children: ["十字起子头 / Phillips Bits", "一字起子头 / Slotted Bits", "内六角起子头 / Hex Bits", "星型起子头 / Torx Bits", "定制起子头 / Custom Bits"]
+      }
+    ];
+
+    const sidebar = document.getElementById("catalogSidebar");
+    const resultGrid = document.getElementById("resultGrid");
+    const resultSummary = document.getElementById("resultSummary");
+    const catalogCount = document.getElementById("catalogCount");
+    const activeCategoryPanel = document.getElementById("activeCategoryPanel");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("catalogSearch");
+    const clearSearch = document.getElementById("clearSearch");
+
+    let activeId = catalog[0].id;
+    let currentQuery = "";
+
+    function normalize(value) {
+      return value.toLowerCase().replace(/[\s"'“”/\\._-]+/g, "");
+    }
+
+    function fuzzyMatch(source, query) {
+      const text = normalize(source);
+      const needle = normalize(query);
+      if (!needle) return true;
+      if (text.includes(needle)) return true;
+
+      let index = 0;
+      for (const char of text) {
+        if (char === needle[index]) index += 1;
+        if (index === needle.length) return true;
+      }
+      return false;
+    }
+
+    function categoryText(item) {
+      return [item.title, item.titleEn, item.range, item.description, ...item.children].join(" ");
+    }
+
+    function renderSidebar(items) {
+      sidebar.innerHTML = items.map((item) => `
+        <button class="catalog-link ${item.id === activeId ? "is-active" : ""} w-full border border-red-900/10 bg-white px-4 py-3 text-left text-slate-700 transition hover:border-red-700/40 hover:bg-red-50" type="button" data-id="${item.id}">
+          <span class="block font-bold">${item.title}</span>
+          <span class="muted mt-1 block text-xs text-slate-500">${item.titleEn} · ${item.range}</span>
+        </button>
+      `).join("");
+
+      sidebar.querySelectorAll(".catalog-link").forEach((button) => {
+        button.addEventListener("click", () => {
+          activeId = button.dataset.id;
+          render();
+          document.getElementById("activeCategoryPanel").scrollIntoView({ block: "start", behavior: "smooth" });
+        });
+      });
+    }
+
+    function renderActivePanel() {
+      const item = catalog.find((entry) => entry.id === activeId) || catalog[0];
+      activeCategoryPanel.innerHTML = `
+        <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
+          <div>
+            <p class="text-sm font-bold uppercase tracking-[.22em] text-red-700">${t("selectedCatalog")}</p>
+            <h2 class="mt-3 text-3xl font-bold">${item.title}</h2>
+            <p class="mt-1 text-sm font-bold text-slate-500">${item.titleEn} · ${item.range}</p>
+            <p class="mt-4 max-w-3xl text-slate-600">${item.description}</p>
+          </div>
+          <div class="border border-red-900/10 bg-red-50 px-4 py-3 text-sm text-red-900">
+            ${t("detailPending")}
+          </div>
+        </div>
+        <div class="mt-6 grid gap-2 sm:grid-cols-2">
+          ${item.children.map((child) => `<div class="border border-red-900/10 bg-white px-4 py-3 text-sm text-slate-700">${child}</div>`).join("")}
+        </div>
+      `;
+    }
+
+    function renderResults(items) {
+      resultGrid.innerHTML = items.map((item) => `
+        <article class="result-card border border-red-900/10 bg-white p-5">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold">${item.title}</h3>
+              <p class="mt-1 text-sm font-bold text-slate-500">${item.titleEn}</p>
+            </div>
+            <span class="shrink-0 rounded-full bg-red-50 px-3 py-1 text-sm font-bold text-red-800">${item.range}</span>
+          </div>
+          <p class="mt-4 text-sm text-slate-600">${item.description}</p>
+          <div class="mt-4 flex flex-wrap gap-2">
+            ${item.children.map((child) => `<span class="border border-red-900/10 bg-red-50/50 px-2.5 py-1 text-xs text-slate-700">${child}</span>`).join("")}
+          </div>
+        </article>
+      `).join("");
+
+      emptyState.classList.toggle("hidden", items.length > 0);
+    }
+
+    function render() {
+      const filtered = catalog.filter((item) => fuzzyMatch(categoryText(item), currentQuery));
+      if (filtered.length && !filtered.some((item) => item.id === activeId)) {
+        activeId = filtered[0].id;
+      }
+
+      catalogCount.textContent = t("catalogCount", catalog.length);
+      resultSummary.textContent = currentQuery
+        ? t("foundResults", filtered.length, currentQuery)
+        : t("allResults");
+
+      renderSidebar(filtered.length ? filtered : catalog);
+      renderActivePanel();
+      renderResults(filtered);
+    }
+
+    searchInput.addEventListener("input", (event) => {
+      currentQuery = event.target.value.trim();
+      render();
+    });
+
+    clearSearch.addEventListener("click", () => {
+      searchInput.value = "";
+      currentQuery = "";
+      render();
+      searchInput.focus();
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("hidden") === false;
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    const languageSwitcher = document.getElementById("languageSwitcher");
+    const languageButton = document.getElementById("languageButton");
+    const languageFlag = document.getElementById("languageFlag");
+    const languageFlags = {
+      zh: { src: "https://flagcdn.com/cn.svg", alt: "中国国旗" },
+      en: { src: "https://flagcdn.com/us.svg", alt: "United States flag" }
+    };
+
+    function applyLanguage(language) {
+      currentLanguage = translations[language] ? language : "zh";
+      const dictionary = translations[currentLanguage];
+
+      document.documentElement.lang = currentLanguage === "en" ? "en" : "zh-CN";
+      document.title = dictionary.pageTitle;
+      document.querySelector("meta[name='description']").setAttribute("content", dictionary.metaDescription);
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const value = dictionary[element.dataset.i18n];
+        if (typeof value === "string") element.textContent = value;
+      });
+
+      document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
+        const value = dictionary[element.dataset.i18nPlaceholder];
+        if (typeof value === "string") element.setAttribute("placeholder", value);
+      });
+
+      const flag = languageFlags[currentLanguage] || languageFlags.zh;
+      languageFlag.src = flag.src;
+      languageFlag.alt = flag.alt;
+      localStorage.setItem("normeco-language", currentLanguage);
+      render();
+    }
+
+    function setLanguageMenuState(isOpen) {
+      languageSwitcher.classList.toggle("is-open", isOpen);
+      languageButton.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    languageSwitcher.addEventListener("mouseenter", () => setLanguageMenuState(true));
+    languageSwitcher.addEventListener("mouseleave", () => setLanguageMenuState(false));
+    languageSwitcher.addEventListener("focusin", () => setLanguageMenuState(true));
+    languageSwitcher.addEventListener("focusout", (event) => {
+      if (!languageSwitcher.contains(event.relatedTarget)) setLanguageMenuState(false);
+    });
+    languageButton.addEventListener("click", () => {
+      const isOpen = languageButton.getAttribute("aria-expanded") === "true";
+      setLanguageMenuState(!isOpen);
+    });
+    document.querySelectorAll(".language-option").forEach((option) => {
+      option.addEventListener("click", () => {
+        applyLanguage(option.dataset.lang);
+        setLanguageMenuState(false);
+      });
+    });
+
+    applyLanguage(currentLanguage);
+  </script>
+</body>
+</html>

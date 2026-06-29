@@ -1,308 +1,738 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HANTORQ 工业工具 | 工业套筒与装配工具定制供应商</title>
-  <meta name="description" content="HANTORQ 工业工具专注工业套筒、冲击套筒、装配工具、扭矩适配器和非标定制方案，为制造企业提供稳定、精密、可协作的 B2B 工具供应服务。">
-  <meta name="keywords" content="工业套筒,冲击套筒,装配工具,扭矩适配器,非标定制工具,B2B工业工具供应商,industrial sockets,assembly tools">
+  <title>NORMECO 专业装配工具定制 | 无MOQ 高性价比 | 中国重庆服务全球</title>
+  <meta name="description" content="想买或了解专业装配工具、定制套筒与产线装配工具方案？NORMECO 总部位于重庆，服务全球，提供无MOQ、1pc起订、专业定制和高性价比装配工具标件/定制服务。">
+  <meta name="keywords" content="NORMECO,专业装配工具,定制套筒,无MOQ,装配工具定制,机器人装配工具,自动化产线,重庆装配工具,全球供应">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="HANTORQ 工业工具 | 工业套筒与装配工具">
-  <meta property="og:description" content="面向高端制造的工业套筒、装配工具和定制化 B2B 供应方案。">
-  <meta property="og:image" content="assets/hero-tools.png">
-  <link rel="canonical" href="https://example.com/">
-  <link rel="stylesheet" href="styles.css">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
+  <meta property="og:title" content="NORMECO 专业装配工具定制 | 无MOQ 高性价比">
+  <meta property="og:description" content="NORMECO 提供专业装配工具标件/定制、定制套筒和自动化产线工具解决方案，中国重庆服务全球。">
+  <meta property="og:image" content="https://www.normeco.com/assets/normeco-custom-sockets.png">
+  <link rel="canonical" href="https://www.normeco.com/">
+
+  <!-- Tailwind CSS CDN: kept as the only external dependency per requirement. -->
+  <script>
+    window.tailwind = window.tailwind || {};
+    window.tailwind.config = {
+      theme: {
+        extend: {
+            colors: {
+            graphite: "#fff7f7",
+            steel: "#fee2e2",
+            zincLine: "rgba(255,255,255,.12)",
+            normBlue: "#b91c1c",
+            normGold: "#dc2626"
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
+
+  <!-- Critical CSS and motion helpers. -->
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg-a: #07090c;
+      --bg-b: #101820;
+      --bg-c: #0b0d10;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(185,28,28,.12), transparent 30rem),
+        radial-gradient(circle at 86% 20%, rgba(220,38,38,.08), transparent 28rem),
+        linear-gradient(135deg, #fff, #fff7f7 46%, #ffffff);
+      color: #1f2933;
+      font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
+      line-height: 1.6;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      background-image:
+        linear-gradient(rgba(185,28,28,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(185,28,28,.04) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, transparent, #000 12%, #000 86%, transparent);
+      opacity: .7;
+    }
+
+    .glass {
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(185,28,28,.16);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 24px 80px rgba(127,29,29,.08);
+    }
+
+    .industrial-image {
+      aspect-ratio: 16 / 11;
+      background: linear-gradient(135deg, #fff, #fee2e2);
+    }
+
+    .brand-logo {
+      width: min(50vw, 230px);
+      height: 72px;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .hero-logo {
+      display: block;
+      width: min(82vw, 430px);
+      height: auto;
+      margin-bottom: .18em;
+    }
+
+    .footer-logo {
+      width: min(62vw, 220px);
+      height: auto;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s cubic-bezier(.2,.8,.2,1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .language-menu {
+      opacity: 0;
+      transform: translateY(8px);
+      visibility: hidden;
+      transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+    }
+
+    .language-switcher:hover .language-menu,
+    .language-switcher:focus-within .language-menu,
+    .language-switcher.is-open .language-menu {
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+    }
+
+    .normeco-red-white .bg-graphite\/88,
+    .normeco-red-white .bg-graphite\/95 {
+      background-color: rgba(255,255,255,.94) !important;
+    }
+
+    .normeco-red-white [class*="text-white/"],
+    .normeco-red-white .text-white {
+      color: #475569 !important;
+    }
+
+    .normeco-red-white .text-normBlue,
+    .normeco-red-white .text-normGold {
+      color: #b91c1c !important;
+    }
+
+    .normeco-red-white .bg-normBlue {
+      background-color: #b91c1c !important;
+      color: #fff !important;
+    }
+
+    .normeco-red-white .text-graphite {
+      color: #fff !important;
+    }
+
+    .normeco-red-white [class*="border-white/"] {
+      border-color: rgba(185,28,28,.16) !important;
+    }
+
+    .normeco-red-white .hover\:text-white:hover {
+      color: #991b1b !important;
+    }
+
+    .normeco-red-white .language-menu,
+    .normeco-red-white .language-option:hover {
+      background-color: rgba(255,255,255,.96) !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+  </style>
+</head>
+<body class="normeco-red-white antialiased">
+  <!-- 1. Navigation -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-graphite/88 backdrop-blur-xl">
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="主导航" data-i18n-aria-label="navAria">
+      <a href="index.html" class="flex items-center" aria-label="NORMECO 首页" data-i18n-aria-label="homeAria">
+        <img class="brand-logo" src="assets/normeco-logo.png" alt="NORMECO 公司 logo" width="230" height="72" decoding="async">
+      </a>
+
+      <div class="flex items-center gap-3">
+        <div class="hidden items-center gap-8 text-sm text-white/75 md:flex">
+          <a class="hover:text-white" href="products.html" data-i18n="navProducts">产品中心</a>
+          <a class="hover:text-white" href="custom.html" data-i18n="navCustom">定制服务</a>
+          <a class="hover:text-white" href="solutions.html" data-i18n="navSolutions">产线方案</a>
+          <a class="hover:text-white" href="about.html" data-i18n="navAbout">关于我们</a>
+          <a class="hover:text-white" href="contact.html" data-i18n="navContact">联系我们</a>
+        </div>
+
+        <button id="menuToggle" type="button" class="inline-flex items-center border border-white/15 px-3 py-2 text-sm text-white/85 md:hidden" aria-controls="mobileMenu" aria-expanded="false" data-i18n="menu">
+          菜单
+        </button>
+
+        <div id="languageSwitcher" class="language-switcher relative">
+          <button id="languageButton" type="button" class="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/8 shadow-lg shadow-black/20" aria-haspopup="true" aria-expanded="false" aria-label="选择语言" data-i18n-aria-label="languageAria">
+            <img id="languageFlag" class="h-6 w-6 rounded-full object-cover" width="24" height="24" src="https://flagcdn.com/cn.svg" alt="中国国旗">
+          </button>
+          <div class="language-menu absolute right-0 top-12 z-50 min-w-36 overflow-hidden border border-white/15 bg-graphite/95 text-sm text-white/80 shadow-2xl shadow-black/40 backdrop-blur-xl">
+            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-white/10" data-lang="zh">
+              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/cn.svg" alt="">
+              <span>中文</span>
+            </button>
+            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-white/10" data-lang="en">
+              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/us.svg" alt="">
+              <span>English</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div id="mobileMenu" class="hidden border-t border-white/10 px-4 pb-4 md:hidden">
+      <div class="grid gap-2 text-sm text-white/80">
+        <a class="py-2" href="products.html" data-i18n="navProducts">产品中心</a>
+        <a class="py-2" href="custom.html" data-i18n="navCustom">定制服务</a>
+        <a class="py-2" href="solutions.html" data-i18n="navSolutions">产线方案</a>
+        <a class="py-2" href="about.html" data-i18n="navAbout">关于我们</a>
+        <a class="py-2" href="contact.html" data-i18n="navContact">联系我们</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- 2. Hero -->
+    <section class="relative overflow-hidden px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.03fr_.97fr]">
+        <div class="reveal">
+          <p class="mb-5 text-sm font-bold uppercase tracking-[.26em] text-normBlue">Professional · No MOQ · Cost-effective</p>
+          <h1 class="max-w-4xl text-4xl font-bold leading-tight tracking-tight sm:text-5xl lg:text-7xl">
+            <img class="hero-logo" src="assets/normeco-logo.png" alt="NORMECO" width="430" height="135" decoding="async">
+            <span data-i18n="heroTitleRest">全球前五套筒品牌，专业装配工具标件与定制</span>
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg text-white/72" data-i18n="heroDesc">
+            无MOQ · 专业定制 · 高性价比。面向机器人、自动化、装配线与产线场景，为全球客户提供专业严谨、具有德国工业美学气质的装配工具解决方案。
+          </p>
+          <div class="mt-9 flex flex-col gap-3 sm:flex-row">
+            <a href="contact.html" class="inline-flex items-center justify-center bg-normBlue px-6 py-3 font-bold text-graphite" data-i18n="quoteNow">立即询价</a>
+            <a href="products.html" class="inline-flex items-center justify-center border border-white/20 px-6 py-3 font-bold text-white" data-i18n="learnProducts">了解产品</a>
+          </div>
+        </div>
+
+        <figure class="reveal glass overflow-hidden">
+          <img class="industrial-image h-full w-full object-cover" width="960" height="660" loading="eager" decoding="async" alt="NORMECO 定制套筒与专业装配工具用于机器人自动化产线" data-i18n-alt="heroImageAlt" src="assets/normeco-hero-red-white.png">
+          <figcaption class="border-t border-white/10 p-5 text-sm text-white/60" data-i18n="heroCaption">
+            定制套筒、装配工具与自动化产线接口工具示意图
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 3. Core Business / Product -->
+    <section id="products" class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="reveal max-w-3xl">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[.24em] text-normGold">Core business</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="productsTitle">定制套筒及专业装配工具</h2>
+          <p class="mt-5 text-white/68" data-i18n="productsDesc">
+            NORMECO 提供装配工具标件与定制服务，覆盖机器人末端工具、自动化装配线、产线维护、设备厂配套和非标接口适配。无论数量，1pc 也可成交。
+          </p>
+        </div>
+
+        <div class="mt-10 grid gap-5 md:grid-cols-3">
+          <article class="reveal glass p-6">
+            <img class="mb-6 w-full industrial-image object-cover" width="640" height="440" loading="lazy" decoding="async" alt="NORMECO 定制套筒产品用于工业装配线" data-i18n-alt="productImageAlt1" src="assets/normeco-custom-sockets.png">
+            <h3 class="text-xl font-bold" data-i18n="product1Title">NORMECO 定制套筒</h3>
+            <p class="mt-3 text-white/64" data-i18n="product1Desc">无MOQ，1件起订，专业级。可按图纸、样件、机器人接口或产线工况定制。</p>
+          </article>
+
+          <article class="reveal glass p-6">
+            <img class="mb-6 w-full industrial-image object-cover" width="640" height="440" loading="lazy" decoding="async" alt="专业装配工具适配机器人与自动化设备" data-i18n-alt="productImageAlt2" src="assets/normeco-robot-tools.png">
+            <h3 class="text-xl font-bold" data-i18n="product2Title">装配工具与接口件</h3>
+            <p class="mt-3 text-white/64" data-i18n="product2Desc">面向自动化、装配线和设备厂，提供扭矩适配、延长、转换和专用连接工具。</p>
+          </article>
+
+          <article class="reveal glass p-6">
+            <img class="mb-6 w-full industrial-image object-cover" width="640" height="440" loading="lazy" decoding="async" alt="高性价比装配工具标件适用于全球客户采购" data-i18n-alt="productImageAlt3" src="assets/normeco-b2b-supply.png">
+            <h3 class="text-xl font-bold" data-i18n="product3Title">标件与批量供应</h3>
+            <p class="mt-3 text-white/64" data-i18n="product3Desc">专业、稳定、高性价比，适合“买现货”“了解规格”“项目长期配套”等采购意图。</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Product structured data -->
+      <script type="application/ld+json">
       {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        "@id": "https://www.normeco.com/#product-custom-socket",
+        "name": "NORMECO 定制套筒",
+        "brand": {
+          "@type": "Brand",
+          "name": "NORMECO"
+        },
+        "category": "专业装配工具 / 定制套筒",
+        "description": "无MOQ，1件起订，专业级。适用于机器人、自动化、装配线和产线场景的 NORMECO 定制套筒。",
+        "image": "https://www.normeco.com/assets/normeco-custom-sockets.png",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "url": "https://www.normeco.com/contact.html",
+          "priceCurrency": "CNY"
+        }
+      }
+      </script>
+    </section>
+
+    <!-- 4. About -->
+    <section id="about" class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[.9fr_1.1fr]">
+        <div class="reveal">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[.24em] text-normBlue">About NORMECO</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="aboutTitle">总部中国重庆，服务全球制造企业</h2>
+        </div>
+        <div class="reveal text-white/70">
+          <p data-i18n="aboutDesc1">
+            NORMECO 是专注专业装配工具标件/定制的工业品牌，以专业严谨的工程语言、克制清晰的视觉体系和高端工业品牌标准服务全球客户。
+          </p>
+          <p class="mt-5" data-i18n="aboutDesc2">
+            我们围绕定制套筒、装配工具、机器人接口工具、自动化装配线和产线工况提供选型、打样和定制支持。NORMECO 品牌套筒全球销量前五，数据来源于《美国US产业经济研究所》。
+          </p>
+        </div>
+      </div>
+
+      <!-- Organization structured data -->
+      <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
         "@type": "Organization",
-        "@id": "https://example.com/#organization",
-        "name": "HANTORQ 工业工具",
-        "alternateName": "HANTORQ Industrial Tools",
-        "url": "https://example.com/",
-        "logo": "https://example.com/assets/hero-tools.png",
-        "description": "工业套筒、冲击套筒、装配工具、扭矩适配器与非标定制工具的 B2B 供应商。",
-        "knowsAbout": [
-          "Industrial sockets",
-          "Impact sockets",
-          "Assembly tools",
-          "Torque adapters",
-          "Custom tooling",
-          "OEM and ODM manufacturing"
-        ],
-        "areaServed": ["China", "Global"],
-        "makesOffer": [
+        "@id": "https://www.normeco.com/#organization",
+        "name": "NORMECO",
+        "url": "https://www.normeco.com/",
+        "logo": "https://www.normeco.com/assets/normeco-logo.png",
+        "description": "NORMECO 是总部位于中国重庆、服务全球的专业装配工具标件/定制品牌，提供定制套筒、装配工具和自动化产线工具方案。",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "重庆",
+          "addressRegion": "重庆",
+          "addressCountry": "CN"
+        },
+        "areaServed": [
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Product",
-              "name": "工业套筒系列",
-              "category": "Industrial Socket Tools",
-              "description": "覆盖标准套筒、长套筒、冲击套筒和特殊驱动规格的工业级套筒产品。"
-            }
+            "@type": "City",
+            "name": "重庆"
           },
           {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "非标装配工具定制服务",
-              "serviceType": "Custom industrial tool design and manufacturing",
-              "description": "根据工位、扭矩、空间限制和自动化设备接口提供定制化装配工具方案。"
-            }
+            "@type": "Place",
+            "name": "Global"
           }
+        ],
+        "knowsAbout": [
+          "专业装配工具",
+          "定制套筒",
+          "机器人",
+          "自动化",
+          "装配线",
+          "产线"
         ]
-      },
+      }
+      </script>
+    </section>
+
+    <!-- 5. Trust Signals -->
+    <section id="trust" class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-4 md:grid-cols-3">
+          <div class="reveal glass p-7">
+            <p class="text-4xl font-bold text-normBlue">TOP 5</p>
+            <h3 class="mt-4 text-xl font-bold" data-i18n="trust1Title">全球前五套筒</h3>
+            <p class="mt-3 text-white/62" data-i18n="trust1Desc">NORMECO 品牌套筒全球销量前五，数据来源于《美国US产业经济研究所》。</p>
+          </div>
+          <div class="reveal glass p-7">
+            <p class="text-4xl font-bold text-normBlue">ISO</p>
+            <h3 class="mt-4 text-xl font-bold" data-i18n="trust2Title">质量体系认证</h3>
+            <p class="mt-3 text-white/62" data-i18n="trust2Desc">以严谨流程支持产品一致性、定制开发和全球客户的长期合作。</p>
+          </div>
+          <div class="reveal glass p-7">
+            <p class="text-4xl font-bold text-normBlue">Global</p>
+            <h3 class="mt-4 text-xl font-bold" data-i18n="trust3Title">全球客户覆盖</h3>
+            <p class="mt-3 text-white/62" data-i18n="trust3Desc">服务自动化设备、机器人集成、装配线、产线维护和工业渠道客户。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FAQ -->
+    <section id="faq" class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-4xl">
+        <div class="reveal text-center">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[.24em] text-normGold">FAQ</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="faqTitle">买之前，先了解这三件事</h2>
+        </div>
+
+        <div class="mt-10 grid gap-4" data-faq-list>
+          <article class="reveal glass">
+            <button class="faq-button flex w-full items-center justify-between gap-4 p-6 text-left" type="button" aria-expanded="false">
+              <span class="text-lg font-bold" data-i18n="faq1Question">MOQ 是多少？</span>
+              <span aria-hidden="true" class="text-2xl text-normBlue">+</span>
+            </button>
+            <div class="faq-panel hidden px-6 pb-6 text-white/68" data-i18n="faq1Answer">
+              无论数量，1pc 也可成交。NORMECO 支持无MOQ采购，适合样品测试、小批量验证和正式项目配套。
+            </div>
+          </article>
+
+          <article class="reveal glass">
+            <button class="faq-button flex w-full items-center justify-between gap-4 p-6 text-left" type="button" aria-expanded="false">
+              <span class="text-lg font-bold" data-i18n="faq2Question">能否定制？</span>
+              <span aria-hidden="true" class="text-2xl text-normBlue">+</span>
+            </button>
+            <div class="faq-panel hidden px-6 pb-6 text-white/68" data-i18n="faq2Answer">
+              可以。我们提供专业定制服务，可围绕定制套筒、装配工具、机器人接口、自动化装配线和产线工况开发。
+            </div>
+          </article>
+
+          <article class="reveal glass">
+            <button class="faq-button flex w-full items-center justify-between gap-4 p-6 text-left" type="button" aria-expanded="false">
+              <span class="text-lg font-bold" data-i18n="faq3Question">你们可靠吗？</span>
+              <span aria-hidden="true" class="text-2xl text-normBlue">+</span>
+            </button>
+            <div class="faq-panel hidden px-6 pb-6 text-white/68" data-i18n="faq3Answer">
+              可靠。NORMECO 是全球客户信赖、行业认可的高端品牌，服务全球制造企业并重视长期稳定合作。
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <!-- FAQPage structured data -->
+      <script type="application/ld+json">
       {
-        "@type": "WebSite",
-        "@id": "https://example.com/#website",
-        "url": "https://example.com/",
-        "name": "HANTORQ 工业工具",
-        "publisher": {
-          "@id": "https://example.com/#organization"
-        },
-        "inLanguage": "zh-CN"
-      },
-      {
+        "@context": "https://schema.org",
         "@type": "FAQPage",
-        "@id": "https://example.com/#faq",
+        "@id": "https://www.normeco.com/#faq",
         "mainEntity": [
           {
             "@type": "Question",
-            "name": "HANTORQ 主要提供哪些产品？",
+            "name": "MOQ 是多少？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "公司主营工业套筒、冲击套筒、装配工具、扭矩适配器、延长杆、转换接头及非标定制工具。"
+              "text": "无论数量，1pc 也可成交。NORMECO 支持无MOQ采购。"
             }
           },
           {
             "@type": "Question",
-            "name": "是否支持 B2B 定制合作？",
+            "name": "能否定制？",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "支持。可围绕材料、规格、驱动接口、表面处理、批量交付和自动化工位适配提供定制方案。"
+              "text": "可以，NORMECO 提供专业定制服务，覆盖定制套筒、装配工具、机器人接口、自动化装配线和产线工况。"
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "你们可靠吗？",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "可靠，NORMECO 是全球客户信赖、行业认可的高端品牌。"
             }
           }
         ]
       }
-    ]
-  }
-  </script>
-</head>
-<body>
-  <div class="ambient-bg" aria-hidden="true"></div>
-  <header class="site-header" data-header>
-    <a class="brand" href="#top" aria-label="HANTORQ 首页">
-      <span class="brand-mark">HT</span>
-      <span>
-        <strong>HANTORQ</strong>
-        <small>Industrial Tools</small>
-      </span>
-    </a>
-    <button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="site-nav">菜单</button>
-    <nav class="site-nav" id="site-nav" data-nav>
-      <a href="#products">产品</a>
-      <a href="#custom">定制服务</a>
-      <a href="#partners">B2B 合作</a>
-      <a href="#culture">企业文化</a>
-      <a href="#contact">联系</a>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero">
-      <img class="hero-image" src="assets/hero-tools.png" alt="工业套筒、冲击套筒和装配工具在金属工作台上的高端产品图">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <p class="eyebrow">Industrial sockets & assembly tools</p>
-        <h1>面向高端制造的工业套筒与装配工具</h1>
-        <p class="hero-copy">我们为制造企业、自动化集成商和设备厂商提供稳定、精密、可定制的工业工具解决方案，让每一次装配都更可靠。</p>
-        <div class="hero-actions">
-          <a class="button primary" href="#products">查看产品能力</a>
-          <a class="button ghost" href="#custom">咨询定制方案</a>
-        </div>
-      </div>
-      <dl class="hero-metrics" aria-label="核心能力">
-        <div>
-          <dt>OEM / ODM</dt>
-          <dd>协同开发</dd>
-        </div>
-        <div>
-          <dt>Custom</dt>
-          <dd>非标定制</dd>
-        </div>
-        <div>
-          <dt>B2B</dt>
-          <dd>批量供应</dd>
-        </div>
-      </dl>
+      </script>
     </section>
 
-    <section class="section intro" aria-label="公司简介">
-      <div>
-        <p class="eyebrow">Precision, durability, cooperation</p>
-        <h2>把工具做成制造现场可以长期信任的部件</h2>
-      </div>
-      <p>HANTORQ 工业工具专注工业套筒和装配工具，服务汽车、工程机械、能源设备、智能制造和设备维护等行业。我们强调材料、热处理、尺寸精度和交付稳定性，也重视与客户工程团队共同解决现场工况问题。</p>
-    </section>
-
-    <section class="section product-section" id="products">
-      <div class="section-heading">
-        <p class="eyebrow">Products</p>
-        <h2>产品多样，适配多种工业场景</h2>
-        <p>从标准批量供应到特殊工况适配，围绕驱动规格、长度、壁厚、材料和表面处理提供灵活选择。</p>
-      </div>
-      <div class="product-grid">
-        <article class="product-card">
-          <img src="assets/product-sockets.png" alt="多规格工业套筒、长套筒和冲击套筒整齐排列">
-          <div>
-            <h3>工业套筒系列</h3>
-            <p>标准套筒、长套筒、冲击套筒、薄壁套筒和特殊驱动规格，适用于高频装配与设备维护。</p>
-            <ul>
-              <li>覆盖多种方驱、六角和特殊接口</li>
-              <li>可选铬钒钢、铬钼钢及定制材料</li>
-              <li>支持批量包装、标识和追溯需求</li>
-            </ul>
-          </div>
-        </article>
-        <article class="product-card">
-          <img src="assets/product-custom-tools.png" alt="定制装配工具头、扭矩适配器和模块化连接件">
-          <div>
-            <h3>装配工具与扭矩适配器</h3>
-            <p>针对自动化产线、受限空间和高扭矩工位，提供连接件、适配器、延长杆和专用工具头。</p>
-            <ul>
-              <li>适配机器人、伺服拧紧轴和手动工位</li>
-              <li>关注扭矩传递、同轴度和寿命表现</li>
-              <li>可按图纸、样件或工况参数开发</li>
-            </ul>
-          </div>
-        </article>
-        <article class="product-card">
-          <img src="assets/b2b-quality.png" alt="工业工具样品、卡尺和质量检测文件构成的 B2B 质量协作场景">
-          <div>
-            <h3>B2B 配套与项目供应</h3>
-            <p>面向主机厂、设备厂、经销体系和集成商，提供稳定供应、项目打样、批量交付和质量协同。</p>
-            <ul>
-              <li>支持长期框架合作与阶段性项目供货</li>
-              <li>可配合来图、来样和联合验证流程</li>
-              <li>提供清晰的产品资料与交付沟通</li>
-            </ul>
-          </div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section split" id="custom">
-      <div>
-        <p class="eyebrow">Custom service</p>
-        <h2>专业定制，不只改变尺寸</h2>
-        <p>真正的定制来自对现场工况的理解。我们会围绕装配空间、目标扭矩、节拍、寿命、设备接口、材料强度和维护方式，给出可制造、可验证、可交付的工具方案。</p>
-      </div>
-      <div class="process-list">
+    <!-- 7. CTA -->
+    <section class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="reveal mx-auto max-w-7xl glass p-8 sm:p-12 lg:flex lg:items-center lg:justify-between">
         <div>
-          <span>01</span>
-          <h3>工况确认</h3>
-          <p>明确使用场景、接口尺寸、扭矩范围、产线节拍和寿命要求。</p>
+          <p class="mb-3 text-sm font-bold uppercase tracking-[.24em] text-normBlue">Start a project</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="ctaTitle">买装配工具，或先了解定制方案</h2>
+          <p class="mt-4 max-w-2xl text-white/68" data-i18n="ctaDesc">发送图纸、样件照片、应用场景或采购数量。无MOQ，1pc 也可成交。</p>
         </div>
-        <div>
-          <span>02</span>
-          <h3>方案与打样</h3>
-          <p>根据图纸或样件确定结构、材料、热处理和表面处理方案。</p>
+        <div class="mt-8 flex flex-col gap-3 sm:flex-row lg:mt-0">
+          <a href="contact.html" class="inline-flex items-center justify-center bg-normBlue px-6 py-3 font-bold text-graphite" data-i18n="contactQuote">联系询价</a>
+          <a href="custom.html" class="inline-flex items-center justify-center border border-white/20 px-6 py-3 font-bold text-white" data-i18n="learnCustom">了解定制</a>
         </div>
-        <div>
-          <span>03</span>
-          <h3>验证与交付</h3>
-          <p>配合尺寸、硬度、扭矩和装配验证，形成稳定批量交付。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section partner-band" id="partners">
-      <div class="section-heading">
-        <p class="eyebrow">B2B cooperation</p>
-        <h2>与设备厂商、制造企业和渠道伙伴长期协作</h2>
-        <p>我们理解 B2B 采购不仅看产品，也看沟通效率、交付纪律、质量稳定和问题响应。网站后续可继续扩展案例、证书、下载中心和多语言产品资料。</p>
-      </div>
-      <div class="partner-grid">
-        <div>
-          <strong>制造企业</strong>
-          <p>为产线装配、维修保养和工装升级提供工具配套。</p>
-        </div>
-        <div>
-          <strong>设备厂商</strong>
-          <p>围绕设备接口和终端客户需求开发专用工具。</p>
-        </div>
-        <div>
-          <strong>渠道伙伴</strong>
-          <p>支持产品组合、区域供应和长期订单协同。</p>
-        </div>
-        <div>
-          <strong>自动化集成商</strong>
-          <p>适配机器人、拧紧轴和特殊装配工位。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section culture" id="culture">
-      <div>
-        <p class="eyebrow">Culture</p>
-        <h2>克制、可靠、以制造现场为中心</h2>
-      </div>
-      <div class="culture-grid">
-        <article>
-          <h3>精度意识</h3>
-          <p>把尺寸、公差、材料和热处理视为产品语言，而不是生产备注。</p>
-        </article>
-        <article>
-          <h3>长期主义</h3>
-          <p>重视可重复交付和持续改进，让客户不用反复解释同一个问题。</p>
-        </article>
-        <article>
-          <h3>灵活协作</h3>
-          <p>从标准品到非标项目，保持清晰沟通和务实的工程判断。</p>
-        </article>
-      </div>
-    </section>
-
-    <section class="section geo-panel" aria-label="AI 搜索和结构化信息">
-      <div>
-        <p class="eyebrow">GEO ready</p>
-        <h2>面向 AI 搜索的结构化表达</h2>
-        <p>本页已内置 Schema.org 的 Organization、WebSite、Offer、Product、Service 和 FAQPage 数据，并用清晰标题、产品实体、服务实体、行业关键词和问答内容帮助搜索引擎及 AI 摘要系统理解网站。</p>
-      </div>
-      <div class="keyword-list" aria-label="核心实体词">
-        <span>工业套筒</span>
-        <span>冲击套筒</span>
-        <span>装配工具</span>
-        <span>扭矩适配器</span>
-        <span>非标定制</span>
-        <span>B2B 工具供应</span>
-        <span>Industrial sockets</span>
-        <span>Assembly tools</span>
-      </div>
-    </section>
-
-    <section class="section contact" id="contact">
-      <div>
-        <p class="eyebrow">Contact</p>
-        <h2>让工具方案进入下一步</h2>
-        <p>把产品图纸、样件照片、规格参数或应用场景发给我们，我们会协助判断可行的材料、结构和交付方式。</p>
-      </div>
-      <div class="contact-card">
-        <p><strong>邮箱</strong><a href="mailto:sales@example.com">sales@example.com</a></p>
-        <p><strong>电话</strong><a href="tel:+8613800000000">+86 138 0000 0000</a></p>
-        <p><strong>服务</strong><span>工业套筒 / 装配工具 / 非标定制 / B2B 项目供应</span></p>
       </div>
     </section>
   </main>
 
-  <footer class="site-footer">
-    <p>© 2026 HANTORQ 工业工具. Industrial sockets and assembly tools.</p>
-    <a href="#top">返回顶部</a>
+  <!-- 8. Footer -->
+  <footer class="border-t border-white/10 px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
+      <div>
+        <img class="footer-logo" src="assets/normeco-logo.png" alt="NORMECO 公司 logo" width="220" height="69" loading="lazy" decoding="async">
+        <p class="mt-3 max-w-md text-sm text-white/58" data-i18n="footerDesc">NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。</p>
+        <p class="mt-4 text-sm text-white/58" data-i18n="footerAddress">重庆地址占位：中国重庆市 XX 区 XX 路 XX 号</p>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-white/75">Pages</h2>
+        <div class="mt-4 grid gap-2 text-sm text-white/58">
+          <a href="products.html" data-i18n="navProducts">产品中心</a>
+          <a href="custom.html" data-i18n="navCustom">定制服务</a>
+          <a href="solutions.html" data-i18n="navSolutions">产线方案</a>
+          <a href="about.html" data-i18n="navAbout">关于我们</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-white/75">Social</h2>
+        <div class="mt-4 grid gap-2 text-sm text-white/58">
+          <a href="#" aria-label="NORMECO LinkedIn 占位链接" data-i18n-aria-label="linkedinAria">LinkedIn</a>
+          <a href="#" aria-label="NORMECO YouTube 占位链接" data-i18n-aria-label="youtubeAria">YouTube</a>
+          <a href="#" aria-label="NORMECO 微信占位链接" data-i18n-aria-label="wechatAria">WeChat</a>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto mt-8 max-w-7xl border-t border-white/10 pt-6 text-sm text-white/45">
+      © 2026 NORMECO. All rights reserved.
+    </div>
   </footer>
 
-  <script src="script.js"></script>
+  <!-- Native JavaScript: mobile menu, accessible FAQ, reveal animation. -->
+  <script>
+    const translations = {
+      zh: {
+        pageTitle: "NORMECO 专业装配工具定制 | 无MOQ 高性价比 | 中国重庆服务全球",
+        metaDescription: "想买或了解专业装配工具、定制套筒与产线装配工具方案？NORMECO 总部位于重庆，服务全球，提供无MOQ、1pc起订、专业定制和高性价比装配工具标件/定制服务。",
+        navAria: "主导航",
+        homeAria: "NORMECO 首页",
+        languageAria: "选择语言",
+        menu: "菜单",
+        navProducts: "产品中心",
+        navCustom: "定制服务",
+        navSolutions: "产线方案",
+        navAbout: "关于我们",
+        navContact: "联系我们",
+        heroTitleRest: "全球前五套筒品牌，专业装配工具标件与定制",
+        heroDesc: "无MOQ · 专业定制 · 高性价比。面向机器人、自动化、装配线与产线场景，为全球客户提供专业严谨、具有德国工业美学气质的装配工具解决方案。",
+        quoteNow: "立即询价",
+        learnProducts: "了解产品",
+        heroImageAlt: "NORMECO 定制套筒与专业装配工具用于机器人自动化产线",
+        heroCaption: "定制套筒、装配工具与自动化产线接口工具示意图",
+        productsTitle: "定制套筒及专业装配工具",
+        productsDesc: "NORMECO 提供装配工具标件与定制服务，覆盖机器人末端工具、自动化装配线、产线维护、设备厂配套和非标接口适配。无论数量，1pc 也可成交。",
+        productImageAlt1: "NORMECO 定制套筒产品用于工业装配线",
+        product1Title: "NORMECO 定制套筒",
+        product1Desc: "无MOQ，1件起订，专业级。可按图纸、样件、机器人接口或产线工况定制。",
+        productImageAlt2: "专业装配工具适配机器人与自动化设备",
+        product2Title: "装配工具与接口件",
+        product2Desc: "面向自动化、装配线和设备厂，提供扭矩适配、延长、转换和专用连接工具。",
+        productImageAlt3: "高性价比装配工具标件适用于全球客户采购",
+        product3Title: "标件与批量供应",
+        product3Desc: "专业、稳定、高性价比，适合“买现货”“了解规格”“项目长期配套”等采购意图。",
+        aboutTitle: "总部中国重庆，服务全球制造企业",
+        aboutDesc1: "NORMECO 是专注专业装配工具标件/定制的工业品牌，以专业严谨的工程语言、克制清晰的视觉体系和高端工业品牌标准服务全球客户。",
+        aboutDesc2: "我们围绕定制套筒、装配工具、机器人接口工具、自动化装配线和产线工况提供选型、打样和定制支持。NORMECO 品牌套筒全球销量前五，数据来源于《美国US产业经济研究所》。",
+        trust1Title: "全球前五套筒",
+        trust1Desc: "NORMECO 品牌套筒全球销量前五，数据来源于《美国US产业经济研究所》。",
+        trust2Title: "质量体系认证",
+        trust2Desc: "以严谨流程支持产品一致性、定制开发和全球客户的长期合作。",
+        trust3Title: "全球客户覆盖",
+        trust3Desc: "服务自动化设备、机器人集成、装配线、产线维护和工业渠道客户。",
+        faqTitle: "买之前，先了解这三件事",
+        faq1Question: "MOQ 是多少？",
+        faq1Answer: "无论数量，1pc 也可成交。NORMECO 支持无MOQ采购，适合样品测试、小批量验证和正式项目配套。",
+        faq2Question: "能否定制？",
+        faq2Answer: "可以。我们提供专业定制服务，可围绕定制套筒、装配工具、机器人接口、自动化装配线和产线工况开发。",
+        faq3Question: "你们可靠吗？",
+        faq3Answer: "可靠。NORMECO 是全球客户信赖、行业认可的高端品牌，服务全球制造企业并重视长期稳定合作。",
+        ctaTitle: "买装配工具，或先了解定制方案",
+        ctaDesc: "发送图纸、样件照片、应用场景或采购数量。无MOQ，1pc 也可成交。",
+        contactQuote: "联系询价",
+        learnCustom: "了解定制",
+        footerDesc: "NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。",
+        footerAddress: "重庆地址占位：中国重庆市 XX 区 XX 路 XX 号",
+        linkedinAria: "NORMECO LinkedIn 占位链接",
+        youtubeAria: "NORMECO YouTube 占位链接",
+        wechatAria: "NORMECO 微信占位链接"
+      },
+      en: {
+        pageTitle: "NORMECO Professional Assembly Tool Customization | No MOQ, High Value | Chongqing, China to Global",
+        metaDescription: "Looking to buy or learn about professional assembly tools, custom sockets, and production line tooling? NORMECO is headquartered in Chongqing, China and serves global customers with no MOQ, 1pc orders, professional customization, and high-value assembly tool standards/custom services.",
+        navAria: "Primary navigation",
+        homeAria: "NORMECO home",
+        languageAria: "Select language",
+        menu: "Menu",
+        navProducts: "Products",
+        navCustom: "Customization",
+        navSolutions: "Line Solutions",
+        navAbout: "About",
+        navContact: "Contact",
+        heroTitleRest: "A Global Top 5 Socket Brand for Professional Assembly Tool Standards and Customization",
+        heroDesc: "No MOQ · Professional customization · High value. Built for robots, automation, assembly lines, and production lines, NORMECO delivers rigorous, German-industrial-inspired tooling solutions to global customers.",
+        quoteNow: "Request a Quote",
+        learnProducts: "Explore Products",
+        heroImageAlt: "NORMECO custom sockets and professional assembly tools for robotic automated production lines",
+        heroCaption: "Concept image of custom sockets, assembly tools, and automated production line interface tooling",
+        productsTitle: "Custom Sockets and Professional Assembly Tools",
+        productsDesc: "NORMECO provides standard and custom assembly tools for robot end tooling, automated assembly lines, production line maintenance, equipment OEMs, and non-standard interface adaptation. Any quantity is accepted, including 1pc orders.",
+        productImageAlt1: "NORMECO custom socket product for industrial assembly lines",
+        product1Title: "NORMECO Custom Socket",
+        product1Desc: "No MOQ, 1pc starting order, professional grade. Customizable by drawing, sample, robot interface, or production line conditions.",
+        productImageAlt2: "Professional assembly tools for robots and automated equipment",
+        product2Title: "Assembly Tools and Interface Parts",
+        product2Desc: "For automation, assembly lines, and equipment manufacturers, we provide torque adapters, extensions, converters, and dedicated connection tools.",
+        productImageAlt3: "High-value standard assembly tools for global customer procurement",
+        product3Title: "Standard Parts and Batch Supply",
+        product3Desc: "Professional, stable, and cost-effective, suitable for buying stock items, learning specifications, and long-term project supply.",
+        aboutTitle: "Headquartered in Chongqing, China, Serving Global Manufacturers",
+        aboutDesc1: "NORMECO is an industrial brand focused on professional assembly tool standards and customization, serving global customers with rigorous engineering language, restrained visual clarity, and high-end industrial brand standards.",
+        aboutDesc2: "We support selection, prototyping, and customization around custom sockets, assembly tools, robot interface tooling, automated assembly lines, and production line conditions. NORMECO brand sockets rank among the global top five by sales, according to the U.S. Industrial Economics Research Institute.",
+        trust1Title: "Global Top 5 Sockets",
+        trust1Desc: "NORMECO brand sockets rank among the global top five by sales, according to the U.S. Industrial Economics Research Institute.",
+        trust2Title: "ISO Quality Certification",
+        trust2Desc: "Rigorous processes support product consistency, custom development, and long-term cooperation with global customers.",
+        trust3Title: "Global Customer Coverage",
+        trust3Desc: "Serving automation equipment, robot integration, assembly lines, production line maintenance, and industrial channel customers.",
+        faqTitle: "Three Things to Know Before You Buy",
+        faq1Question: "What is the MOQ?",
+        faq1Answer: "Any quantity is accepted. A 1pc order can be completed. NORMECO supports no-MOQ procurement for samples, small-batch validation, and formal project supply.",
+        faq2Question: "Can you customize?",
+        faq2Answer: "Yes. We provide professional customization services for custom sockets, assembly tools, robot interfaces, automated assembly lines, and production line conditions.",
+        faq3Question: "Are you reliable?",
+        faq3Answer: "Yes. NORMECO is a high-end brand trusted by global customers and recognized by the industry, with a focus on stable long-term cooperation.",
+        ctaTitle: "Buy Assembly Tools or Learn About a Custom Solution",
+        ctaDesc: "Send drawings, sample photos, application scenarios, or purchase quantity. No MOQ, and 1pc orders are accepted.",
+        contactQuote: "Contact for Quote",
+        learnCustom: "Learn Customization",
+        footerDesc: "NORMECO provides professional assembly tool standards and customization, headquartered in Chongqing, China and serving global customers.",
+        footerAddress: "Chongqing address placeholder: No. XX, XX Road, XX District, Chongqing, China",
+        linkedinAria: "NORMECO LinkedIn placeholder link",
+        youtubeAria: "NORMECO YouTube placeholder link",
+        wechatAria: "NORMECO WeChat placeholder link"
+      }
+    };
+
+    const languageFlags = {
+      zh: {
+        src: "https://flagcdn.com/cn.svg",
+        alt: "中国国旗"
+      },
+      en: {
+        src: "https://flagcdn.com/us.svg",
+        alt: "United States flag"
+      }
+    };
+
+    const languageSwitcher = document.getElementById("languageSwitcher");
+    const languageButton = document.getElementById("languageButton");
+    const languageFlag = document.getElementById("languageFlag");
+
+    function setLanguage(language) {
+      const dictionary = translations[language] || translations.zh;
+
+      document.documentElement.lang = language === "en" ? "en" : "zh-CN";
+      document.title = dictionary.pageTitle;
+      document.querySelector("meta[name='description']").setAttribute("content", dictionary.metaDescription);
+      const flag = languageFlags[language] || languageFlags.zh;
+      languageFlag.src = flag.src;
+      languageFlag.alt = flag.alt;
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (dictionary[key]) element.textContent = dictionary[key];
+      });
+
+      document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+        const key = element.dataset.i18nAlt;
+        if (dictionary[key]) element.setAttribute("alt", dictionary[key]);
+      });
+
+      document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+        const key = element.dataset.i18nAriaLabel;
+        if (dictionary[key]) element.setAttribute("aria-label", dictionary[key]);
+      });
+
+      localStorage.setItem("normeco-language", language);
+    }
+
+    function setLanguageMenuState(isOpen) {
+      languageSwitcher.classList.toggle("is-open", isOpen);
+      languageButton.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    languageSwitcher.addEventListener("mouseenter", () => setLanguageMenuState(true));
+    languageSwitcher.addEventListener("mouseleave", () => setLanguageMenuState(false));
+    languageSwitcher.addEventListener("focusin", () => setLanguageMenuState(true));
+    languageSwitcher.addEventListener("focusout", (event) => {
+      if (!languageSwitcher.contains(event.relatedTarget)) setLanguageMenuState(false);
+    });
+    languageButton.addEventListener("click", () => {
+      const isOpen = languageButton.getAttribute("aria-expanded") === "true";
+      setLanguageMenuState(!isOpen);
+    });
+
+    document.querySelectorAll(".language-option").forEach((option) => {
+      option.addEventListener("click", () => {
+        setLanguage(option.dataset.lang);
+        setLanguageMenuState(false);
+      });
+    });
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = mobileMenu.classList.toggle("hidden") === false;
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.querySelectorAll(".faq-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const panel = button.nextElementSibling;
+        const isOpen = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!isOpen));
+        panel.classList.toggle("hidden", isOpen);
+        button.querySelector("[aria-hidden='true']").textContent = isOpen ? "+" : "−";
+      });
+    });
+
+    const revealTargets = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          entry.target.classList.toggle("is-visible", entry.isIntersecting);
+        });
+      }, { threshold: 0.14, rootMargin: "0px 0px -8% 0px" });
+
+      revealTargets.forEach((target) => observer.observe(target));
+    } else {
+      revealTargets.forEach((target) => target.classList.add("is-visible"));
+    }
+
+    setLanguage(localStorage.getItem("normeco-language") || "zh");
+  </script>
 </body>
 </html>
+
