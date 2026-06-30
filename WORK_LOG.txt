@@ -1,0 +1,20 @@
+NORMECO 网站工作日志
+
+2026-06-29
+- 将首页从原 HANTORQ 工业工具内容改版为 NORMECO 品牌站首页。
+- 更新首页标题、SEO 描述、关键词、Open Graph 信息和规范链接。
+- 新增中英文切换内容、移动端菜单、FAQ、CTA、品牌信任信息和结构化数据。
+- 新增产品中心页面 products.html，用于展示 NORMECO 产品与业务方向。
+- 新增 NORMECO 品牌与产品素材，包括 logo、首页视觉图、定制套筒、机器人装配工具、B2B 供应图等。
+- 新增产品资料 PDF：2026气动冲击套筒&起子头Impact Sockets & Bits.pdf。
+- 提交记录：27eaa58 Update NORMECO site content and assets。
+
+2026-06-30
+- 将 2026-06-29 的网站更新提交推送到 GitHub 仓库 cheng837852742-alt/normeco.github.io。
+- 确认本地 main 分支与 origin/main 同步。
+- 新增本工作日志文件，用于后续持续记录网站更新和每日工作总结。
+
+后续建议
+- 补齐导航中 custom.html、solutions.html、about.html、contact.html 等页面，避免导航链接指向未创建页面。
+- 根据真实联系方式、公司地址和社媒链接替换页面中的占位内容。
+- 视需要更新 sitemap.xml，让新增页面更容易被搜索引擎发现。
