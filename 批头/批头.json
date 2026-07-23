@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "stepFile": "批头.STEP",
+  "unit": "mm",
+  "axis": "+X",
+  "baseLength": 50,
+  "shaftRadius": 1.6,
+  "variableRegion": {
+    "startX": 11,
+    "endX": 50
+  }
+}

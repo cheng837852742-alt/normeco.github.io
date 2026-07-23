@@ -1,586 +1,2608 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NORMECO 产品中心 | 工业套筒与起子头目录框架</title>
-  <meta name="description" content="NORMECO 产品中心目录框架，按方驱尺寸、起子套筒、起子头分类，支持模糊搜索，便于客户查找专业装配工具目录。">
-  <meta name="robots" content="index,follow">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NORMECO 产品中心 | 工业套筒与装配工具</title>
+  <meta name="description" content="浏览 NORMECO 工业冲击套筒、起子套筒、连接附件、定制产品和特殊应用分类。支持按方驱尺寸、结构与功能快速筛选。">
   <link rel="canonical" href="https://www.normeco.com/products.html">
-
-  <script>
-    window.tailwind = window.tailwind || {};
-    window.tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            graphite: "#fff7f7",
-            steel: "#fee2e2",
-            normBlue: "#b91c1c",
-            normGold: "#dc2626"
-          }
-        }
-      }
-    };
-  </script>
-  <script src="https://cdn.tailwindcss.com" defer></script>
-
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
   <style>
+    :root {
+      --red: #d30b22;
+      --red-dark: #a9061a;
+      --red-soft: #fff0f2;
+      --ink: #15171a;
+      --muted: #687078;
+      --line: #e4e7eb;
+      --surface: #ffffff;
+      --page: #f5f6f7;
+      --shadow: 0 14px 38px rgba(26, 30, 35, 0.09);
+      --header-height: 78px;
+    }
+
     * {
       box-sizing: border-box;
     }
 
     html {
       scroll-behavior: smooth;
+      scrollbar-gutter: stable;
     }
 
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at 14% 10%, rgba(185,28,28,.12), transparent 30rem),
-        radial-gradient(circle at 88% 14%, rgba(220,38,38,.08), transparent 28rem),
-        linear-gradient(135deg, #fff, #fff7f7 48%, #ffffff);
-      color: #1f2933;
-      font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
-      line-height: 1.6;
+      color: var(--ink);
+      background: var(--page);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      letter-spacing: 0;
     }
 
-    body::before {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events: none;
-      content: "";
-      background-image:
-        linear-gradient(rgba(185,28,28,.055) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(185,28,28,.04) 1px, transparent 1px);
-      background-size: 72px 72px;
-      mask-image: linear-gradient(180deg, transparent, #000 12%, #000 86%, transparent);
-      opacity: .7;
+    button,
+    input,
+    select {
+      font: inherit;
     }
 
-    .glass {
-      background: rgba(255,255,255,.86);
-      border: 1px solid rgba(185,28,28,.16);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 24px 80px rgba(127,29,29,.08);
+    button,
+    a,
+    select {
+      -webkit-tap-highlight-color: transparent;
     }
 
-    .brand-logo {
-      width: min(50vw, 230px);
-      height: 72px;
-      object-fit: contain;
-      object-position: left center;
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid rgba(211, 11, 34, 0.22);
+      outline-offset: 2px;
     }
 
-    .footer-logo {
-      width: min(62vw, 220px);
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: var(--header-height);
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(12px);
+    }
+
+    .header-inner {
+      width: min(1440px, calc(100% - 40px));
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    .brand img {
+      display: block;
+      width: 174px;
       height: auto;
-      object-fit: contain;
-      object-position: left center;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: stretch;
+      align-self: stretch;
+      gap: 30px;
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      color: #30343a;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a[aria-current="page"] {
+      color: var(--red);
+    }
+
+    .desktop-nav a[aria-current="page"]::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: #fff;
+      content: "";
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .language-switcher {
+      position: relative;
+      padding-bottom: 8px;
+      margin-bottom: -8px;
+    }
+
+    .language-trigger {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .language-trigger img,
+    .language-menu img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .language-menu {
-      opacity: 0;
-      transform: translateY(8px);
+      position: absolute;
+      top: 52px;
+      right: 0;
+      width: 158px;
+      padding: 7px;
       visibility: hidden;
-      transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+      opacity: 0;
+      transform: translateY(-5px);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: var(--shadow);
+      transition: 160ms ease;
     }
 
     .language-switcher:hover .language-menu,
-    .language-switcher:focus-within .language-menu,
-    .language-switcher.is-open .language-menu {
+    .language-switcher:focus-within .language-menu {
+      visibility: visible;
       opacity: 1;
       transform: translateY(0);
-      visibility: visible;
     }
 
-    .catalog-link.is-active {
-      background: #b91c1c;
-      border-color: #b91c1c;
+    .language-option {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 9px;
+      border: 0;
+      border-radius: 4px;
+      color: #292d32;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .language-option:hover,
+    .language-option[aria-current="true"] {
+      color: var(--red);
+      background: var(--red-soft);
+    }
+
+    .language-option img {
+      width: 28px;
+      height: 20px;
+      border: 1px solid #d9dce0;
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: #25292e;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: var(--header-height);
+      right: 0;
+      left: 0;
+      padding: 14px 20px 22px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+      box-shadow: 0 18px 30px rgba(20, 24, 28, 0.08);
+    }
+
+    .mobile-nav.is-open {
+      display: grid;
+    }
+
+    .mobile-nav a {
+      padding: 13px 4px;
+      border-bottom: 1px solid #eef0f2;
+      color: #292d32;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .catalog-intro {
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .intro-inner {
+      width: min(1440px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 34px 0 26px;
+    }
+
+    .intro-heading {
+      display: flex;
+      align-items: baseline;
+      gap: 18px;
+      margin: 0;
+    }
+
+    .intro-heading strong {
+      font-family: "Arial Narrow", "Microsoft YaHei", sans-serif;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1;
+    }
+
+    .intro-heading span {
+      padding-left: 18px;
+      border-left: 1px solid #b8bdc3;
+      color: var(--muted);
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+    .intro-copy {
+      max-width: 760px;
+      margin: 15px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .search-row {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+    }
+
+    .search-box {
+      position: relative;
+    }
+
+    .search-box svg {
+      position: absolute;
+      top: 50%;
+      left: 16px;
+      width: 20px;
+      height: 20px;
+      color: #8a929a;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .search-box input {
+      width: 100%;
+      height: 50px;
+      padding: 0 46px;
+      border: 1px solid #cfd4d9;
+      border-radius: 4px;
+      color: var(--ink);
+      background: #fff;
+      font-size: 15px;
+      transition: border-color 150ms ease, box-shadow 150ms ease;
+    }
+
+    .search-box input:focus {
+      border-color: var(--red);
+      outline: 0;
+      box-shadow: 0 0 0 3px rgba(211, 11, 34, 0.1);
+    }
+
+    .clear-search {
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      width: 30px;
+      height: 30px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 4px;
+      color: #747b82;
+      background: transparent;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+
+    .clear-search.is-visible {
+      display: inline-flex;
+    }
+
+    .search-submit {
+      min-width: 116px;
+      height: 50px;
+      border: 1px solid var(--red);
+      border-radius: 4px;
       color: #fff;
+      background: var(--red);
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: background 150ms ease;
     }
 
-    .catalog-link.is-active .muted {
-      color: rgba(255,255,255,.78);
+    .search-submit:hover {
+      background: var(--red-dark);
     }
 
-    .result-card mark {
-      background: rgba(220,38,38,.14);
-      color: #991b1b;
-      padding: 0 .16rem;
+    .catalog-workspace {
+      width: min(1440px, calc(100% - 40px));
+      min-height: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 286px minmax(0, 1fr);
+      align-items: start;
+      gap: 30px;
+      padding: 28px 0 70px;
+    }
+
+    .catalog-sidebar {
+      position: sticky;
+      top: calc(var(--header-height) + 22px);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .sidebar-heading {
+      margin: 0;
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .category-group + .category-group {
+      border-top: 1px solid var(--line);
+    }
+
+    .category-group-button {
+      width: 100%;
+      min-height: 52px;
+      display: grid;
+      grid-template-columns: 22px 1fr 18px;
+      align-items: center;
+      gap: 10px;
+      padding: 0 16px;
+      border: 0;
+      color: #25292d;
+      background: #fff;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .category-group-button:hover,
+    .category-group-button.is-active {
+      color: var(--red);
+      background: #fff7f8;
+    }
+
+    .category-group-button svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 1.8;
+    }
+
+    .category-group-button .chevron {
+      transition: transform 160ms ease;
+    }
+
+    .category-group-button[aria-expanded="true"] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .category-children {
+      display: none;
+      padding: 4px 0 9px;
+      background: #fbfbfc;
+    }
+
+    .category-children.is-open {
+      display: block;
+    }
+
+    .category-child {
+      position: relative;
+      width: 100%;
+      min-height: 42px;
+      padding: 0 18px 0 50px;
+      border: 0;
+      color: #596168;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .category-child:hover {
+      color: var(--red);
+    }
+
+    .category-child.is-active {
+      color: var(--red);
+      background: var(--red-soft);
+      font-weight: 800;
+    }
+
+    .category-child.is-active::before {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+      background: var(--red);
+      content: "";
+    }
+
+    .mobile-category-trigger {
+      display: none;
+    }
+
+    .content-area {
+      min-width: 0;
+    }
+
+    .breadcrumb {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 18px;
+      color: #7a8289;
+      font-size: 13px;
+    }
+
+    .breadcrumb svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .content-heading-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .content-heading-row h2 {
+      margin: 0;
+      font-family: "Arial Narrow", "Microsoft YaHei", sans-serif;
+      font-size: clamp(28px, 3.2vw, 40px);
+      line-height: 1.15;
+    }
+
+    .content-heading-row p {
+      max-width: 670px;
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .preview-note {
+      flex: 0 0 auto;
+      padding: 9px 12px;
+      border-left: 3px solid var(--red);
+      color: #6d2731;
+      background: var(--red-soft);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .filter-bar {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(150px, 1fr)) auto;
+      align-items: end;
+      gap: 12px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .filter-field label {
+      display: block;
+      margin-bottom: 7px;
+      color: #454b51;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .filter-field select {
+      width: 100%;
+      height: 42px;
+      padding: 0 34px 0 12px;
+      border: 1px solid #cfd4d9;
+      border-radius: 4px;
+      color: #2c3136;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .filter-field select:focus {
+      border-color: var(--red);
+      outline: 0;
+    }
+
+    .reset-filters {
+      height: 42px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      padding: 0 14px;
+      border: 1px solid #cfd4d9;
+      border-radius: 4px;
+      color: #4f565d;
+      background: #fff;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .reset-filters:hover {
+      color: var(--red);
+      border-color: #e6a4ad;
+    }
+
+    .reset-filters svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .results-toolbar {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .results-summary {
+      color: #5f676e;
+      font-size: 14px;
+    }
+
+    .results-summary strong {
+      color: var(--ink);
+      font-size: 18px;
+    }
+
+    .catalog-source {
+      color: #7a8289;
+      font-size: 12px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .product-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    }
+
+    .product-card:hover {
+      border-color: #e1a0aa;
+      box-shadow: 0 12px 24px rgba(24, 28, 32, 0.08);
+      transform: translateY(-2px);
+    }
+
+    .product-card.is-detail-origin {
+      visibility: hidden;
+    }
+
+    .product-placeholder {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      color: #969da4;
+      background: #f7f8f9;
+    }
+
+    .product-placeholder img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 18px;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .product-placeholder.has-image::before,
+    .product-placeholder.has-image::after {
+      display: none;
+    }
+
+    .product-placeholder::before,
+    .product-placeholder::after {
+      position: absolute;
+      background: #e6e9ec;
+      content: "";
+    }
+
+    .product-placeholder::before {
+      width: 1px;
+      height: 180%;
+      transform: rotate(54deg);
+    }
+
+    .product-placeholder::after {
+      width: 180%;
+      height: 1px;
+      transform: rotate(36deg);
+    }
+
+    .placeholder-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      justify-items: center;
+      gap: 9px;
+      padding: 14px;
+      background: rgba(247, 248, 249, 0.9);
+    }
+
+    .placeholder-content svg {
+      width: 34px;
+      height: 34px;
+      stroke-width: 1.3;
+    }
+
+    .placeholder-content span {
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+
+    .card-body {
+      padding: 16px;
+    }
+
+    .card-code {
+      color: var(--red);
+      font-family: Consolas, monospace;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .product-card h3 {
+      min-height: 48px;
+      margin: 7px 0 0;
+      font-size: 16px;
+      line-height: 1.45;
+    }
+
+    .product-name-en {
+      min-height: 36px;
+      margin: 4px 0 14px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .card-specs {
+      display: grid;
+      gap: 7px;
+      padding: 12px 0;
+      border-top: 1px solid #edf0f2;
+      border-bottom: 1px solid #edf0f2;
+    }
+
+    .card-spec-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: #626970;
+      font-size: 12px;
+    }
+
+    .card-spec-row strong {
+      color: #2f3439;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .card-tags {
+      min-height: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 12px;
+    }
+
+    .card-tag {
+      padding: 4px 7px;
+      border: 1px solid #dfe3e6;
+      border-radius: 3px;
+      color: #626970;
+      background: #fafafa;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .card-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .card-action {
+      min-height: 40px;
+      border: 1px solid var(--red);
+      border-radius: 4px;
+      color: var(--red);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .card-action.primary {
+      color: #fff;
+      background: var(--red);
+    }
+
+    .card-action:hover {
+      color: #fff;
+      background: var(--red-dark);
+      border-color: var(--red-dark);
+    }
+
+    .load-more {
+      min-width: 160px;
+      min-height: 44px;
+      display: none;
+      margin: 28px auto 0;
+      padding: 0 22px;
+      border: 1px solid var(--red);
+      border-radius: 4px;
+      color: var(--red);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .load-more.is-visible {
+      display: block;
+    }
+
+    .load-more:hover {
+      color: #fff;
+      background: var(--red);
+    }
+
+    .empty-state {
+      display: none;
+      min-height: 310px;
+      place-items: center;
+      border: 1px dashed #c9ced3;
+      border-radius: 6px;
+      color: #747c83;
+      background: #fff;
+      text-align: center;
+    }
+
+    .empty-state.is-visible {
+      display: grid;
+    }
+
+    .empty-state svg {
+      width: 38px;
+      height: 38px;
+      margin: 0 auto 12px;
+      stroke-width: 1.4;
+    }
+
+    .empty-state h3 {
+      margin: 0;
+      color: #30353a;
+      font-size: 20px;
+    }
+
+    .empty-state p {
+      max-width: 430px;
+      margin: 9px auto 0;
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      visibility: hidden;
+      opacity: 0;
+      background: rgba(12, 14, 16, 0.58);
+      backdrop-filter: blur(2px);
+      transition: opacity 260ms ease, visibility 260ms ease;
+    }
+
+    .drawer-backdrop.is-open {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .detail-drawer {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 70;
+      width: min(980px, calc(100vw - 48px));
+      max-height: min(88vh, 920px);
+      overflow: hidden;
+      visibility: hidden;
+      opacity: 0;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 28px 80px rgba(8, 10, 12, 0.28);
+      transform: translate(-50%, -48%) scale(0.97);
+      transition:
+        opacity 280ms ease,
+        transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 280ms ease;
+    }
+
+    .detail-drawer.is-open {
+      visibility: visible;
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .detail-is-animating .detail-drawer {
+      transition: none;
+    }
+
+    .detail-drawer.is-flight-target {
+      opacity: 0;
+    }
+
+    .detail-content {
+      overflow: hidden;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    .detail-flight-card {
+      position: fixed !important;
+      z-index: 80;
+      margin: 0 !important;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      border-radius: 8px;
+      background: #fff;
+      box-shadow: 0 22px 58px rgba(8, 10, 12, 0.24);
+      pointer-events: none;
+      transform-origin: top left;
+      will-change: transform;
+      transition:
+        transform 300ms cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 120ms ease !important;
+    }
+
+    .detail-flight-content {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    .detail-card-handoff {
+      position: fixed !important;
+      z-index: 81;
+      margin: 0 !important;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: none !important;
+      transition: opacity 120ms ease !important;
+    }
+
+    .detail-flight-card.is-reverse {
+      transition-timing-function: cubic-bezier(0.64, 0, 0.78, 0) !important;
+    }
+
+    .drawer-header {
+      z-index: 2;
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.97);
+    }
+
+    .drawer-header h2 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .drawer-close {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: #3b4146;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .drawer-close svg {
+      width: 19px;
+      height: 19px;
+    }
+
+    .drawer-content {
+      max-height: calc(min(88vh, 920px) - 68px);
+      display: grid;
+      grid-template-columns: minmax(300px, 0.9fr) minmax(390px, 1.1fr);
+      column-gap: 30px;
+      align-items: start;
+      overflow-y: auto;
+      padding: 26px;
+    }
+
+    .drawer-visual {
+      grid-column: 1;
+      grid-row: 1 / 10;
+      position: sticky;
+      top: 0;
+      min-height: 520px;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      color: #90979e;
+      background: #f7f8f9;
+      text-align: center;
+    }
+
+    .drawer-visual img {
+      width: 100%;
+      height: min(58vh, 590px);
+      padding: 24px;
+      object-fit: contain;
+      background: #fff;
+    }
+
+    .drawer-visual svg {
+      width: 56px;
+      height: 56px;
+      margin: 0 auto 12px;
+      stroke-width: 1.2;
+    }
+
+    .drawer-product-name {
+      grid-column: 2;
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.4;
+    }
+
+    .drawer-product-en {
+      grid-column: 2;
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .parameter-table {
+      grid-column: 2;
+      width: 100%;
+      margin-top: 20px;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .parameter-table th,
+    .parameter-table td {
+      padding: 13px 0;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .parameter-table th {
+      width: 42%;
+      color: #666d74;
+      font-weight: 600;
+    }
+
+    .parameter-table td {
+      color: #272c31;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    .model-specs {
+      grid-column: 2;
+      display: none;
+      margin-top: 22px;
+    }
+
+    .model-specs.is-visible {
+      display: block;
+    }
+
+    .model-specs-heading {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .model-specs-heading h4 {
+      margin: 0;
+      font-size: 15px;
+    }
+
+    .model-specs-heading span {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .model-specs-scroll {
+      max-height: 320px;
+      overflow: auto;
+      border: 1px solid var(--line);
+    }
+
+    .model-specs-table {
+      width: 100%;
+      min-width: 390px;
+      border-collapse: collapse;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .model-specs-table th,
+    .model-specs-table td {
+      padding: 9px 8px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .model-specs-table th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      color: #fff;
+      background: #2b3035;
+    }
+
+    .model-specs-table td:first-child {
+      color: var(--red);
+      font-family: Consolas, monospace;
+      font-weight: 800;
+    }
+
+    .drawer-note {
+      grid-column: 2;
+      margin-top: 20px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--red);
+      color: #6f2731;
+      background: var(--red-soft);
+      font-size: 12px;
+      line-height: 1.65;
+    }
+
+    .drawer-source {
+      grid-column: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 14px;
+      color: var(--red);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .drawer-source:hover {
+      text-decoration: underline;
+    }
+
+    .drawer-source svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .drawer-inquiry {
+      grid-column: 2;
+      width: 100%;
+      min-height: 48px;
+      margin-top: 18px;
+      border: 1px solid var(--red);
+      border-radius: 4px;
+      color: #fff;
+      background: var(--red);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .toast {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 90;
+      max-width: min(390px, calc(100% - 44px));
+      padding: 13px 16px;
+      visibility: hidden;
+      opacity: 0;
+      border-left: 3px solid var(--red);
+      border-radius: 4px;
+      color: #2e3338;
+      background: #fff;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+      transform: translateY(8px);
+      transition: 170ms ease;
+    }
+
+    .toast.is-visible {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mobile-sidebar-backdrop {
+      display: none;
+    }
+
+    footer {
+      border-top: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .footer-inner {
+      width: min(1440px, calc(100% - 40px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 28px 0;
+      color: #70777e;
+      font-size: 12px;
+    }
+
+    .footer-inner img {
+      width: 142px;
+      height: auto;
+    }
+
+    @media (max-width: 1180px) {
+      .desktop-nav {
+        gap: 18px;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 920px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .header-inner {
+        width: min(100% - 28px, 1440px);
+      }
+
+      .header-actions {
+        margin-left: auto;
+      }
+
+      .mobile-menu-button {
+        display: inline-flex;
+      }
+
+      .intro-inner,
+      .catalog-workspace,
+      .footer-inner {
+        width: min(100% - 28px, 1440px);
+      }
+
+      .catalog-workspace {
+        display: block;
+      }
+
+      .mobile-category-trigger {
+        width: 100%;
+        min-height: 46px;
+        margin-bottom: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 14px;
+        border: 1px solid var(--line);
+        border-radius: 4px;
+        color: #2e3338;
+        background: #fff;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      .mobile-category-trigger svg {
+        width: 18px;
+        height: 18px;
+      }
+
+      .catalog-sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 80;
+        width: min(328px, 88vw);
+        overflow-y: auto;
+        border: 0;
+        border-radius: 0;
+        box-shadow: 18px 0 42px rgba(13, 17, 20, 0.16);
+        transform: translateX(-102%);
+        transition: transform 220ms ease;
+      }
+
+      .catalog-sidebar.is-open {
+        transform: translateX(0);
+      }
+
+      .mobile-sidebar-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 75;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        background: rgba(12, 14, 16, 0.42);
+        transition: 180ms ease;
+      }
+
+      .mobile-sidebar-backdrop.is-open {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      .filter-bar {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 780px) {
+      .detail-drawer {
+        width: calc(100vw - 20px);
+        max-height: 92vh;
+      }
+
+      .drawer-header {
+        min-height: 62px;
+        padding: 0 16px;
+      }
+
+      .drawer-header h2 {
+        font-size: 18px;
+      }
+
+      .drawer-content {
+        max-height: calc(92vh - 62px);
+        display: block;
+        padding: 16px;
+      }
+
+      .drawer-visual {
+        position: static;
+        min-height: 0;
+      }
+
+      .drawer-visual img {
+        height: min(38vh, 320px);
+        padding: 14px;
+      }
+
+      .drawer-product-name {
+        margin-top: 18px;
+        font-size: 21px;
+      }
+
+      .model-specs-scroll {
+        max-height: 270px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      :root {
+        --header-height: 68px;
+      }
+
+      .brand img {
+        width: 148px;
+      }
+
+      .language-trigger,
+      .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+      }
+
+      .intro-inner {
+        padding-top: 26px;
+      }
+
+      .intro-heading {
+        display: block;
+      }
+
+      .intro-heading strong {
+        display: block;
+        font-size: 34px;
+      }
+
+      .intro-heading span {
+        display: block;
+        margin-top: 10px;
+        padding-left: 0;
+        border-left: 0;
+        font-size: 17px;
+      }
+
+      .intro-copy {
+        font-size: 14px;
+      }
+
+      .search-row {
+        grid-template-columns: 1fr;
+      }
+
+      .search-submit {
+        width: 100%;
+      }
+
+      .catalog-workspace {
+        padding-top: 20px;
+      }
+
+      .content-heading-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .preview-note {
+        width: 100%;
+      }
+
+      .filter-bar {
+        grid-template-columns: 1fr;
+        padding: 14px;
+      }
+
+      .reset-filters {
+        width: 100%;
+      }
+
+      .results-toolbar {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+      }
     }
   </style>
 </head>
-<body class="antialiased">
-  <header class="sticky top-0 z-50 border-b border-red-900/10 bg-white/94 backdrop-blur-xl">
-    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="主导航">
-      <a href="index.html" class="flex items-center" aria-label="NORMECO 首页">
-        <img class="brand-logo" src="assets/normeco-logo.png" alt="NORMECO 公司 logo" width="230" height="72" decoding="async">
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="NORMECO 首页">
+        <img src="assets/normeco-logo.png" alt="NORMECO 工业装配工具品牌标志" width="348" height="110">
       </a>
 
-      <div class="flex items-center gap-3">
-        <div class="hidden items-center gap-8 text-sm text-slate-600 md:flex">
-          <a class="font-bold text-red-800" href="products.html" aria-current="page" data-i18n="navProducts">产品中心</a>
-          <a class="hover:text-red-800" href="custom.html" data-i18n="navCustom">定制服务</a>
-          <a class="hover:text-red-800" href="solutions.html" data-i18n="navSolutions">产线方案</a>
-          <a class="hover:text-red-800" href="about.html" data-i18n="navAbout">关于我们</a>
-          <a class="hover:text-red-800" href="contact.html" data-i18n="navContact">联系我们</a>
-        </div>
+      <nav class="desktop-nav" aria-label="主导航">
+        <a href="index.html" data-i18n="navHome">首页</a>
+        <a href="products.html" aria-current="page" data-i18n="navProducts">产品中心</a>
+        <a href="custom.html" data-i18n="navCustom">定制服务</a>
+        <a href="solutions.html" data-i18n="navSolutions">产线方案</a>
+        <a href="index.html#about" data-i18n="navAbout">关于我们</a>
+        <a href="contact.html" data-i18n="navContact">联系我们</a>
+      </nav>
 
-        <button id="menuToggle" type="button" class="inline-flex items-center border border-red-900/15 px-3 py-2 text-sm text-slate-700 md:hidden" aria-controls="mobileMenu" aria-expanded="false">
-          <span data-i18n="menu">菜单</span>
-        </button>
-
-        <div id="languageSwitcher" class="language-switcher relative">
-          <button id="languageButton" type="button" class="grid h-11 w-11 place-items-center rounded-full border border-red-900/15 bg-white shadow-lg shadow-red-950/10" aria-haspopup="true" aria-expanded="false" aria-label="选择语言">
-            <img id="languageFlag" class="h-6 w-6 rounded-full object-cover" width="24" height="24" src="https://flagcdn.com/cn.svg" alt="中国国旗">
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button id="languageTrigger" class="language-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="切换语言">
+            <img id="currentFlag" src="https://flagcdn.com/w80/cn.png" alt="中国国旗">
           </button>
-          <div class="language-menu absolute right-0 top-12 z-50 min-w-36 overflow-hidden border border-red-900/15 bg-white/96 text-sm text-slate-700 shadow-2xl shadow-red-950/15 backdrop-blur-xl">
-            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-red-50" data-lang="zh">
-              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/cn.svg" alt="">
-              <span>中文</span>
+          <div class="language-menu" role="menu" aria-label="语言选择">
+            <button class="language-option" type="button" role="menuitem" data-language="zh" aria-current="true">
+              <img src="https://flagcdn.com/w40/cn.png" alt="">
+              <span>简体中文</span>
             </button>
-            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-red-50" data-lang="en">
-              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/us.svg" alt="">
+            <button class="language-option" type="button" role="menuitem" data-language="en" aria-current="false">
+              <img src="https://flagcdn.com/w40/us.png" alt="">
               <span>English</span>
             </button>
           </div>
         </div>
-      </div>
-    </nav>
 
-    <div id="mobileMenu" class="hidden border-t border-red-900/10 px-4 pb-4 md:hidden">
-      <div class="grid gap-2 text-sm text-slate-700">
-        <a class="py-2 font-bold text-red-800" href="products.html" aria-current="page" data-i18n="navProducts">产品中心</a>
-        <a class="py-2" href="custom.html" data-i18n="navCustom">定制服务</a>
-        <a class="py-2" href="solutions.html" data-i18n="navSolutions">产线方案</a>
-        <a class="py-2" href="about.html" data-i18n="navAbout">关于我们</a>
-        <a class="py-2" href="contact.html" data-i18n="navContact">联系我们</a>
+        <button id="mobileMenuButton" class="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开菜单">
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
+
+    <nav id="mobileNav" class="mobile-nav" aria-label="移动端导航">
+      <a href="index.html" data-i18n="navHome">首页</a>
+      <a href="products.html" aria-current="page" data-i18n="navProducts">产品中心</a>
+      <a href="custom.html" data-i18n="navCustom">定制服务</a>
+      <a href="solutions.html" data-i18n="navSolutions">产线方案</a>
+      <a href="index.html#about" data-i18n="navAbout">关于我们</a>
+      <a href="contact.html" data-i18n="navContact">联系我们</a>
+    </nav>
   </header>
 
   <main>
-    <section class="px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-      <div class="mx-auto max-w-7xl">
-        <p class="text-sm font-bold uppercase tracking-[.26em] text-red-700" data-i18n="eyebrow">Product Center</p>
-        <div class="mt-5 grid gap-8 lg:grid-cols-[.8fr_1.2fr] lg:items-end">
-          <div>
-            <h1 class="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl" data-i18n="heroTitle">产品中心框架</h1>
-            <p class="mt-5 max-w-3xl text-lg text-slate-600" data-i18n="heroDesc">
-              基于已上传 PDF 产品目录，先建立产品目录/子目录导航与模糊搜索框架。当前页面仅展示分类结构，不展示具体产品型号、参数或价格信息。
-            </p>
+    <section class="catalog-intro" aria-labelledby="pageTitle">
+      <div class="intro-inner">
+        <h1 id="pageTitle" class="intro-heading">
+          <strong data-i18n="pageTitle">产品中心</strong>
+          <span>Product Center</span>
+        </h1>
+        <p class="intro-copy" data-i18n="pageDescription">
+          浏览 NORMECO 工业套筒、起子套筒、连接附件、套装与定制产品，并通过方驱尺寸、轮廓、长度和功能特征快速筛选。
+        </p>
+
+        <form id="searchForm" class="search-row" role="search">
+          <div class="search-box">
+            <i data-lucide="search" aria-hidden="true"></i>
+            <input id="catalogSearch" type="search" autocomplete="off" data-i18n-placeholder="searchPlaceholder" placeholder="搜索产品名称、方驱尺寸、结构或英文关键词">
+            <button id="clearSearch" class="clear-search" type="button" aria-label="清除搜索">
+              <i data-lucide="x" aria-hidden="true"></i>
+            </button>
           </div>
-          <div class="glass p-5">
-            <label for="catalogSearch" class="block text-sm font-bold text-slate-800" data-i18n="searchLabel">搜索目录</label>
-            <div class="mt-3 flex gap-3">
-              <input id="catalogSearch" type="search" class="min-h-12 w-full border border-red-900/15 bg-white px-4 text-base text-slate-900 outline-none focus:border-red-700" placeholder="输入方驱尺寸、套筒、起子头、Torx、Adapter 等关键词" aria-describedby="searchHint" data-i18n-placeholder="searchPlaceholder">
-              <button id="clearSearch" type="button" class="border border-red-900/15 px-4 font-bold text-red-800 hover:bg-red-50" data-i18n="clear">清除</button>
-            </div>
-            <p id="searchHint" class="mt-3 text-sm text-slate-500" data-i18n="searchHint">支持中英文、尺寸、目录页码和近似拼写匹配。示例：1/2、起子、bit、adapter、torx。</p>
+          <button class="search-submit" type="submit" data-i18n="searchButton">搜索</button>
+        </form>
+      </div>
+    </section>
+
+    <div class="catalog-workspace">
+      <button id="mobileCategoryTrigger" class="mobile-category-trigger" type="button" aria-expanded="false" aria-controls="catalogSidebar">
+        <span data-i18n="openCategories">浏览产品分类</span>
+        <i data-lucide="sliders-horizontal" aria-hidden="true"></i>
+      </button>
+
+      <aside id="catalogSidebar" class="catalog-sidebar" aria-label="产品分类">
+        <h2 class="sidebar-heading" data-i18n="categoryHeading">产品分类</h2>
+        <nav id="categoryTree"></nav>
+      </aside>
+
+      <div class="content-area">
+        <div id="breadcrumb" class="breadcrumb" aria-label="面包屑导航"></div>
+
+        <div class="content-heading-row">
+          <div>
+            <h2 id="activeCategoryTitle">1/2" 工业冲击套筒</h2>
+            <p id="activeCategoryDescription">常用工业装配规格，按驱动轮廓、长度和功能结构继续筛选。</p>
+          </div>
+          <div class="preview-note" data-i18n="previewNote">219 款官网产品 · 实时筛选</div>
+        </div>
+
+        <section class="filter-bar" aria-label="产品筛选">
+          <div class="filter-field">
+            <label for="profileFilter" data-i18n="profileLabel">驱动轮廓</label>
+            <select id="profileFilter"></select>
+          </div>
+          <div class="filter-field">
+            <label for="lengthFilter" data-i18n="lengthLabel">长度结构</label>
+            <select id="lengthFilter"></select>
+          </div>
+          <div class="filter-field">
+            <label for="featureFilter" data-i18n="featureLabel">功能特征</label>
+            <select id="featureFilter"></select>
+          </div>
+          <button id="resetFilters" class="reset-filters" type="button">
+            <i data-lucide="rotate-ccw" aria-hidden="true"></i>
+            <span data-i18n="resetFilters">重置筛选</span>
+          </button>
+        </section>
+
+        <div class="results-toolbar">
+          <div id="resultsSummary" class="results-summary" aria-live="polite"></div>
+          <div class="catalog-source" data-i18n="catalogSource">数据来源：NORMECO 官网与 2026 PDF 样册</div>
+        </div>
+
+        <section id="productGrid" class="product-grid" aria-label="产品系列预览"></section>
+        <button id="loadMore" class="load-more" type="button" data-i18n="loadMore">加载更多产品</button>
+
+        <div id="emptyState" class="empty-state">
+          <div>
+            <i data-lucide="search-x" aria-hidden="true"></i>
+            <h3 data-i18n="emptyTitle">没有匹配的预览条目</h3>
+            <p data-i18n="emptyDescription">请清除部分筛选条件，或搜索“1/2”“Torx”“带磁”“Adapter”等关键词。</p>
           </div>
         </div>
       </div>
-    </section>
-
-    <section class="px-4 pb-16 sm:px-6 lg:px-8">
-      <div class="mx-auto grid max-w-7xl gap-6 lg:grid-cols-[320px_1fr]">
-        <aside class="glass self-start p-4 lg:sticky lg:top-28" aria-label="产品目录侧边栏">
-          <div class="flex items-center justify-between gap-4 border-b border-red-900/10 pb-4">
-            <div>
-              <h2 class="text-lg font-bold" data-i18n="sidebarTitle">产品目录</h2>
-              <p class="text-sm text-slate-500">Catalog / Subcatalog</p>
-            </div>
-            <span id="catalogCount" class="rounded-full bg-red-50 px-3 py-1 text-sm font-bold text-red-800"></span>
-          </div>
-          <nav id="catalogSidebar" class="mt-4 grid gap-2" aria-label="产品目录"></nav>
-        </aside>
-
-        <section class="grid gap-6" aria-label="产品分类内容">
-          <div id="activeCategoryPanel" class="glass p-6"></div>
-          <div class="glass p-6">
-            <div class="flex flex-col gap-3 border-b border-red-900/10 pb-5 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h2 class="text-2xl font-bold" data-i18n="resultTitle">目录匹配结果</h2>
-                <p id="resultSummary" class="mt-1 text-sm text-slate-500">显示全部目录分类。</p>
-              </div>
-              <p class="text-sm font-bold text-red-800" data-i18n="frameworkOnly">仅分类框架，产品明细待上传</p>
-            </div>
-            <div id="resultGrid" class="mt-6 grid gap-4 md:grid-cols-2"></div>
-            <div id="emptyState" class="mt-6 hidden border border-dashed border-red-900/20 bg-red-50/60 p-8 text-center">
-              <h3 class="text-xl font-bold" data-i18n="emptyTitle">未找到匹配目录</h3>
-              <p class="mt-2 text-slate-600" data-i18n="emptyDesc">请尝试输入方驱尺寸、中文分类或英文关键词，例如 “1/2”、 “起子套筒”、 “torx”。</p>
-            </div>
-          </div>
-        </section>
-      </div>
-    </section>
+    </div>
   </main>
 
-  <footer class="border-t border-red-900/10 px-4 py-10 sm:px-6 lg:px-8">
-    <div class="mx-auto grid max-w-7xl gap-8 md:grid-cols-[1.2fr_.8fr_.8fr]">
-      <div>
-        <img class="footer-logo" src="assets/normeco-logo.png" alt="NORMECO 公司 logo" width="220" height="69" loading="lazy" decoding="async">
-        <p class="mt-3 max-w-md text-sm text-slate-600" data-i18n="footerDesc">NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。</p>
-      </div>
-      <div>
-        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-slate-700">Pages</h2>
-        <div class="mt-4 grid gap-2 text-sm text-slate-600">
-          <a href="index.html" data-i18n="home">首页</a>
-          <a href="products.html" data-i18n="navProducts">产品中心</a>
-          <a href="custom.html" data-i18n="navCustom">定制服务</a>
-          <a href="contact.html" data-i18n="navContact">联系我们</a>
-        </div>
-      </div>
-      <div>
-        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-slate-700" data-i18n="statusTitle">Catalog Status</h2>
-        <p class="mt-4 text-sm text-slate-600" data-i18n="statusDesc">PDF 目录已用于分类框架；产品明细、参数表、下载入口待后续接入。</p>
-      </div>
+  <div id="mobileSidebarBackdrop" class="mobile-sidebar-backdrop"></div>
+  <div id="drawerBackdrop" class="drawer-backdrop"></div>
+
+  <aside id="detailDrawer" class="detail-drawer" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" aria-hidden="true">
+    <div id="detailContent" class="detail-content">
+    <div class="drawer-header">
+      <h2 id="drawerTitle" data-i18n="drawerTitle">产品详情</h2>
+      <button id="drawerClose" class="drawer-close" type="button" aria-label="关闭产品详情">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
     </div>
-    <div class="mx-auto mt-8 max-w-7xl border-t border-red-900/10 pt-6 text-sm text-slate-500">
-      © 2026 NORMECO. All rights reserved.
+    <div class="drawer-content">
+      <div class="drawer-visual">
+        <img id="drawerImage" src="" alt="" width="420" height="320">
+      </div>
+      <h3 id="drawerProductName" class="drawer-product-name"></h3>
+      <p id="drawerProductEn" class="drawer-product-en"></p>
+      <table class="parameter-table">
+        <tbody id="parameterTableBody"></tbody>
+      </table>
+      <section id="modelSpecs" class="model-specs" aria-labelledby="modelSpecsTitle">
+        <div class="model-specs-heading">
+          <h4 id="modelSpecsTitle" data-i18n="modelTableTitle">型号尺寸表</h4>
+          <span id="modelSpecsMeta"></span>
+        </div>
+        <div class="model-specs-scroll">
+          <table class="model-specs-table">
+            <thead>
+              <tr><th data-i18n="parameterModel">型号</th><th>Size</th><th>D2</th><th>D1</th><th>L2</th><th>L</th></tr>
+            </thead>
+            <tbody id="modelSpecsBody"></tbody>
+          </table>
+        </div>
+      </section>
+      <p id="drawerNote" class="drawer-note" data-i18n="drawerNote">官网未公开结构化尺寸表；D1、D2、L、L2 需在询价时按具体型号确认。</p>
+      <a id="drawerSource" class="drawer-source" href="#" target="_blank" rel="noopener">
+        <span data-i18n="sourceLink">查看官网产品页</span>
+        <i data-lucide="external-link" aria-hidden="true"></i>
+      </a>
+      <button id="drawerInquiry" class="drawer-inquiry" type="button" data-i18n="inquiryButton">询问此产品系列</button>
+    </div>
+    </div>
+  </aside>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <footer>
+    <div class="footer-inner">
+      <img src="assets/normeco-logo.png" alt="NORMECO 公司标志" width="284" height="90" loading="lazy">
+      <span data-i18n="footerText">© 2026 NORMECO · 专业装配工具标件 / 定制 · 中国重庆服务全球</span>
     </div>
   </footer>
+
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "NORMECO 产品中心",
+      "description": "NORMECO 工业冲击套筒、装配工具、连接附件与定制产品目录。",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "NORMECO",
+        "url": "https://www.normeco.com/"
+      },
+      "about": [
+        "工业冲击套筒",
+        "装配工具",
+        "自动化装配线",
+        "机器人装配工具",
+        "定制套筒"
+      ]
+    }
+  </script>
 
   <script>
     const translations = {
       zh: {
-        pageTitle: "NORMECO 产品中心 | 工业套筒与起子头目录框架",
-        metaDescription: "NORMECO 产品中心目录框架，按方驱尺寸、起子套筒、起子头分类，支持模糊搜索，便于客户查找专业装配工具目录。",
+        navHome: "首页",
         navProducts: "产品中心",
         navCustom: "定制服务",
         navSolutions: "产线方案",
         navAbout: "关于我们",
         navContact: "联系我们",
-        menu: "菜单",
-        eyebrow: "Product Center",
-        heroTitle: "产品中心框架",
-        heroDesc: "基于已上传 PDF 产品目录，先建立产品目录/子目录导航与模糊搜索框架。当前页面仅展示分类结构，不展示具体产品型号、参数或价格信息。",
-        searchLabel: "搜索目录",
-        searchPlaceholder: "输入方驱尺寸、套筒、起子头、Torx、Adapter 等关键词",
-        clear: "清除",
-        searchHint: "支持中英文、尺寸、目录页码和近似拼写匹配。示例：1/2、起子、bit、adapter、torx。",
-        sidebarTitle: "产品目录",
-        resultTitle: "目录匹配结果",
-        frameworkOnly: "仅分类框架，产品明细待上传",
-        allResults: "显示全部目录分类。",
-        foundResults: (count, query) => `找到 ${count} 个匹配目录：“${query}”。`,
-        catalogCount: (count) => `${count} 类`,
-        selectedCatalog: "Selected Catalog",
-        detailPending: "产品资料待上传",
-        emptyTitle: "未找到匹配目录",
-        emptyDesc: "请尝试输入方驱尺寸、中文分类或英文关键词，例如 “1/2”、 “起子套筒”、 “torx”。",
-        footerDesc: "NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。",
-        home: "首页",
-        statusTitle: "Catalog Status",
-        statusDesc: "PDF 目录已用于分类框架；产品明细、参数表、下载入口待后续接入。"
+        pageTitle: "产品中心",
+        pageDescription: "浏览 NORMECO 工业套筒、起子套筒、连接附件、套装与定制产品，并通过方驱尺寸、轮廓、长度和功能特征快速筛选。",
+        searchPlaceholder: "搜索产品名称、方驱尺寸、结构或英文关键词",
+        searchButton: "搜索",
+        openCategories: "浏览产品分类",
+        categoryHeading: "产品分类",
+        previewNote: "219 款官网产品 · 实时筛选",
+        profileLabel: "驱动轮廓",
+        lengthLabel: "长度结构",
+        featureLabel: "功能特征",
+        resetFilters: "重置筛选",
+        catalogSource: "数据来源：NORMECO 官网与 2026 PDF 样册",
+        emptyTitle: "没有匹配的预览条目",
+        emptyDescription: "请清除部分筛选条件，或搜索“1/2”“Torx”“带磁”“Adapter”等关键词。",
+        drawerTitle: "产品详情",
+        drawerNote: "官网未公开结构化尺寸表；D1、D2、L、L2 需在询价时按具体型号确认。",
+        drawerNoteVerified: "型号尺寸来自 NORMECO 2026 PDF 样册，并通过表格结构、数值与识别置信度校验；下单前仍请确认具体型号。",
+        modelTableTitle: "型号尺寸表",
+        modelMeta: (count, page) => `${count} 个型号 · 样册 P${page}`,
+        modelCount: (count) => `${count} 个可选型号`,
+        seeTable: "见下方型号表",
+        specAvailable: "含型号参数",
+        sourceLink: "查看官网产品页",
+        loadMore: "加载更多产品",
+        inquiryButton: "询问此产品系列",
+        footerText: "© 2026 NORMECO · 专业装配工具标件 / 定制 · 中国重庆服务全球",
+        allProfiles: "全部轮廓",
+        allLengths: "全部长度",
+        allFeatures: "全部特征",
+        itemCount: (count) => `共 <strong>${count}</strong> 个产品`,
+        searchCount: (count, query) => `“${query}”找到 <strong>${count}</strong> 个匹配产品`,
+        imagePending: "产品图片",
+        previewCode: "官网分类",
+        drive: "方驱",
+        profile: "轮廓",
+        length: "长度",
+        viewDetails: "查看参数",
+        inquiry: "询价",
+        homeCrumb: "产品中心",
+        searchCrumb: "搜索结果",
+        pending: "按具体型号确认",
+        parameterModel: "型号",
+        parameterDrive: "方驱",
+        parameterProfile: "轮廓",
+        parameterLength: "长度结构",
+        parameterFeature: "功能特征",
+        parameterCategory: "官网分类",
+        inquiryToast: "请通过“联系我们”提交产品名称、数量和应用场景，我们将提供选型与报价。",
+        loading: "正在加载官网产品数据…",
+        loadError: "产品数据加载失败，请刷新页面重试。",
+        closeMenu: "关闭分类"
       },
       en: {
-        pageTitle: "NORMECO Product Center | Industrial Sockets and Bits Catalog Framework",
-        metaDescription: "NORMECO product center framework organized by square drive size, bit sockets, and industrial bits, with fuzzy search for professional assembly tool catalog navigation.",
+        navHome: "Home",
         navProducts: "Products",
         navCustom: "Customization",
         navSolutions: "Line Solutions",
         navAbout: "About",
         navContact: "Contact",
-        menu: "Menu",
-        eyebrow: "Product Center",
-        heroTitle: "Product Center Framework",
-        heroDesc: "Based on the uploaded PDF catalog, this page first builds the catalog/subcatalog navigation and fuzzy search framework. It currently shows category structure only, without product models, specifications, or pricing.",
-        searchLabel: "Search Catalog",
-        searchPlaceholder: "Search drive size, sockets, bits, Torx, Adapter, etc.",
-        clear: "Clear",
-        searchHint: "Supports Chinese/English terms, sizes, catalog page ranges, and approximate spelling. Try: 1/2, bit, socket, adapter, torx.",
-        sidebarTitle: "Product Catalog",
-        resultTitle: "Catalog Matches",
-        frameworkOnly: "Framework only, product details pending",
-        allResults: "Showing all catalog categories.",
-        foundResults: (count, query) => `${count} matching catalog categories found for “${query}”.`,
-        catalogCount: (count) => `${count} groups`,
-        selectedCatalog: "Selected Catalog",
-        detailPending: "Product details pending",
-        emptyTitle: "No matching catalog found",
-        emptyDesc: "Try a drive size, Chinese category, or English keyword such as “1/2”, “bit socket”, or “torx”.",
-        footerDesc: "NORMECO provides professional assembly tool standards and customization, headquartered in Chongqing, China and serving global customers.",
-        home: "Home",
-        statusTitle: "Catalog Status",
-        statusDesc: "The PDF catalog has been used for classification only. Product details, specification tables, and downloads will be connected later."
+        pageTitle: "Product Center",
+        pageDescription: "Browse NORMECO impact sockets, bit sockets, accessories, sets and custom products, then filter by drive size, profile, length and feature.",
+        searchPlaceholder: "Search product name, drive size, structure or keyword",
+        searchButton: "Search",
+        openCategories: "Browse Categories",
+        categoryHeading: "Product Categories",
+        previewNote: "219 official products · live filters",
+        profileLabel: "Drive Profile",
+        lengthLabel: "Length",
+        featureLabel: "Feature",
+        resetFilters: "Reset",
+        catalogSource: "Data source: NORMECO website and 2026 PDF catalog",
+        emptyTitle: "No preview items match",
+        emptyDescription: "Clear one or more filters, or try 1/2, Torx, Magnet or Adapter.",
+        drawerTitle: "Product Details",
+        drawerNote: "The official website does not publish a structured dimension table. D1, D2, L and L2 are confirmed against the selected model during inquiry.",
+        drawerNoteVerified: "Model dimensions are sourced from the NORMECO 2026 PDF catalog and validated for table structure, numeric content and OCR confidence. Please reconfirm the model before ordering.",
+        modelTableTitle: "Model Dimensions",
+        modelMeta: (count, page) => `${count} models · Catalog P${page}`,
+        modelCount: (count) => `${count} available models`,
+        seeTable: "See model table below",
+        specAvailable: "Model specs",
+        sourceLink: "View official product page",
+        loadMore: "Load More Products",
+        inquiryButton: "Ask About This Series",
+        footerText: "© 2026 NORMECO · Standard and custom assembly tools · Chongqing, China, serving worldwide",
+        allProfiles: "All profiles",
+        allLengths: "All lengths",
+        allFeatures: "All features",
+        itemCount: (count) => `<strong>${count}</strong> products`,
+        searchCount: (count, query) => `<strong>${count}</strong> matches for “${query}”`,
+        imagePending: "Product image",
+        previewCode: "Official category",
+        drive: "Drive",
+        profile: "Profile",
+        length: "Length",
+        viewDetails: "Specifications",
+        inquiry: "Inquiry",
+        homeCrumb: "Product Center",
+        searchCrumb: "Search Results",
+        pending: "Confirm by model",
+        parameterModel: "Model",
+        parameterDrive: "Square Drive",
+        parameterProfile: "Profile",
+        parameterLength: "Length",
+        parameterFeature: "Features",
+        parameterCategory: "Official Category",
+        inquiryToast: "Send the product name, quantity and application through Contact for selection support and a quotation.",
+        loading: "Loading official product data…",
+        loadError: "Product data could not be loaded. Please refresh the page.",
+        closeMenu: "Close Categories"
       }
     };
 
-    let currentLanguage = localStorage.getItem("normeco-language") || "zh";
-
-    function t(key, ...args) {
-      const value = (translations[currentLanguage] || translations.zh)[key];
-      return typeof value === "function" ? value(...args) : value;
-    }
-
-    const catalog = [
+    const categories = [
       {
-        id: "drive-1-4",
-        title: "1/4\" 方驱套筒",
-        titleEn: "1/4\" Square Drive",
-        range: "P1-10",
-        description: "小规格冲击套筒与外星型套筒目录入口。",
-        children: ["外星型标准套筒 / External Torx Sockets", "外星型薄壁套筒 / Thin Wall", "外星型加长套筒 / Deep", "小规格附件 / Accessories"]
+        id: "impact",
+        icon: "nut",
+        zh: "工业冲击套筒",
+        en: "Industrial Impact Sockets",
+        children: [
+          ["impact-1-4", "1/4\" 工业冲击套筒", "1/4\" Impact Sockets"],
+          ["impact-3-8", "3/8\" 工业冲击套筒", "3/8\" Impact Sockets"],
+          ["impact-1-2", "1/2\" 工业冲击套筒", "1/2\" Impact Sockets"],
+          ["impact-5-8", "5/8\" 工业冲击套筒", "5/8\" Impact Sockets"],
+          ["impact-3-4", "3/4\" 工业冲击套筒", "3/4\" Impact Sockets"],
+          ["impact-1", "1\" 工业冲击套筒", "1\" Impact Sockets"],
+          ["impact-1-1-2", "1-1/2\" 工业冲击套筒", "1-1/2\" Impact Sockets"],
+          ["impact-2-1-2", "2-1/2\" 工业冲击套筒", "2-1/2\" Impact Sockets"]
+        ]
       },
       {
-        id: "drive-3-8",
-        title: "3/8\" 方驱套筒",
-        titleEn: "3/8\" Square Drive",
-        range: "P11-44",
-        description: "中小规格冲击套筒、外星型套筒与附件目录入口。",
-        children: ["六角冲击套筒 / 6-Point Impact Sockets", "加长冲击套筒 / Deep Impact Sockets", "外星型套筒 / External Torx", "转换头 / Adapter", "延长杆 / Extension Bars"]
+        id: "bits",
+        icon: "wrench",
+        zh: "起子套筒与起子头",
+        en: "Bit Sockets & Bits",
+        children: [
+          ["bits-sockets", "起子套筒", "Bit Sockets"],
+          ["bits-industrial", "工业级起子头", "Industrial Bits"],
+          ["bits-maintenance", "维修级起子头", "Maintenance Bits"]
+        ]
       },
       {
-        id: "drive-1-2",
-        title: "1/2\" 方驱套筒",
-        titleEn: "1/2\" Square Drive",
-        range: "P45-92",
-        description: "常用工业装配规格，覆盖标准、深型、薄壁与连接附件。",
-        children: ["标准冲击套筒 / Standard Impact Sockets", "薄壁套筒 / Thin Wall", "加长套筒 / Deep", "外星型套筒 / External Torx", "万向接头 / Universal Joint", "转换头与延长杆 / Adapter & Extension Bars"]
+        id: "accessories",
+        icon: "unplug",
+        zh: "连接与附件",
+        en: "Adapters & Accessories",
+        children: [
+          ["accessories-adapters", "转换头", "Adapters"],
+          ["accessories-extensions", "延长杆", "Extension Bars"],
+          ["accessories-universal", "万向接头", "Universal Joints"],
+          ["accessories-retainers", "锁销与 O 形环", "Pins & O-Rings"]
+        ]
       },
       {
-        id: "drive-5-8",
-        title: "5/8\" 方驱套筒",
-        titleEn: "5/8\" Square Drive",
-        range: "P93-94",
-        description: "特殊方驱规格的工业冲击套筒目录入口。",
-        children: ["特殊冲击套筒 / Specialty Impact Sockets", "定制接口预留 / Custom Interface Placeholder"]
+        id: "sets",
+        icon: "briefcase-business",
+        zh: "套装组合工具",
+        en: "Socket Sets",
+        children: [
+          ["sets-combination", "套筒与装配工具套装", "Socket & Assembly Sets"]
+        ]
       },
       {
-        id: "drive-3-4",
-        title: "3/4\" 方驱套筒",
-        titleEn: "3/4\" Square Drive",
-        range: "P95-112",
-        description: "重载装配场景常用规格，适配大型设备和产线维护。",
-        children: ["标准冲击套筒 / Standard Impact Sockets", "加长冲击套筒 / Deep Impact Sockets", "转换头 / Adapter", "延长杆 / Extension Bars", "万向接头 / Universal Joint"]
+        id: "custom",
+        icon: "pencil-ruler",
+        zh: "定制产品",
+        en: "Custom-made Items",
+        children: [
+          ["custom-special", "异形与特殊结构", "Special Geometry"],
+          ["custom-line", "产线专用定制", "Assembly-line Customization"]
+        ]
       },
       {
-        id: "drive-1",
-        title: "1\" 方驱套筒",
-        titleEn: "1\" Square Drive",
-        range: "P113-128",
-        description: "重型工业装配与维护类套筒目录入口。",
-        children: ["重型冲击套筒 / Heavy-Duty Impact Sockets", "加长套筒 / Deep Sockets", "连接附件 / Accessories", "延长杆 / Extension Bars"]
-      },
-      {
-        id: "drive-1-1-2",
-        title: "1-1/2\" 方驱套筒",
-        titleEn: "1-1/2\" Square Drive",
-        range: "P129-132",
-        description: "大规格重载冲击套筒及延长连接件目录入口。",
-        children: ["重载冲击套筒 / Heavy-Duty Sockets", "延长杆 / Extension Bars", "销孔式连接 / Pin Hole Connection"]
-      },
-      {
-        id: "drive-2-1-2",
-        title: "2-1/2\" 方驱套筒",
-        titleEn: "2-1/2\" Square Drive",
-        range: "P133-136",
-        description: "超重载工业装配场景的套筒目录入口。",
-        children: ["超重载冲击套筒 / Extra Heavy-Duty Sockets", "大型设备维护 / Heavy Equipment Maintenance"]
-      },
-      {
-        id: "bit-sockets",
-        title: "起子套筒",
-        titleEn: "Bit Sockets",
-        range: "P137-145",
-        description: "面向冲击工具的起子套筒分类目录。",
-        children: ["带磁起子套筒 / Bit Sockets with Magnet", "不带磁起子套筒 / Bit Sockets without Magnet", "六角起子套筒 / Hex Bit Sockets", "定制长度预留 / Custom Length Placeholder"]
-      },
-      {
-        id: "industrial-bits",
-        title: "起子头",
-        titleEn: "Industrial Bits",
-        range: "P146-164",
-        description: "工业装配级起子头目录入口。",
-        children: ["十字起子头 / Phillips Bits", "一字起子头 / Slotted Bits", "内六角起子头 / Hex Bits", "星型起子头 / Torx Bits", "定制起子头 / Custom Bits"]
+        id: "special",
+        icon: "shield-check",
+        zh: "特殊应用",
+        en: "Special Applications",
+        children: [
+          ["special-insulated", "绝缘套筒", "Insulated Sockets"],
+          ["special-antivibration", "抗震动与油压脉冲", "Anti-vibration"],
+          ["special-protected", "旋护与保护结构", "Protected Sockets"]
+        ]
       }
     ];
 
-    const sidebar = document.getElementById("catalogSidebar");
-    const resultGrid = document.getElementById("resultGrid");
-    const resultSummary = document.getElementById("resultSummary");
-    const catalogCount = document.getElementById("catalogCount");
-    const activeCategoryPanel = document.getElementById("activeCategoryPanel");
-    const emptyState = document.getElementById("emptyState");
-    const searchInput = document.getElementById("catalogSearch");
-    const clearSearch = document.getElementById("clearSearch");
+    const categoryDescriptions = {
+      "impact-1-4": ["适合小规格紧固与精密装配场景。", "For compact fastening and precision assembly."],
+      "impact-3-8": ["覆盖中小规格工业装配、磁吸与万向结构。", "For compact industrial assembly, magnetic and universal designs."],
+      "impact-1-2": ["常用工业装配规格，按驱动轮廓、长度和功能结构继续筛选。", "A core industrial assembly range, refined by profile, length and function."],
+      "impact-5-8": ["特殊方驱接口与转换应用预览。", "Preview of specialty square-drive and adapter applications."],
+      "impact-3-4": ["面向重载装配、设备维护与大型紧固件。", "For heavy assembly, equipment maintenance and large fasteners."],
+      "impact-1": ["重型工业装配与高扭矩维护工具系列。", "Heavy industrial assembly and high-torque maintenance range."],
+      "impact-1-1-2": ["大型设备与重载冲击工具使用的套筒系列。", "Socket range for large equipment and heavy impact tools."],
+      "impact-2-1-2": ["超重载工业设备和特殊工程应用。", "For extra-heavy industrial equipment and engineered applications."],
+      "bits-sockets": ["按磁吸结构、等级和接口形式组织起子套筒。", "Bit sockets organized by magnet system, grade and interface."],
+      "bits-industrial": ["适用于自动化、机器人与连续装配线。", "For automation, robotics and continuous assembly lines."],
+      "bits-maintenance": ["适用于维修与通用装配场景。", "For maintenance and general assembly."],
+      "accessories-adapters": ["不同方驱、六角接口之间的转换产品。", "Adapters between square-drive and hex interfaces."],
+      "accessories-extensions": ["标准、快换、抗震和旋护延长结构。", "Standard, quick-change, anti-vibration and protected extensions."],
+      "accessories-universal": ["万向、重工和颤动连接结构。", "Universal, heavy-duty and wobble joint structures."],
+      "accessories-retainers": ["套筒锁销、O 形环等连接附件。", "Locking pins, O-rings and socket retention accessories."],
+      "sets-combination": ["按使用场景组织套筒与装配工具组合。", "Socket and assembly tool combinations organized by application."],
+      "custom-special": ["开口、异形、特殊磁吸和特殊接口定制。", "Open, special-shape, magnetic and interface customization."],
+      "custom-line": ["针对机器人、自动化产线和工位进行定制。", "Customization for robots, automated lines and workstations."],
+      "special-insulated": ["面向绝缘要求的特殊套筒与转换工具。", "Special sockets and adapters for insulated applications."],
+      "special-antivibration": ["面向油压脉冲工具和高频装配工况。", "For hydraulic pulse tools and high-cycle assembly."],
+      "special-protected": ["旋护、双层护套与工件表面保护结构。", "Rotating covers and protective structures for workpiece safety."]
+    };
 
-    let activeId = catalog[0].id;
-    let currentQuery = "";
+    let products = [];
+
+    const ui = {
+      language: localStorage.getItem("normeco-language") || "zh",
+      activeCategory: "impact-1-2",
+      openGroups: new Set(["impact"]),
+      query: "",
+      filters: {
+        profile: "",
+        length: "",
+        feature: ""
+      },
+      visibleCount: 18,
+      activeProduct: null,
+      activeCard: null,
+      detailAnimating: false
+    };
+
+    const elements = {
+      categoryTree: document.getElementById("categoryTree"),
+      breadcrumb: document.getElementById("breadcrumb"),
+      activeTitle: document.getElementById("activeCategoryTitle"),
+      activeDescription: document.getElementById("activeCategoryDescription"),
+      profileFilter: document.getElementById("profileFilter"),
+      lengthFilter: document.getElementById("lengthFilter"),
+      featureFilter: document.getElementById("featureFilter"),
+      productGrid: document.getElementById("productGrid"),
+      loadMore: document.getElementById("loadMore"),
+      resultsSummary: document.getElementById("resultsSummary"),
+      emptyState: document.getElementById("emptyState"),
+      search: document.getElementById("catalogSearch"),
+      clearSearch: document.getElementById("clearSearch"),
+      sidebar: document.getElementById("catalogSidebar"),
+      mobileSidebarBackdrop: document.getElementById("mobileSidebarBackdrop"),
+      mobileCategoryTrigger: document.getElementById("mobileCategoryTrigger"),
+      drawer: document.getElementById("detailDrawer"),
+      detailContent: document.getElementById("detailContent"),
+      drawerBackdrop: document.getElementById("drawerBackdrop"),
+      drawerProductName: document.getElementById("drawerProductName"),
+      drawerProductEn: document.getElementById("drawerProductEn"),
+      drawerImage: document.getElementById("drawerImage"),
+      drawerSource: document.getElementById("drawerSource"),
+      parameterTableBody: document.getElementById("parameterTableBody"),
+      modelSpecs: document.getElementById("modelSpecs"),
+      modelSpecsMeta: document.getElementById("modelSpecsMeta"),
+      modelSpecsBody: document.getElementById("modelSpecsBody"),
+      drawerNote: document.getElementById("drawerNote"),
+      toast: document.getElementById("toast")
+    };
+
+    function t(key, ...args) {
+      const value = translations[ui.language][key];
+      return typeof value === "function" ? value(...args) : value;
+    }
+
+    function text(zh, en) {
+      return ui.language === "en" ? en : zh;
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    function prepareProduct(item) {
+      const features = Array.isArray(item.features) && item.features.length
+        ? item.features
+        : [{ zh: "基础结构", en: "Standard" }];
+      return {
+        id: item.id,
+        categories: item.categories || [item.primaryCategory],
+        drive: item.drive || "Multi",
+        zh: item.name?.zh || "",
+        en: item.name?.en || item.name?.zh || "",
+        profileZh: item.profile?.zh || "特殊结构",
+        profileEn: item.profile?.en || "Special Profile",
+        lengthZh: item.length?.zh || "未标注",
+        lengthEn: item.length?.en || "Not Specified",
+        features,
+        sourceCategory: item.sourceCategory || "",
+        sourceUrl: item.sourceUrl || "",
+        image: item.image || null,
+        dimensions: item.dimensions || {},
+        specifications: item.specifications || null
+      };
+    }
 
     function normalize(value) {
-      return value.toLowerCase().replace(/[\s"'“”/\\._-]+/g, "");
+      return String(value)
+        .toLowerCase()
+        .replace(/[\s"'“”‘’\\/_.,\-()&]+/g, "");
+    }
+
+    function editDistance(left, right) {
+      const previous = Array.from({ length: right.length + 1 }, (_, index) => index);
+      for (let leftIndex = 1; leftIndex <= left.length; leftIndex += 1) {
+        const current = [leftIndex];
+        for (let rightIndex = 1; rightIndex <= right.length; rightIndex += 1) {
+          const cost = left[leftIndex - 1] === right[rightIndex - 1] ? 0 : 1;
+          current[rightIndex] = Math.min(
+            current[rightIndex - 1] + 1,
+            previous[rightIndex] + 1,
+            previous[rightIndex - 1] + cost
+          );
+        }
+        previous.splice(0, previous.length, ...current);
+      }
+      return previous[right.length];
     }
 
     function fuzzyMatch(source, query) {
-      const text = normalize(source);
+      const haystack = normalize(source);
       const needle = normalize(query);
-      if (!needle) return true;
-      if (text.includes(needle)) return true;
+      if (!needle || haystack.includes(needle)) return true;
 
-      let index = 0;
-      for (const char of text) {
-        if (char === needle[index]) index += 1;
-        if (index === needle.length) return true;
+      const words = String(source)
+        .toLowerCase()
+        .split(/[\s"'“”‘’\\/_.,\-()&]+/)
+        .map(normalize)
+        .filter(Boolean);
+      const tolerance = needle.length >= 6 ? 2 : 1;
+
+      return words.some((word) => {
+        if (word.startsWith(needle) || needle.startsWith(word)) return true;
+        return Math.abs(word.length - needle.length) <= tolerance
+          && editDistance(word, needle) <= tolerance;
+      });
+    }
+
+    function getCategoryInfo(categoryId) {
+      for (const group of categories) {
+        const child = group.children.find(([id]) => id === categoryId);
+        if (child) return { group, child };
       }
-      return false;
+      return null;
     }
 
-    function categoryText(item) {
-      return [item.title, item.titleEn, item.range, item.description, ...item.children].join(" ");
-    }
+    function renderCategoryTree() {
+      elements.categoryTree.innerHTML = categories.map((group) => {
+        const isOpen = ui.openGroups.has(group.id);
+        const isActiveGroup = group.children.some(([id]) => id === ui.activeCategory);
+        return `
+          <section class="category-group">
+            <button class="category-group-button ${isActiveGroup ? "is-active" : ""}" type="button" data-group="${group.id}" aria-expanded="${isOpen}">
+              <i data-lucide="${group.icon}" aria-hidden="true"></i>
+              <strong>${text(group.zh, group.en)}</strong>
+              <i class="chevron" data-lucide="chevron-down" aria-hidden="true"></i>
+            </button>
+            <div class="category-children ${isOpen ? "is-open" : ""}">
+              ${group.children.map(([id, zh, en]) => `
+                <button class="category-child ${id === ui.activeCategory ? "is-active" : ""}" type="button" data-category="${id}">
+                  ${text(zh, en)}
+                </button>
+              `).join("")}
+            </div>
+          </section>
+        `;
+      }).join("");
 
-    function renderSidebar(items) {
-      sidebar.innerHTML = items.map((item) => `
-        <button class="catalog-link ${item.id === activeId ? "is-active" : ""} w-full border border-red-900/10 bg-white px-4 py-3 text-left text-slate-700 transition hover:border-red-700/40 hover:bg-red-50" type="button" data-id="${item.id}">
-          <span class="block font-bold">${item.title}</span>
-          <span class="muted mt-1 block text-xs text-slate-500">${item.titleEn} · ${item.range}</span>
-        </button>
-      `).join("");
-
-      sidebar.querySelectorAll(".catalog-link").forEach((button) => {
+      elements.categoryTree.querySelectorAll("[data-group]").forEach((button) => {
         button.addEventListener("click", () => {
-          activeId = button.dataset.id;
+          const groupId = button.dataset.group;
+          if (ui.openGroups.has(groupId)) {
+            ui.openGroups.delete(groupId);
+          } else {
+            ui.openGroups.add(groupId);
+          }
+          renderCategoryTree();
+          refreshIcons();
+        });
+      });
+
+      elements.categoryTree.querySelectorAll("[data-category]").forEach((button) => {
+        button.addEventListener("click", () => {
+          ui.activeCategory = button.dataset.category;
+          ui.query = "";
+          elements.search.value = "";
+          ui.filters = { profile: "", length: "", feature: "" };
+          ui.visibleCount = 18;
+          closeMobileSidebar();
           render();
-          document.getElementById("activeCategoryPanel").scrollIntoView({ block: "start", behavior: "smooth" });
         });
       });
     }
 
-    function renderActivePanel() {
-      const item = catalog.find((entry) => entry.id === activeId) || catalog[0];
-      activeCategoryPanel.innerHTML = `
-        <div class="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
-          <div>
-            <p class="text-sm font-bold uppercase tracking-[.22em] text-red-700">${t("selectedCatalog")}</p>
-            <h2 class="mt-3 text-3xl font-bold">${item.title}</h2>
-            <p class="mt-1 text-sm font-bold text-slate-500">${item.titleEn} · ${item.range}</p>
-            <p class="mt-4 max-w-3xl text-slate-600">${item.description}</p>
-          </div>
-          <div class="border border-red-900/10 bg-red-50 px-4 py-3 text-sm text-red-900">
-            ${t("detailPending")}
-          </div>
-        </div>
-        <div class="mt-6 grid gap-2 sm:grid-cols-2">
-          ${item.children.map((child) => `<div class="border border-red-900/10 bg-white px-4 py-3 text-sm text-slate-700">${child}</div>`).join("")}
-        </div>
+    function uniqueValues(items, zhKey, enKey) {
+      const seen = new Map();
+      items.forEach((item) => {
+        const key = `${item[zhKey]}|${item[enKey]}`;
+        seen.set(key, [item[zhKey], item[enKey]]);
+      });
+      return [...seen.values()];
+    }
+
+    function renderSelect(select, items, zhKey, enKey, allLabel, selectedValue) {
+      const options = uniqueValues(items, zhKey, enKey);
+      select.innerHTML = `
+        <option value="">${allLabel}</option>
+        ${options.map(([zh, en]) => `<option value="${escapeHtml(zh)}" ${selectedValue === zh ? "selected" : ""}>${escapeHtml(text(zh, en))}</option>`).join("")}
       `;
     }
 
-    function renderResults(items) {
-      resultGrid.innerHTML = items.map((item) => `
-        <article class="result-card border border-red-900/10 bg-white p-5">
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="text-xl font-bold">${item.title}</h3>
-              <p class="mt-1 text-sm font-bold text-slate-500">${item.titleEn}</p>
-            </div>
-            <span class="shrink-0 rounded-full bg-red-50 px-3 py-1 text-sm font-bold text-red-800">${item.range}</span>
+    function renderFeatureSelect(items) {
+      const options = new Map();
+      items.forEach((item) => {
+        item.features.forEach((feature) => {
+          options.set(feature.zh, [feature.zh, feature.en]);
+        });
+      });
+      elements.featureFilter.innerHTML = `
+        <option value="">${t("allFeatures")}</option>
+        ${[...options.values()].map(([zh, en]) => `
+          <option value="${escapeHtml(zh)}" ${ui.filters.feature === zh ? "selected" : ""}>${escapeHtml(text(zh, en))}</option>
+        `).join("")}
+      `;
+    }
+
+    function baseItems() {
+      if (ui.query) return products;
+      return products.filter((item) => item.categories.includes(ui.activeCategory));
+    }
+
+    function filteredItems() {
+      return baseItems().filter((item) => {
+        const searchable = [
+          item.zh,
+          item.en,
+          item.drive,
+          item.profileZh,
+          item.profileEn,
+          item.lengthZh,
+          item.lengthEn,
+          item.sourceCategory,
+          ...item.features.flatMap((feature) => [feature.zh, feature.en])
+        ].join(" ");
+        const matchesQuery = fuzzyMatch(searchable, ui.query);
+        const matchesProfile = !ui.filters.profile || item.profileZh === ui.filters.profile;
+        const matchesLength = !ui.filters.length || item.lengthZh === ui.filters.length;
+        const matchesFeature = !ui.filters.feature
+          || item.features.some((feature) => feature.zh === ui.filters.feature);
+        return matchesQuery && matchesProfile && matchesLength && matchesFeature;
+      });
+    }
+
+    function renderHeading() {
+      const info = getCategoryInfo(ui.activeCategory);
+      const [categoryId, categoryZh, categoryEn] = info.child;
+      const description = categoryDescriptions[categoryId];
+
+      elements.activeTitle.textContent = ui.query
+        ? text("搜索结果", "Search Results")
+        : text(categoryZh, categoryEn);
+      elements.activeDescription.textContent = ui.query
+        ? text("搜索会跨越全部产品分类，并继续应用当前属性筛选。", "Search spans all catalog groups and keeps the active attribute filters.")
+        : text(description[0], description[1]);
+
+      elements.breadcrumb.innerHTML = `
+        <i data-lucide="home" aria-hidden="true"></i>
+        <span>${t("homeCrumb")}</span>
+        <i data-lucide="chevron-right" aria-hidden="true"></i>
+        <span>${ui.query ? t("searchCrumb") : text(info.group.zh, info.group.en)}</span>
+        ${ui.query ? "" : `<i data-lucide="chevron-right" aria-hidden="true"></i><strong>${text(categoryZh, categoryEn)}</strong>`}
+      `;
+    }
+
+    function renderFilters() {
+      const items = baseItems();
+      renderSelect(elements.profileFilter, items, "profileZh", "profileEn", t("allProfiles"), ui.filters.profile);
+      renderSelect(elements.lengthFilter, items, "lengthZh", "lengthEn", t("allLengths"), ui.filters.length);
+      renderFeatureSelect(items);
+    }
+
+    function productCard(item, index) {
+      const displayName = text(item.zh, item.en);
+      const alternateName = ui.language === "en" ? item.zh : item.en;
+      const imagePath = item.image?.path || "";
+      const imageAlt = text(
+        `NORMECO ${item.zh}工业装配工具产品图`,
+        `NORMECO ${item.en} industrial assembly tool`
+      );
+      const featureTags = item.features.slice(0, 2).map((feature) => `
+        <span class="card-tag">${escapeHtml(text(feature.zh, feature.en))}</span>
+      `).join("");
+      const specsTag = item.specifications
+        ? `<span class="card-tag">${t("specAvailable")}</span>`
+        : "";
+      return `
+        <article class="product-card">
+          <div class="product-placeholder has-image">
+            <img src="${escapeHtml(imagePath)}" alt="${escapeHtml(imageAlt)}" width="${item.image?.width || 640}" height="${item.image?.height || 480}" loading="lazy" decoding="async">
           </div>
-          <p class="mt-4 text-sm text-slate-600">${item.description}</p>
-          <div class="mt-4 flex flex-wrap gap-2">
-            ${item.children.map((child) => `<span class="border border-red-900/10 bg-red-50/50 px-2.5 py-1 text-xs text-slate-700">${child}</span>`).join("")}
+          <div class="card-body">
+            <div class="card-code">${t("previewCode")} · ${escapeHtml(item.sourceCategory)}</div>
+            <h3>${escapeHtml(displayName)}</h3>
+            <p class="product-name-en">${escapeHtml(alternateName)}</p>
+            <div class="card-specs">
+              <div class="card-spec-row"><span>${t("drive")}</span><strong>${escapeHtml(item.drive)}</strong></div>
+              <div class="card-spec-row"><span>${t("profile")}</span><strong>${escapeHtml(text(item.profileZh, item.profileEn))}</strong></div>
+              <div class="card-spec-row"><span>${t("length")}</span><strong>${escapeHtml(text(item.lengthZh, item.lengthEn))}</strong></div>
+            </div>
+            <div class="card-tags">
+              ${featureTags}
+              ${specsTag}
+              <span class="card-tag">B2B</span>
+            </div>
+            <div class="card-actions">
+              <button class="card-action" type="button" data-detail="${item.id}">${t("viewDetails")}</button>
+              <button class="card-action primary" type="button" data-inquiry="${item.id}">${t("inquiry")}</button>
+            </div>
           </div>
         </article>
-      `).join("");
+      `;
+    }
 
-      emptyState.classList.toggle("hidden", items.length > 0);
+    function renderProducts() {
+      const items = filteredItems();
+      const visibleItems = items.slice(0, ui.visibleCount);
+      elements.resultsSummary.innerHTML = ui.query
+        ? t("searchCount", items.length, ui.query)
+        : t("itemCount", items.length);
+      elements.productGrid.innerHTML = visibleItems.map(productCard).join("");
+      elements.productGrid.style.display = items.length ? "" : "none";
+      elements.emptyState.classList.toggle("is-visible", items.length === 0);
+      elements.loadMore.classList.toggle("is-visible", visibleItems.length < items.length);
+
+      elements.productGrid.querySelectorAll("[data-detail]").forEach((button) => {
+        button.addEventListener("click", () => openDetail(button.dataset.detail, button.closest(".product-card")));
+      });
+
+      elements.productGrid.querySelectorAll("[data-inquiry]").forEach((button) => {
+        button.addEventListener("click", showInquiryToast);
+      });
     }
 
     function render() {
-      const filtered = catalog.filter((item) => fuzzyMatch(categoryText(item), currentQuery));
-      if (filtered.length && !filtered.some((item) => item.id === activeId)) {
-        activeId = filtered[0].id;
-      }
-
-      catalogCount.textContent = t("catalogCount", catalog.length);
-      resultSummary.textContent = currentQuery
-        ? t("foundResults", filtered.length, currentQuery)
-        : t("allResults");
-
-      renderSidebar(filtered.length ? filtered : catalog);
-      renderActivePanel();
-      renderResults(filtered);
-    }
-
-    searchInput.addEventListener("input", (event) => {
-      currentQuery = event.target.value.trim();
-      render();
-    });
-
-    clearSearch.addEventListener("click", () => {
-      searchInput.value = "";
-      currentQuery = "";
-      render();
-      searchInput.focus();
-    });
-
-    const menuToggle = document.getElementById("menuToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-    menuToggle.addEventListener("click", () => {
-      const isOpen = mobileMenu.classList.toggle("hidden") === false;
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
-    });
-
-    const languageSwitcher = document.getElementById("languageSwitcher");
-    const languageButton = document.getElementById("languageButton");
-    const languageFlag = document.getElementById("languageFlag");
-    const languageFlags = {
-      zh: { src: "https://flagcdn.com/cn.svg", alt: "中国国旗" },
-      en: { src: "https://flagcdn.com/us.svg", alt: "United States flag" }
-    };
-
-    function applyLanguage(language) {
-      currentLanguage = translations[language] ? language : "zh";
-      const dictionary = translations[currentLanguage];
-
-      document.documentElement.lang = currentLanguage === "en" ? "en" : "zh-CN";
-      document.title = dictionary.pageTitle;
-      document.querySelector("meta[name='description']").setAttribute("content", dictionary.metaDescription);
+      document.documentElement.lang = ui.language === "en" ? "en" : "zh-CN";
+      document.title = ui.language === "en"
+        ? "NORMECO Product Center | Industrial Sockets and Assembly Tools"
+        : "NORMECO 产品中心 | 工业套筒与装配工具";
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
-        const value = dictionary[element.dataset.i18n];
-        if (typeof value === "string") element.textContent = value;
+        element.textContent = t(element.dataset.i18n);
       });
-
       document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
-        const value = dictionary[element.dataset.i18nPlaceholder];
-        if (typeof value === "string") element.setAttribute("placeholder", value);
+        element.placeholder = t(element.dataset.i18nPlaceholder);
       });
 
-      const flag = languageFlags[currentLanguage] || languageFlags.zh;
-      languageFlag.src = flag.src;
-      languageFlag.alt = flag.alt;
-      localStorage.setItem("normeco-language", currentLanguage);
+      document.querySelectorAll(".language-option").forEach((button) => {
+        button.setAttribute("aria-current", String(button.dataset.language === ui.language));
+      });
+      document.getElementById("currentFlag").src = ui.language === "en"
+        ? "https://flagcdn.com/w80/us.png"
+        : "https://flagcdn.com/w80/cn.png";
+      document.getElementById("currentFlag").alt = ui.language === "en" ? "United States flag" : "中国国旗";
+
+      renderCategoryTree();
+      renderHeading();
+      renderFilters();
+      renderProducts();
+      elements.clearSearch.classList.toggle("is-visible", Boolean(ui.query));
+      refreshIcons();
+    }
+
+    function setDetailOpen(open) {
+      elements.drawer.classList.toggle("is-open", open);
+      elements.drawerBackdrop.classList.toggle("is-open", open);
+      elements.drawer.setAttribute("aria-hidden", String(!open));
+      document.body.style.overflow = open ? "hidden" : "";
+    }
+
+    function canAnimateDetailTransition(sourceElement) {
+      return Boolean(sourceElement)
+        && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+
+    function createScaleFlight(cardRect, detailRect, reverse = false) {
+      const flight = document.createElement("div");
+      flight.className = `detail-flight-card${reverse ? " is-reverse" : ""}`;
+      flight.setAttribute("aria-hidden", "true");
+      Object.assign(flight.style, {
+        top: `${detailRect.top}px`,
+        left: `${detailRect.left}px`,
+        width: `${detailRect.width}px`,
+        height: `${detailRect.height}px`
+      });
+      const content = elements.detailContent.cloneNode(true);
+      content.removeAttribute("id");
+      content.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
+      content.className = "detail-flight-content";
+      flight.appendChild(content);
+
+      const inverseTransform = [
+        `translate3d(${cardRect.left - detailRect.left}px, ${cardRect.top - detailRect.top}px, 0)`,
+        `scale(${cardRect.width / detailRect.width}, ${cardRect.height / detailRect.height})`
+      ].join(" ");
+      flight.style.transform = reverse ? "translate3d(0, 0, 0) scale(1, 1)" : inverseTransform;
+      document.body.appendChild(flight);
+      return { flight, inverseTransform, reverse };
+    }
+
+    function runScaleFlight(animationState) {
+      const { flight, inverseTransform, reverse } = animationState;
+      return new Promise((resolve) => {
+        let completed = false;
+        const finish = () => {
+          if (completed) return;
+          completed = true;
+          resolve();
+        };
+        flight.addEventListener("transitionend", (event) => {
+          if (event.propertyName === "transform") finish();
+        });
+        void flight.offsetWidth;
+        window.setTimeout(() => {
+          flight.style.transform = reverse
+            ? inverseTransform
+            : "translate3d(0, 0, 0) scale(1, 1)";
+        }, 0);
+        window.setTimeout(finish, 330);
+      });
+    }
+
+    function fadeOutFlight(flight, onComplete) {
+      flight.style.opacity = "0";
+      window.setTimeout(() => {
+        flight.remove();
+        onComplete();
+      }, 140);
+    }
+
+    function createCardHandoff(card, rect) {
+      const handoff = card.cloneNode(true);
+      handoff.removeAttribute("id");
+      handoff.querySelectorAll("[id]").forEach((element) => element.removeAttribute("id"));
+      handoff.classList.remove("is-detail-origin");
+      handoff.classList.add("detail-card-handoff");
+      handoff.setAttribute("aria-hidden", "true");
+      Object.assign(handoff.style, {
+        top: `${rect.top}px`,
+        left: `${rect.left}px`,
+        width: `${rect.width}px`,
+        height: `${rect.height}px`
+      });
+      document.body.appendChild(handoff);
+      return handoff;
+    }
+
+    function crossfadeFlightToCard(flight, handoff, card, onComplete) {
+      void handoff.offsetWidth;
+      handoff.style.opacity = "1";
+      flight.style.opacity = "0";
+      window.setTimeout(() => {
+        card.classList.remove("is-detail-origin");
+        void card.offsetWidth;
+        flight.remove();
+        handoff.remove();
+        onComplete();
+      }, 140);
+    }
+
+    function openDetail(productId, sourceCard) {
+      if (ui.detailAnimating || ui.activeProduct) return;
+      const product = products.find((item) => item.id === productId);
+      if (!product) return;
+      ui.activeProduct = product;
+      ui.activeCard = sourceCard;
+      elements.drawerProductName.textContent = text(product.zh, product.en);
+      elements.drawerProductEn.textContent = ui.language === "en" ? product.zh : product.en;
+      elements.drawerImage.src = product.image?.path || "";
+      elements.drawerImage.alt = text(
+        `NORMECO ${product.zh}产品图`,
+        `NORMECO ${product.en} product image`
+      );
+      elements.drawerSource.href = product.sourceUrl;
+      const modelRows = product.specifications?.models || [];
+
+      const rows = [
+        [t("parameterModel"), modelRows.length ? t("modelCount", modelRows.length) : t("pending")],
+        [t("parameterDrive"), product.drive],
+        [t("parameterProfile"), text(product.profileZh, product.profileEn)],
+        [t("parameterLength"), text(product.lengthZh, product.lengthEn)],
+        [t("parameterFeature"), product.features.map((feature) => text(feature.zh, feature.en)).join(" / ")],
+        [t("parameterCategory"), product.sourceCategory],
+        ["D1 / D2 / L / L2", modelRows.length ? t("seeTable") : t("pending")]
+      ];
+      elements.parameterTableBody.innerHTML = rows.map(([label, value]) => `
+        <tr><th>${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>
+      `).join("");
+
+      elements.modelSpecs.classList.toggle("is-visible", modelRows.length > 0);
+      elements.modelSpecsMeta.textContent = modelRows.length
+        ? t("modelMeta", modelRows.length, product.specifications.catalogPage)
+        : "";
+      elements.modelSpecsBody.innerHTML = modelRows.map((model) => `
+        <tr>
+          <td>${escapeHtml(model.model)}</td>
+          <td>${escapeHtml(model.size)}</td>
+          <td>${escapeHtml(model.D2)}</td>
+          <td>${escapeHtml(model.D1)}</td>
+          <td>${escapeHtml(model.L2)}</td>
+          <td>${escapeHtml(model.L)}</td>
+        </tr>
+      `).join("");
+      elements.drawerNote.textContent = modelRows.length ? t("drawerNoteVerified") : t("drawerNote");
+
+      refreshIcons();
+
+      if (!canAnimateDetailTransition(sourceCard)) {
+        setDetailOpen(true);
+        requestAnimationFrame(() => document.getElementById("drawerClose").focus());
+        return;
+      }
+
+      ui.detailAnimating = true;
+      document.body.classList.add("detail-is-animating");
+      const originRect = sourceCard.getBoundingClientRect();
+      sourceCard.classList.add("is-detail-origin");
+      elements.drawer.classList.add("is-flight-target");
+      setDetailOpen(true);
+      const targetRect = elements.drawer.getBoundingClientRect();
+      const flightState = createScaleFlight(originRect, targetRect);
+      const animation = runScaleFlight(flightState);
+      const finishOpen = () => {
+        elements.drawer.classList.remove("is-flight-target");
+        void elements.drawer.offsetWidth;
+        fadeOutFlight(flightState.flight, () => {
+          document.body.classList.remove("detail-is-animating");
+          ui.detailAnimating = false;
+          document.getElementById("drawerClose").focus();
+        });
+      };
+      animation.then(finishOpen, finishOpen);
+    }
+
+    function closeDetail() {
+      if (ui.detailAnimating || !ui.activeProduct) return;
+      const activeProduct = ui.activeProduct;
+      const targetCard = ui.activeCard
+        || document.querySelector(`[data-detail="${activeProduct.id}"]`)?.closest(".product-card");
+      const targetButton = targetCard?.querySelector(`[data-detail="${activeProduct.id}"]`);
+
+      const finishClose = () => {
+        ui.activeProduct = null;
+        ui.activeCard = null;
+        ui.detailAnimating = false;
+        targetButton?.focus();
+      };
+
+      if (!canAnimateDetailTransition(targetCard) || !targetCard.classList.contains("is-detail-origin")) {
+        setDetailOpen(false);
+        targetCard?.classList.remove("is-detail-origin");
+        finishClose();
+        return;
+      }
+
+      ui.detailAnimating = true;
+      document.body.classList.add("detail-is-animating");
+      const detailRect = elements.drawer.getBoundingClientRect();
+      const cardRect = targetCard.getBoundingClientRect();
+      const flightState = createScaleFlight(cardRect, detailRect, true);
+      const cardHandoff = createCardHandoff(targetCard, cardRect);
+      elements.drawer.classList.add("is-flight-target");
+      elements.drawerBackdrop.classList.remove("is-open");
+      const animation = runScaleFlight(flightState);
+      const finishTransitionClose = () => {
+        crossfadeFlightToCard(flightState.flight, cardHandoff, targetCard, () => {
+          setDetailOpen(false);
+          elements.drawer.classList.remove("is-flight-target");
+          document.body.classList.remove("detail-is-animating");
+          finishClose();
+        });
+      };
+      animation.then(finishTransitionClose, finishTransitionClose);
+    }
+
+    let toastTimer;
+    function showInquiryToast() {
+      clearTimeout(toastTimer);
+      elements.toast.textContent = t("inquiryToast");
+      elements.toast.classList.add("is-visible");
+      toastTimer = setTimeout(() => elements.toast.classList.remove("is-visible"), 3200);
+    }
+
+    function openMobileSidebar() {
+      elements.sidebar.classList.add("is-open");
+      elements.mobileSidebarBackdrop.classList.add("is-open");
+      elements.mobileCategoryTrigger.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeMobileSidebar() {
+      elements.sidebar.classList.remove("is-open");
+      elements.mobileSidebarBackdrop.classList.remove("is-open");
+      elements.mobileCategoryTrigger.setAttribute("aria-expanded", "false");
+      if (!elements.drawer.classList.contains("is-open")) {
+        document.body.style.overflow = "";
+      }
+    }
+
+    function refreshIcons() {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    document.getElementById("searchForm").addEventListener("submit", (event) => {
+      event.preventDefault();
+      ui.query = elements.search.value.trim();
+      ui.filters = { profile: "", length: "", feature: "" };
+      ui.visibleCount = 18;
       render();
-    }
-
-    function setLanguageMenuState(isOpen) {
-      languageSwitcher.classList.toggle("is-open", isOpen);
-      languageButton.setAttribute("aria-expanded", String(isOpen));
-    }
-
-    languageSwitcher.addEventListener("mouseenter", () => setLanguageMenuState(true));
-    languageSwitcher.addEventListener("mouseleave", () => setLanguageMenuState(false));
-    languageSwitcher.addEventListener("focusin", () => setLanguageMenuState(true));
-    languageSwitcher.addEventListener("focusout", (event) => {
-      if (!languageSwitcher.contains(event.relatedTarget)) setLanguageMenuState(false);
     });
-    languageButton.addEventListener("click", () => {
-      const isOpen = languageButton.getAttribute("aria-expanded") === "true";
-      setLanguageMenuState(!isOpen);
+
+    elements.search.addEventListener("input", () => {
+      ui.query = elements.search.value.trim();
+      ui.visibleCount = 18;
+      elements.clearSearch.classList.toggle("is-visible", Boolean(ui.query));
+      if (!ui.query) {
+        ui.filters = { profile: "", length: "", feature: "" };
+      }
+      renderHeading();
+      renderFilters();
+      renderProducts();
+      refreshIcons();
     });
-    document.querySelectorAll(".language-option").forEach((option) => {
-      option.addEventListener("click", () => {
-        applyLanguage(option.dataset.lang);
-        setLanguageMenuState(false);
+
+    elements.clearSearch.addEventListener("click", () => {
+      elements.search.value = "";
+      ui.query = "";
+      ui.filters = { profile: "", length: "", feature: "" };
+      ui.visibleCount = 18;
+      render();
+      elements.search.focus();
+    });
+
+    [elements.profileFilter, elements.lengthFilter, elements.featureFilter].forEach((select) => {
+      select.addEventListener("change", () => {
+        ui.filters.profile = elements.profileFilter.value;
+        ui.filters.length = elements.lengthFilter.value;
+        ui.filters.feature = elements.featureFilter.value;
+        ui.visibleCount = 18;
+        renderProducts();
+        refreshIcons();
       });
     });
 
-    applyLanguage(currentLanguage);
+    document.getElementById("resetFilters").addEventListener("click", () => {
+      ui.filters = { profile: "", length: "", feature: "" };
+      ui.visibleCount = 18;
+      renderFilters();
+      renderProducts();
+      refreshIcons();
+    });
+
+    document.querySelectorAll(".language-option").forEach((button) => {
+      button.addEventListener("click", () => {
+        ui.language = button.dataset.language;
+        localStorage.setItem("normeco-language", ui.language);
+        document.getElementById("languageTrigger").setAttribute("aria-expanded", "false");
+        render();
+      });
+    });
+
+    document.getElementById("languageTrigger").addEventListener("click", (event) => {
+      const expanded = event.currentTarget.getAttribute("aria-expanded") === "true";
+      event.currentTarget.setAttribute("aria-expanded", String(!expanded));
+    });
+
+    document.getElementById("mobileMenuButton").addEventListener("click", (event) => {
+      const menu = document.getElementById("mobileNav");
+      const open = menu.classList.toggle("is-open");
+      event.currentTarget.setAttribute("aria-expanded", String(open));
+    });
+
+    elements.mobileCategoryTrigger.addEventListener("click", openMobileSidebar);
+    elements.mobileSidebarBackdrop.addEventListener("click", closeMobileSidebar);
+    elements.drawerBackdrop.addEventListener("click", closeDetail);
+    document.getElementById("drawerClose").addEventListener("click", closeDetail);
+    document.getElementById("drawerInquiry").addEventListener("click", showInquiryToast);
+    elements.loadMore.addEventListener("click", () => {
+      ui.visibleCount += 18;
+      renderProducts();
+      refreshIcons();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        if (elements.drawer.classList.contains("is-open")) {
+          closeDetail();
+        } else {
+          closeMobileSidebar();
+        }
+      }
+    });
+
+    window.addEventListener("load", refreshIcons);
+
+    async function loadCatalog() {
+      elements.resultsSummary.textContent = t("loading");
+      try {
+        const response = await fetch("assets/product-catalog/catalog.json");
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const catalog = await response.json();
+        products = catalog.products.map(prepareProduct);
+        render();
+      } catch (error) {
+        console.error("Catalog load failed:", error);
+        elements.resultsSummary.textContent = t("loadError");
+        elements.emptyState.classList.add("is-visible");
+      }
+    }
+
+    loadCatalog();
   </script>
 </body>
 </html>

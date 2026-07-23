@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="NORMECO 螺丝批头 3D 规格与长度预览工具">
+  <title>NORMECO 批头 3D 配置器</title>
+  <link rel="stylesheet" href="bit-configurator.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="wordmark" href="index.html" aria-label="NORMECO 首页">NORMECO</a>
+      <a class="back-link" href="products.html">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6M9 12h11"/></svg>
+        返回产品中心
+      </a>
+    </header>
+
+    <main>
+      <section class="intro">
+        <h1>批头 3D 配置器</h1>
+        <p>选择规格，调整长度，从任意角度检查细节</p>
+      </section>
+
+      <div class="workspace">
+        <section class="viewport" aria-label="三维批头预览">
+          <canvas id="bitCanvas"></canvas>
+          <div class="viewport-fade" aria-hidden="true"></div>
+          <div class="model-status" id="modelStatus" role="status" aria-live="polite">正在载入 STEP…</div>
+          <div class="dimension dimension-length" aria-hidden="true">
+            <span></span><b id="lengthDimension">50 mm</b><span></span>
+          </div>
+          <div class="axis" aria-hidden="true">
+            <i class="axis-x"></i><b class="x">X</b>
+            <i class="axis-y"></i><b class="y">Y</b>
+            <i class="axis-z"></i><b class="z">Z</b>
+          </div>
+          <div class="drag-hint">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 9V6a2 2 0 0 1 4 0v2m0 0V5a2 2 0 0 1 4 0v4m0 0V7a2 2 0 0 1 4 0v6c0 5-3 8-8 8-3.2 0-5.3-1.8-7.2-4.5L3 14a2 2 0 0 1 3-2.6L8 13V9a2 2 0 0 1 4 0"/></svg>
+            拖拽旋转 · 滚轮缩放
+          </div>
+        </section>
+
+        <aside class="inspector" aria-label="批头参数">
+          <section class="control-section">
+            <h2>批头规格</h2>
+            <div class="bit-options" id="bitOptions">
+              <button class="bit-option is-selected" type="button" data-type="phillips" aria-pressed="true">
+                <span class="bit-icon icon-phillips"></span><span><strong>十字</strong><small>PH2</small></span><i></i>
+              </button>
+            </div>
+          </section>
+
+          <section class="control-section length-control">
+            <div class="section-heading"><h2>总长度</h2><output id="lengthOutput">50 mm</output></div>
+            <input id="lengthRange" type="range" min="25" max="150" value="50" step="1" aria-label="批头总长度" disabled>
+            <div class="range-labels"><span>25 mm</span><span>150 mm</span></div>
+            <label class="number-field">
+              <span>精确数值</span>
+              <span><input id="lengthNumber" type="number" min="25" max="150" value="50" step="1" disabled><b>mm</b></span>
+            </label>
+          </section>
+
+          <section class="control-section view-control">
+            <h2>视图</h2>
+            <button class="view-button" id="resetView" type="button">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/></svg>
+              重置视角
+            </button>
+            <button class="view-button export-button" id="exportStep" type="button" disabled>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>
+              <span>生成 STEP</span>
+            </button>
+            <a class="view-button export-button download-button" id="downloadStep" hidden>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 19h14"/></svg>
+              <span>下载 STEP</span>
+            </a>
+          </section>
+        </aside>
+      </div>
+    </main>
+  </div>
+  <script type="module" src="cad-dist/bit-configurator.js"></script>
+</body>
+</html>

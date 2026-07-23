@@ -14,7 +14,17 @@ NORMECO 网站工作日志
 - 确认本地 main 分支与 origin/main 同步。
 - 新增本工作日志文件，用于后续持续记录网站更新和每日工作总结。
 
+2026-07-23
+- 将产品目录页整合到当前网站进度：products.html 扩展为完整产品中心页面，支持分类、搜索、筛选、产品详情抽屉和中英文内容。
+- 新增产品目录数据 assets/product-catalog/catalog.json，包含 219 款产品条目，并配套 219 张产品图片。
+- 新增 PDF 样册页截图 assets/catalog-pages/，共 164 页，用于产品目录来源追溯和后续校对。
+- 新增目录导入与规格合并脚本 scripts/import-normeco-catalog.py、scripts/merge-normeco-catalog-specs.py，保留目录数据处理来源。
+- 新增 bit configurator 相关页面与构建产物，包括 configurator.html、bit-configurator.css、cad-src/、cad-dist/、package.json、vite.config.js 和批头模型文件。
+- 更新 server.mjs，支持解码中文路径，并补充 STEP、WASM、JSON 等目录/配置器资源类型。
+- 更新 llms.txt、robots.txt 和 sitemap.xml，将站点说明与索引信息统一到 NORMECO 和产品目录页。
+- 新增 .gitignore 规则，排除本地预览服务器日志文件。
+
 后续建议
 - 补齐导航中 custom.html、solutions.html、about.html、contact.html 等页面，避免导航链接指向未创建页面。
 - 根据真实联系方式、公司地址和社媒链接替换页面中的占位内容。
-- 视需要更新 sitemap.xml，让新增页面更容易被搜索引擎发现。
+- 上线后检查 GitHub Pages 对大体积产品图片、WASM 和中文文件名资源的加载表现。
