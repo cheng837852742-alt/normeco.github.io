@@ -1038,6 +1038,45 @@
       font-size: 13px;
     }
 
+    .drawer-editorial {
+      grid-column: 2;
+      display: none;
+      margin-top: 20px;
+      padding: 18px 20px;
+      border-left: 3px solid var(--red);
+      background: var(--red-soft);
+    }
+
+    .drawer-editorial.is-visible {
+      display: block;
+    }
+
+    .drawer-editorial h4,
+    .drawer-editorial h5 {
+      margin: 0;
+      line-height: 1.5;
+    }
+
+    .drawer-editorial h4 {
+      font-size: 17px;
+    }
+
+    .drawer-editorial h5 {
+      margin-top: 15px;
+      font-size: 13px;
+    }
+
+    .drawer-editorial p,
+    .drawer-editorial ul {
+      margin: 8px 0 0;
+      color: #555d65;
+      line-height: 1.75;
+    }
+
+    .drawer-editorial ul {
+      padding-left: 20px;
+    }
+
     .parameter-table {
       grid-column: 2;
       width: 100%;
@@ -1611,6 +1650,12 @@
       </div>
       <h3 id="drawerProductName" class="drawer-product-name"></h3>
       <p id="drawerProductEn" class="drawer-product-en"></p>
+      <section id="drawerEditorial" class="drawer-editorial">
+        <h4 id="drawerDetailTitle"></h4>
+        <p id="drawerDetailIntro"></p>
+        <h5 id="drawerFeatureTitle"></h5>
+        <ul id="drawerFeatureList"></ul>
+      </section>
       <table class="parameter-table">
         <tbody id="parameterTableBody"></tbody>
       </table>
@@ -1621,7 +1666,7 @@
         </div>
         <div class="model-specs-scroll">
           <table class="model-specs-table">
-            <thead>
+            <thead id="modelSpecsHead">
               <tr><th data-i18n="parameterModel">型号</th><th>Size</th><th>D2</th><th>D1</th><th>L2</th><th>L</th></tr>
             </thead>
             <tbody id="modelSpecsBody"></tbody>
@@ -1790,7 +1835,7 @@
       }
     };
 
-    const categories = [
+    const defaultCategories = [
       {
         id: "impact",
         icon: "nut",
@@ -1862,7 +1907,9 @@
       }
     ];
 
-    const categoryDescriptions = {
+    let categories = defaultCategories;
+
+    const defaultCategoryDescriptions = {
       "impact-1-4": ["适合小规格紧固与精密装配场景。", "For compact fastening and precision assembly."],
       "impact-3-8": ["覆盖中小规格工业装配、磁吸与万向结构。", "For compact industrial assembly, magnetic and universal designs."],
       "impact-1-2": ["常用工业装配规格，按驱动轮廓、长度和功能结构继续筛选。", "A core industrial assembly range, refined by profile, length and function."],
@@ -1886,7 +1933,9 @@
       "special-protected": ["旋护、双层护套与工件表面保护结构。", "Rotating covers and protective structures for workpiece safety."]
     };
 
+    let categoryDescriptions = defaultCategoryDescriptions;
     let products = [];
+    let usingAdminCatalog = false;
 
     const ui = {
       language: localStorage.getItem("normeco-language") || "zh",
@@ -1915,6 +1964,8 @@
       productGrid: document.getElementById("productGrid"),
       loadMore: document.getElementById("loadMore"),
       resultsSummary: document.getElementById("resultsSummary"),
+      previewNote: document.querySelector(".preview-note"),
+      catalogSource: document.querySelector(".catalog-source"),
       emptyState: document.getElementById("emptyState"),
       search: document.getElementById("catalogSearch"),
       clearSearch: document.getElementById("clearSearch"),
@@ -1926,10 +1977,16 @@
       drawerBackdrop: document.getElementById("drawerBackdrop"),
       drawerProductName: document.getElementById("drawerProductName"),
       drawerProductEn: document.getElementById("drawerProductEn"),
+      drawerEditorial: document.getElementById("drawerEditorial"),
+      drawerDetailTitle: document.getElementById("drawerDetailTitle"),
+      drawerDetailIntro: document.getElementById("drawerDetailIntro"),
+      drawerFeatureTitle: document.getElementById("drawerFeatureTitle"),
+      drawerFeatureList: document.getElementById("drawerFeatureList"),
       drawerImage: document.getElementById("drawerImage"),
       drawerSource: document.getElementById("drawerSource"),
       parameterTableBody: document.getElementById("parameterTableBody"),
       modelSpecs: document.getElementById("modelSpecs"),
+      modelSpecsHead: document.getElementById("modelSpecsHead"),
       modelSpecsMeta: document.getElementById("modelSpecsMeta"),
       modelSpecsBody: document.getElementById("modelSpecsBody"),
       drawerNote: document.getElementById("drawerNote"),
@@ -1973,8 +2030,144 @@
         sourceUrl: item.sourceUrl || "",
         image: item.image || null,
         dimensions: item.dimensions || {},
-        specifications: item.specifications || null
+        specifications: item.specifications || null,
+        adminManaged: Boolean(item.adminManaged),
+        model: item.model || "",
+        summary: item.summary || "",
+        detailTitle: item.detailTitle || "",
+        detailIntro: item.detailIntro || "",
+        featureTitle: item.featureTitle || "",
+        detailFeatures: item.detailFeatures || [],
+        specNote: item.specNote || "",
+        adminTable: item.adminTable || null
       };
+    }
+
+    function isAdminCatalogState(value) {
+      return value
+        && Array.isArray(value.products)
+        && Array.isArray(value.categories)
+        && Array.isArray(value.tags);
+    }
+
+    function adminCategoryIcon(name) {
+      if (/套筒|socket/i.test(name)) return "nut";
+      if (/起子|bit/i.test(name)) return "wrench";
+      if (/接头|附件|adapter/i.test(name)) return "unplug";
+      if (/套装|set/i.test(name)) return "briefcase-business";
+      if (/定制|custom/i.test(name)) return "pencil-ruler";
+      return "folder";
+    }
+
+    function adminTableValue(product, headerPattern) {
+      const columnIndex = (product.columns || []).findIndex((column) => headerPattern.test(column));
+      if (columnIndex < 0) return "";
+      const row = (product.rows || []).find((item) => item[columnIndex]);
+      return row?.[columnIndex] || "";
+    }
+
+    function buildAdminCatalog(adminState) {
+      const categoryMap = new Map(adminState.categories.map((category) => [category.id, category]));
+      const tagMap = new Map(adminState.tags.map((tag) => [tag.id, tag.name]));
+      const publishedProducts = adminState.products.filter((product) => product.status === "已发布");
+      const roots = adminState.categories
+        .filter((category) => !category.parentId || !categoryMap.has(category.parentId))
+        .sort((left, right) => left.order - right.order);
+      const descriptions = {};
+
+      const managedCategories = roots.map((root) => {
+        const children = adminState.categories
+          .filter((category) => category.parentId === root.id)
+          .sort((left, right) => left.order - right.order);
+        const hasDirectProducts = publishedProducts.some((product) => product.categoryId === root.id);
+        const childEntries = children.map((child) => {
+          descriptions[child.id] = [`${child.name}产品目录。`, `${child.name} product catalog.`];
+          return [child.id, child.name, child.name];
+        });
+        if (hasDirectProducts || !childEntries.length) {
+          const label = childEntries.length ? `${root.name}（其他）` : root.name;
+          childEntries.unshift([root.id, label, root.name]);
+          descriptions[root.id] = [`${root.name}产品目录。`, `${root.name} product catalog.`];
+        }
+        return {
+          id: root.id,
+          icon: adminCategoryIcon(root.name),
+          zh: root.name,
+          en: root.name,
+          children: childEntries
+        };
+      });
+
+      const knownCategoryIds = new Set(adminState.categories.map((category) => category.id));
+      const hasUncategorized = publishedProducts.some((product) => !knownCategoryIds.has(product.categoryId));
+      if (hasUncategorized || !managedCategories.length) {
+        managedCategories.push({
+          id: "admin-uncategorized-group",
+          icon: "folder",
+          zh: "未分类产品",
+          en: "Uncategorized",
+          children: [["admin-uncategorized", "未分类", "Uncategorized"]]
+        });
+        descriptions["admin-uncategorized"] = ["尚未指定产品分类。", "Products without an assigned category."];
+      }
+
+      const managedProducts = publishedProducts.map((product) => {
+        const category = categoryMap.get(product.categoryId);
+        const parent = categoryMap.get(category?.parentId);
+        const categoryId = knownCategoryIds.has(product.categoryId)
+          ? product.categoryId
+          : "admin-uncategorized";
+        const tagNames = (product.tagIds || []).map((tagId) => tagMap.get(tagId)).filter(Boolean);
+        const detailFeatures = (product.features || []).filter(Boolean);
+        const featureNames = [...new Set([...tagNames, ...detailFeatures])];
+        const drive = adminTableValue(product, /方驱|drive/i)
+          || tagNames.find((tag) => /\d+(?:-\d+)?\/\d+"/.test(tag))
+          || "Multi";
+        const length = tagNames.find((tag) => /加深|加长|标准|短|长|deep|length/i.test(tag))
+          || "规格见详情";
+        return prepareProduct({
+          id: product.id,
+          categories: [categoryId],
+          primaryCategory: categoryId,
+          name: { zh: product.name, en: product.name },
+          model: product.model,
+          drive,
+          profile: { zh: tagNames[0] || "标准产品", en: tagNames[0] || "Standard Product" },
+          length: { zh: length, en: length },
+          features: featureNames.map((name) => ({ zh: name, en: name })),
+          sourceCategory: parent ? `${parent.name} / ${category.name}` : category?.name || "未分类",
+          sourceUrl: product.sourceUrl || "",
+          image: { path: product.image || "assets/product-sockets.png" },
+          adminManaged: true,
+          summary: product.summary,
+          detailTitle: product.detailTitle,
+          detailIntro: product.detailIntro,
+          featureTitle: product.featureTitle,
+          detailFeatures,
+          specNote: product.specNote,
+          adminTable: {
+            columns: Array.isArray(product.columns) ? product.columns : [],
+            rows: Array.isArray(product.rows) ? product.rows : []
+          }
+        });
+      });
+
+      return { categories: managedCategories, descriptions, products: managedProducts };
+    }
+
+    function applyAdminCatalog(adminState) {
+      const managedCatalog = buildAdminCatalog(adminState);
+      usingAdminCatalog = true;
+      categories = managedCatalog.categories;
+      categoryDescriptions = managedCatalog.descriptions;
+      products = managedCatalog.products;
+      const categoryIds = new Set(categories.flatMap((group) => group.children.map(([id]) => id)));
+      if (!categoryIds.has(ui.activeCategory)) {
+        ui.activeCategory = categories[0].children[0][0];
+      }
+      ui.openGroups = new Set([categories[0].id]);
+      ui.visibleCount = 18;
+      return managedCatalog;
     }
 
     function normalize(value) {
@@ -2164,7 +2357,9 @@
 
     function productCard(item, index) {
       const displayName = text(item.zh, item.en);
-      const alternateName = ui.language === "en" ? item.zh : item.en;
+      const alternateName = item.adminManaged
+        ? item.summary
+        : (ui.language === "en" ? item.zh : item.en);
       const imagePath = item.image?.path || "";
       const imageAlt = text(
         `NORMECO ${item.zh}工业装配工具产品图`,
@@ -2173,7 +2368,7 @@
       const featureTags = item.features.slice(0, 2).map((feature) => `
         <span class="card-tag">${escapeHtml(text(feature.zh, feature.en))}</span>
       `).join("");
-      const specsTag = item.specifications
+      const specsTag = item.specifications || item.adminTable?.rows?.length
         ? `<span class="card-tag">${t("specAvailable")}</span>`
         : "";
       return `
@@ -2182,7 +2377,7 @@
             <img src="${escapeHtml(imagePath)}" alt="${escapeHtml(imageAlt)}" width="${item.image?.width || 640}" height="${item.image?.height || 480}" loading="lazy" decoding="async">
           </div>
           <div class="card-body">
-            <div class="card-code">${t("previewCode")} · ${escapeHtml(item.sourceCategory)}</div>
+            <div class="card-code">${item.adminManaged ? text("产品分类", "Category") : t("previewCode")} · ${escapeHtml(item.sourceCategory)}</div>
             <h3>${escapeHtml(displayName)}</h3>
             <p class="product-name-en">${escapeHtml(alternateName)}</p>
             <div class="card-specs">
@@ -2236,6 +2431,17 @@
       document.querySelectorAll("[data-i18n-placeholder]").forEach((element) => {
         element.placeholder = t(element.dataset.i18nPlaceholder);
       });
+
+      if (usingAdminCatalog) {
+        elements.previewNote.textContent = text(
+          `${products.length} 个已发布产品 · 后台同步`,
+          `${products.length} published products · synced from admin`
+        );
+        elements.catalogSource.textContent = text(
+          "数据来源：NORMECO 产品编辑后台",
+          "Data source: NORMECO product admin"
+        );
+      }
 
       document.querySelectorAll(".language-option").forEach((button) => {
         button.setAttribute("aria-current", String(button.dataset.language === ui.language));
@@ -2357,43 +2563,69 @@
       ui.activeProduct = product;
       ui.activeCard = sourceCard;
       elements.drawerProductName.textContent = text(product.zh, product.en);
-      elements.drawerProductEn.textContent = ui.language === "en" ? product.zh : product.en;
+      elements.drawerProductEn.textContent = product.adminManaged
+        ? product.summary
+        : (ui.language === "en" ? product.zh : product.en);
       elements.drawerImage.src = product.image?.path || "";
       elements.drawerImage.alt = text(
         `NORMECO ${product.zh}产品图`,
         `NORMECO ${product.en} product image`
       );
       elements.drawerSource.href = product.sourceUrl;
+      elements.drawerSource.hidden = !product.sourceUrl;
+
+      const hasEditorial = product.adminManaged
+        && Boolean(product.detailTitle || product.detailIntro || product.detailFeatures.length);
+      elements.drawerEditorial.classList.toggle("is-visible", hasEditorial);
+      elements.drawerDetailTitle.textContent = product.detailTitle;
+      elements.drawerDetailIntro.textContent = product.detailIntro;
+      elements.drawerFeatureTitle.textContent = product.featureTitle;
+      elements.drawerFeatureList.innerHTML = product.detailFeatures
+        .map((feature) => `<li>${escapeHtml(feature)}</li>`)
+        .join("");
+
       const modelRows = product.specifications?.models || [];
 
-      const rows = [
-        [t("parameterModel"), modelRows.length ? t("modelCount", modelRows.length) : t("pending")],
-        [t("parameterDrive"), product.drive],
-        [t("parameterProfile"), text(product.profileZh, product.profileEn)],
-        [t("parameterLength"), text(product.lengthZh, product.lengthEn)],
-        [t("parameterFeature"), product.features.map((feature) => text(feature.zh, feature.en)).join(" / ")],
-        [t("parameterCategory"), product.sourceCategory],
-        ["D1 / D2 / L / L2", modelRows.length ? t("seeTable") : t("pending")]
-      ];
+      const rows = product.adminManaged
+        ? [
+            [t("parameterModel"), product.model || t("pending")],
+            [t("parameterDrive"), product.drive],
+            [t("parameterProfile"), text(product.profileZh, product.profileEn)],
+            [t("parameterLength"), text(product.lengthZh, product.lengthEn)],
+            [t("parameterFeature"), product.features.map((feature) => text(feature.zh, feature.en)).join(" / ")],
+            [text("产品分类", "Category"), product.sourceCategory]
+          ]
+        : [
+            [t("parameterModel"), modelRows.length ? t("modelCount", modelRows.length) : t("pending")],
+            [t("parameterDrive"), product.drive],
+            [t("parameterProfile"), text(product.profileZh, product.profileEn)],
+            [t("parameterLength"), text(product.lengthZh, product.lengthEn)],
+            [t("parameterFeature"), product.features.map((feature) => text(feature.zh, feature.en)).join(" / ")],
+            [t("parameterCategory"), product.sourceCategory],
+            ["D1 / D2 / L / L2", modelRows.length ? t("seeTable") : t("pending")]
+          ];
       elements.parameterTableBody.innerHTML = rows.map(([label, value]) => `
         <tr><th>${escapeHtml(label)}</th><td>${escapeHtml(value)}</td></tr>
       `).join("");
 
-      elements.modelSpecs.classList.toggle("is-visible", modelRows.length > 0);
-      elements.modelSpecsMeta.textContent = modelRows.length
-        ? t("modelMeta", modelRows.length, product.specifications.catalogPage)
-        : "";
-      elements.modelSpecsBody.innerHTML = modelRows.map((model) => `
-        <tr>
-          <td>${escapeHtml(model.model)}</td>
-          <td>${escapeHtml(model.size)}</td>
-          <td>${escapeHtml(model.D2)}</td>
-          <td>${escapeHtml(model.D1)}</td>
-          <td>${escapeHtml(model.L2)}</td>
-          <td>${escapeHtml(model.L)}</td>
-        </tr>
+      const tableColumns = product.adminManaged
+        ? product.adminTable?.columns || []
+        : [t("parameterModel"), "Size", "D2", "D1", "L2", "L"];
+      const tableRows = product.adminManaged
+        ? product.adminTable?.rows || []
+        : modelRows.map((model) => [model.model, model.size, model.D2, model.D1, model.L2, model.L]);
+      elements.modelSpecs.classList.toggle("is-visible", tableColumns.length > 0 && tableRows.length > 0);
+      elements.modelSpecsHead.innerHTML = `<tr>${tableColumns.map((column) => `<th>${escapeHtml(column)}</th>`).join("")}</tr>`;
+      elements.modelSpecsMeta.textContent = product.adminManaged
+        ? text(`${tableRows.length} 行`, `${tableRows.length} rows`)
+        : (modelRows.length ? t("modelMeta", modelRows.length, product.specifications.catalogPage) : "");
+      elements.modelSpecsBody.innerHTML = tableRows.map((row) => `
+        <tr>${tableColumns.map((_, index) => `<td>${escapeHtml(row[index] || "")}</td>`).join("")}</tr>
       `).join("");
-      elements.drawerNote.textContent = modelRows.length ? t("drawerNoteVerified") : t("drawerNote");
+      elements.drawerNote.hidden = product.adminManaged && !product.specNote;
+      elements.drawerNote.textContent = product.adminManaged
+        ? product.specNote
+        : (modelRows.length ? t("drawerNoteVerified") : t("drawerNote"));
 
       refreshIcons();
 
@@ -2590,6 +2822,23 @@
     async function loadCatalog() {
       elements.resultsSummary.textContent = t("loading");
       try {
+        const response = await fetch("/api/catalog", { cache: "no-store" });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const adminState = await response.json();
+        if (!isAdminCatalogState(adminState)) throw new Error("Invalid catalog state");
+        applyAdminCatalog(adminState);
+        render();
+        return;
+      } catch (apiError) {
+        console.warn("Live catalog unavailable; using static fallback:", apiError);
+      }
+
+      try {
+        usingAdminCatalog = false;
+        categories = defaultCategories;
+        categoryDescriptions = defaultCategoryDescriptions;
+        ui.activeCategory = "impact-1-2";
+        ui.openGroups = new Set(["impact"]);
         const response = await fetch("assets/product-catalog/catalog.json");
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         const catalog = await response.json();
@@ -2601,6 +2850,14 @@
         elements.emptyState.classList.add("is-visible");
       }
     }
+
+    if (typeof BroadcastChannel === "function") {
+      const catalogChannel = new BroadcastChannel("normeco-catalog");
+      catalogChannel.addEventListener("message", (event) => {
+        if (event.data?.type === "catalog-updated") loadCatalog();
+      });
+    }
+    window.addEventListener("focus", loadCatalog);
 
     loadCatalog();
   </script>

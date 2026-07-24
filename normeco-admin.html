@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>NORMECO 产品页编辑后台</title>
+  <link rel="stylesheet" href="normeco-admin.css">
+</head>
+<body>
+  <svg class="icon-sprite" aria-hidden="true">
+    <symbol id="i-products" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h10"/><circle cx="18" cy="17" r="2"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M6 4v16M6 8h5M6 16h5M11 6h8v4h-8zM11 14h8v4h-8z"/></symbol>
+    <symbol id="i-tags" viewBox="0 0 24 24"><path d="M4 5h7l9 9-6 6-9-9z"/><circle cx="8.5" cy="8.5" r="1"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.5"/></symbol>
+    <symbol id="i-logout" viewBox="0 0 24 24"><path d="M10 5H5v14h5M14 8l4 4-4 4M8 12h10"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M7 7l1 13h8l1-13M10 11v5M14 11v5"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5M5 19h14"/></symbol>
+    <symbol id="i-grip" viewBox="0 0 24 24"><circle cx="9" cy="7" r="1"/><circle cx="15" cy="7" r="1"/><circle cx="9" cy="12" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="9" cy="17" r="1"/><circle cx="15" cy="17" r="1"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.5 2.5L16 9"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="m4 16-.5 4.5L8 20l10.5-10.5-4-4zM13 7l4 4"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m8 10 4 4 4-4"/></symbol>
+  </svg>
+
+  <main id="loginView" class="login-shell">
+    <section class="login-panel" aria-labelledby="loginTitle">
+      <img class="login-logo" src="assets/normeco-logo.png" alt="NORMECO">
+      <h1 id="loginTitle">产品页编辑后台</h1>
+      <p>内部工作人员入口</p>
+      <form id="loginForm" novalidate>
+        <label for="username">账户</label>
+        <input id="username" name="username" autocomplete="username" value="admin" required>
+        <label for="password">密码</label>
+        <input id="password" name="password" type="password" autocomplete="current-password" required>
+        <p id="loginError" class="form-error" role="alert"></p>
+        <button class="button primary login-button" type="submit">进入后台</button>
+      </form>
+      <p class="prototype-note">独立后台入口 · 未在客户页面公开</p>
+    </section>
+  </main>
+
+  <div id="appView" class="app-shell" hidden>
+    <aside class="main-nav">
+      <div class="nav-brand">NORMECO</div>
+      <nav aria-label="后台功能">
+        <button class="nav-item active" data-view="products">
+          <svg><use href="#i-products"/></svg><span>产品管理</span>
+        </button>
+        <button class="nav-item" data-view="categories">
+          <svg><use href="#i-tree"/></svg><span>分类管理</span>
+        </button>
+        <button class="nav-item" data-view="tags">
+          <svg><use href="#i-tags"/></svg><span>标签管理</span>
+        </button>
+      </nav>
+      <div class="nav-footer">
+        <span>产品后台 v1.0</span>
+        <span>已接入正式产品目录</span>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="topbar">
+        <div>
+          <button id="mobileNavButton" class="icon-button mobile-only" aria-label="打开功能菜单">
+            <svg><use href="#i-products"/></svg>
+          </button>
+          <h1 id="pageTitle">产品页编辑后台</h1>
+        </div>
+        <div class="top-actions">
+          <span id="saveStatus" class="save-status">
+            <svg><use href="#i-check"/></svg>更改已保存
+          </span>
+          <button id="previewButton" class="button secondary">
+            <svg><use href="#i-eye"/></svg>预览页面
+          </button>
+          <button id="logoutButton" class="button secondary">
+            <svg><use href="#i-logout"/></svg>退出
+          </button>
+        </div>
+      </header>
+
+      <div id="productsView" class="view-shell product-workspace">
+        <aside class="product-sidebar">
+          <div class="sidebar-controls">
+            <label class="search-field">
+              <svg><use href="#i-search"/></svg>
+              <input id="productSearch" type="search" placeholder="搜索产品" aria-label="搜索产品">
+            </label>
+            <select id="productCategoryFilter" aria-label="筛选产品分类"></select>
+          </div>
+          <div id="productList" class="product-list"></div>
+          <button id="addProductButton" class="button dashed full-width">
+            <svg><use href="#i-plus"/></svg>新增产品
+          </button>
+        </aside>
+
+        <section class="editor-pane">
+          <div class="editor-heading">
+            <div>
+              <p id="editorPath" class="editor-path"></p>
+              <h2 id="editorTitle">产品编辑</h2>
+            </div>
+            <div class="editor-actions">
+              <button id="saveButton" class="button primary">保存更改</button>
+              <button id="deleteProductButton" class="button danger-outline">
+                <svg><use href="#i-trash"/></svg>删除产品
+              </button>
+            </div>
+          </div>
+
+          <div class="tabs" role="tablist" aria-label="产品编辑内容">
+            <button class="tab active" data-tab="basic" role="tab">基本信息</button>
+            <button class="tab" data-tab="details" role="tab">详情内容</button>
+            <button class="tab" data-tab="table" role="tab">型号尺寸表</button>
+          </div>
+
+          <div id="basicTab" class="tab-panel active">
+            <div class="basic-grid">
+              <form id="productForm" class="product-form">
+                <label>产品名称<input id="productName" data-field="name"></label>
+                <div class="form-row">
+                  <label>型号<input id="productModel" data-field="model"></label>
+                  <label>状态
+                    <select id="productStatus" data-field="status">
+                      <option value="已发布">已发布</option>
+                      <option value="草稿">草稿</option>
+                      <option value="已隐藏">已隐藏</option>
+                    </select>
+                  </label>
+                </div>
+                <label>产品分类<select id="productCategory" data-field="categoryId"></select></label>
+                <fieldset class="tag-fieldset">
+                  <legend>标签</legend>
+                  <div id="productTags" class="tag-editor"></div>
+                  <div class="inline-add">
+                    <select id="tagPicker"></select>
+                    <button id="assignTagButton" class="button compact" type="button">添加标签</button>
+                  </div>
+                </fieldset>
+                <label>简短说明
+                  <textarea id="productSummary" data-field="summary" rows="4" maxlength="200"></textarea>
+                  <span id="summaryCount" class="char-count"></span>
+                </label>
+              </form>
+
+              <section class="image-editor">
+                <h3>产品图片</h3>
+                <div class="image-stage">
+                  <img id="productImagePreview" alt="当前产品图片">
+                </div>
+                <label class="upload-box" for="productImageInput">
+                  <svg><use href="#i-upload"/></svg>
+                  <strong>点击选择并替换图片</strong>
+                  <span>支持 JPG / PNG / WebP，单张不超过 5MB</span>
+                </label>
+                <input id="productImageInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+              </section>
+            </div>
+          </div>
+
+          <div id="detailsTab" class="tab-panel">
+            <div class="details-form">
+              <label>详情页主标题<input id="detailTitle" data-field="detailTitle"></label>
+              <label>详情页介绍<textarea id="detailIntro" data-field="detailIntro" rows="5"></textarea></label>
+              <label>产品特点标题<input id="featureTitle" data-field="featureTitle"></label>
+              <label>产品特点（每行一项）<textarea id="featureItems" rows="7"></textarea></label>
+              <label>规格说明<input id="specNote" data-field="specNote"></label>
+            </div>
+          </div>
+
+          <div id="tableTab" class="tab-panel">
+            <div class="table-toolbar">
+              <div>
+                <h3>型号尺寸表</h3>
+                <p>直接编辑抬头与单元格内容</p>
+              </div>
+              <div>
+                <button id="addRowButton" class="button secondary compact">
+                  <svg><use href="#i-plus"/></svg>添加行
+                </button>
+                <button id="addColumnButton" class="button secondary compact">
+                  <svg><use href="#i-plus"/></svg>添加列
+                </button>
+              </div>
+            </div>
+            <div class="spreadsheet-wrap">
+              <table id="sizeTable" class="spreadsheet"></table>
+            </div>
+          </div>
+        </section>
+
+        <aside class="context-sidebar">
+          <section class="context-panel">
+            <div class="panel-heading">
+              <h3>分类结构</h3><span>拖拽调整顺序或归属</span>
+            </div>
+            <div id="compactCategoryTree" class="category-tree compact-tree"></div>
+            <button class="button secondary full-width" data-jump-view="categories">
+              <svg><use href="#i-plus"/></svg>编辑全部分类
+            </button>
+          </section>
+          <section class="context-panel preview-card">
+            <div class="panel-heading"><h3>页面预览</h3></div>
+            <div id="miniPreview"></div>
+          </section>
+        </aside>
+      </div>
+
+      <div id="categoriesView" class="view-shell manager-view" hidden>
+        <div class="manager-heading">
+          <div><h2>产品分类</h2><p>建立母目录与子目录，拖拽即可调整顺序和子目录归属。</p></div>
+          <button id="addRootCategoryButton" class="button primary">
+            <svg><use href="#i-plus"/></svg>新增母目录
+          </button>
+        </div>
+        <div class="manager-panel">
+          <div class="tree-help">拖到母目录上可成为其子目录；拖到空白区域恢复为母目录。</div>
+          <div id="categoryManagerTree" class="category-tree manager-tree"></div>
+          <div id="rootDropZone" class="root-drop-zone">拖到这里设为母目录</div>
+        </div>
+      </div>
+
+      <div id="tagsView" class="view-shell manager-view" hidden>
+        <div class="manager-heading">
+          <div><h2>标签管理</h2><p>标签可用于产品筛选与详情页标识。</p></div>
+          <form id="addTagForm" class="quick-create">
+            <input id="newTagName" placeholder="输入新标签名称" required>
+            <button class="button primary" type="submit">
+              <svg><use href="#i-plus"/></svg>新建标签
+            </button>
+          </form>
+        </div>
+        <div class="manager-panel">
+          <div id="tagManagerList" class="tag-manager-list"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <dialog id="previewDialog" class="preview-dialog">
+    <button id="closePreviewButton" class="icon-button close-preview" aria-label="关闭预览">
+      <svg><use href="#i-close"/></svg>
+    </button>
+    <div id="fullPreview"></div>
+  </dialog>
+
+  <dialog id="confirmDialog" class="confirm-dialog">
+    <h2>请确认操作</h2>
+    <p id="confirmMessage"></p>
+    <div class="confirm-actions">
+      <button id="confirmCancelButton" class="button secondary" type="button">取消</button>
+      <button id="confirmAcceptButton" class="button primary" type="button">确认</button>
+    </div>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="normeco-admin.js"></script>
+</body>
+</html>
