@@ -31,6 +31,7 @@
     };
   </script>
   <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
 
   <!-- Critical CSS and motion helpers. -->
   <style>
@@ -86,13 +87,6 @@
       background: linear-gradient(135deg, #fff, #fee2e2);
     }
 
-    .brand-logo {
-      width: min(50vw, 230px);
-      height: 72px;
-      object-fit: contain;
-      object-position: left center;
-    }
-
     .hero-logo {
       display: block;
       width: min(82vw, 430px);
@@ -116,21 +110,6 @@
     .reveal.is-visible {
       opacity: 1;
       transform: translateY(0);
-    }
-
-    .language-menu {
-      opacity: 0;
-      transform: translateY(8px);
-      visibility: hidden;
-      transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
-    }
-
-    .language-switcher:hover .language-menu,
-    .language-switcher:focus-within .language-menu,
-    .language-switcher.is-open .language-menu {
-      opacity: 1;
-      transform: translateY(0);
-      visibility: visible;
     }
 
     .normeco-red-white .bg-graphite\/88,
@@ -165,9 +144,234 @@
       color: #991b1b !important;
     }
 
-    .normeco-red-white .language-menu,
-    .normeco-red-white .language-option:hover {
-      background-color: rgba(255,255,255,.96) !important;
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: 78px;
+      border-bottom: 1px solid #e4e7eb;
+      background: rgba(255, 255, 255, .97);
+      backdrop-filter: blur(12px);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .header-inner {
+      width: min(1440px, calc(100% - 40px));
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    .brand img {
+      display: block;
+      width: 174px;
+      height: auto;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: stretch;
+      align-self: stretch;
+      gap: 30px;
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      color: #30343a;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a[aria-current="page"] {
+      color: #d30b22;
+    }
+
+    .desktop-nav a[aria-current="page"]::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: #fff;
+      content: "";
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .language-switcher {
+      position: relative;
+      padding-bottom: 8px;
+      margin-bottom: -8px;
+    }
+
+    .language-trigger {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #e4e7eb;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .language-trigger img,
+    .language-menu img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .language-menu {
+      position: absolute;
+      top: 52px;
+      right: 0;
+      z-index: 50;
+      width: 158px;
+      min-width: 0;
+      padding: 7px;
+      overflow: visible;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-5px);
+      border: 1px solid #e4e7eb;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 14px 38px rgba(26, 30, 35, .09);
+      transition: 160ms ease;
+    }
+
+    .language-switcher:hover .language-menu,
+    .language-switcher:focus-within .language-menu {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 9px;
+      border: 0;
+      border-radius: 4px;
+      color: #292d32;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .language-option:hover,
+    .language-option[aria-current="true"] {
+      color: #d30b22;
+      background: #fff0f2 !important;
+    }
+
+    .language-option img {
+      width: 28px;
+      height: 20px;
+      border: 1px solid #d9dce0;
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e4e7eb;
+      border-radius: 4px;
+      color: #25292e;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 78px;
+      right: 0;
+      left: 0;
+      padding: 14px 20px 22px;
+      border-bottom: 1px solid #e4e7eb;
+      background: #fff;
+      box-shadow: 0 18px 30px rgba(20, 24, 28, .08);
+    }
+
+    .mobile-nav.is-open {
+      display: grid;
+    }
+
+    .mobile-nav a {
+      padding: 13px 4px;
+      border-bottom: 1px solid #eef0f2;
+      color: #292d32;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 1180px) {
+      .desktop-nav {
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .header-inner {
+        width: min(100% - 28px, 1440px);
+      }
+
+      .header-actions {
+        margin-left: auto;
+      }
+
+      .mobile-menu-button {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-header {
+        height: 68px;
+      }
+
+      .brand img {
+        width: 148px;
+      }
+
+      .language-trigger,
+      .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+      }
+
+      .mobile-nav {
+        top: 68px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -185,52 +389,52 @@
 </head>
 <body class="normeco-red-white antialiased">
   <!-- 1. Navigation -->
-  <header class="sticky top-0 z-50 border-b border-white/10 bg-graphite/88 backdrop-blur-xl">
-    <nav class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8" aria-label="主导航" data-i18n-aria-label="navAria">
-      <a href="index.html" class="flex items-center" aria-label="NORMECO 首页" data-i18n-aria-label="homeAria">
-        <img class="brand-logo" src="assets/normeco-logo.png" alt="NORMECO 公司 logo" width="230" height="72" decoding="async">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="NORMECO 首页">
+        <img src="assets/normeco-logo.png" alt="NORMECO 工业装配工具品牌标志" width="348" height="110">
       </a>
 
-      <div class="flex items-center gap-3">
-        <div class="hidden items-center gap-8 text-sm text-white/75 md:flex">
-          <a class="hover:text-white" href="products.html" data-i18n="navProducts">产品中心</a>
-          <a class="hover:text-white" href="custom.html" data-i18n="navCustom">定制服务</a>
-          <a class="hover:text-white" href="solutions.html" data-i18n="navSolutions">产线方案</a>
-          <a class="hover:text-white" href="about.html" data-i18n="navAbout">关于我们</a>
-          <a class="hover:text-white" href="contact.html" data-i18n="navContact">联系我们</a>
-        </div>
+      <nav class="desktop-nav" aria-label="主导航">
+        <a href="index.html" aria-current="page" data-i18n="navHome">首页</a>
+        <a href="products.html" data-i18n="navProducts">产品中心</a>
+        <a href="custom.html" data-i18n="navCustom">定制服务</a>
+        <a href="solutions.html" data-i18n="navSolutions">产线方案</a>
+        <a href="index.html#about" data-i18n="navAbout">关于我们</a>
+        <a href="contact.html" data-i18n="navContact">联系我们</a>
+      </nav>
 
-        <button id="menuToggle" type="button" class="inline-flex items-center border border-white/15 px-3 py-2 text-sm text-white/85 md:hidden" aria-controls="mobileMenu" aria-expanded="false" data-i18n="menu">
-          菜单
-        </button>
-
-        <div id="languageSwitcher" class="language-switcher relative">
-          <button id="languageButton" type="button" class="grid h-11 w-11 place-items-center rounded-full border border-white/20 bg-white/8 shadow-lg shadow-black/20" aria-haspopup="true" aria-expanded="false" aria-label="选择语言" data-i18n-aria-label="languageAria">
-            <img id="languageFlag" class="h-6 w-6 rounded-full object-cover" width="24" height="24" src="https://flagcdn.com/cn.svg" alt="中国国旗">
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button id="languageTrigger" class="language-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="切换语言">
+            <img id="currentFlag" src="https://flagcdn.com/w80/cn.png" alt="中国国旗">
           </button>
-          <div class="language-menu absolute right-0 top-12 z-50 min-w-36 overflow-hidden border border-white/15 bg-graphite/95 text-sm text-white/80 shadow-2xl shadow-black/40 backdrop-blur-xl">
-            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-white/10" data-lang="zh">
-              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/cn.svg" alt="">
-              <span>中文</span>
+          <div class="language-menu" role="menu" aria-label="语言选择">
+            <button class="language-option" type="button" role="menuitem" data-language="zh" aria-current="true">
+              <img src="https://flagcdn.com/w40/cn.png" alt="">
+              <span>简体中文</span>
             </button>
-            <button type="button" class="language-option flex w-full items-center gap-3 px-4 py-3 text-left hover:bg-white/10" data-lang="en">
-              <img class="h-5 w-5 rounded-full object-cover" width="20" height="20" src="https://flagcdn.com/us.svg" alt="">
+            <button class="language-option" type="button" role="menuitem" data-language="en" aria-current="false">
+              <img src="https://flagcdn.com/w40/us.png" alt="">
               <span>English</span>
             </button>
           </div>
         </div>
-      </div>
-    </nav>
 
-    <div id="mobileMenu" class="hidden border-t border-white/10 px-4 pb-4 md:hidden">
-      <div class="grid gap-2 text-sm text-white/80">
-        <a class="py-2" href="products.html" data-i18n="navProducts">产品中心</a>
-        <a class="py-2" href="custom.html" data-i18n="navCustom">定制服务</a>
-        <a class="py-2" href="solutions.html" data-i18n="navSolutions">产线方案</a>
-        <a class="py-2" href="about.html" data-i18n="navAbout">关于我们</a>
-        <a class="py-2" href="contact.html" data-i18n="navContact">联系我们</a>
+        <button id="mobileMenuButton" class="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开菜单">
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
       </div>
     </div>
+
+    <nav id="mobileNav" class="mobile-nav" aria-label="移动端导航">
+      <a href="index.html" aria-current="page" data-i18n="navHome">首页</a>
+      <a href="products.html" data-i18n="navProducts">产品中心</a>
+      <a href="custom.html" data-i18n="navCustom">定制服务</a>
+      <a href="solutions.html" data-i18n="navSolutions">产线方案</a>
+      <a href="index.html#about" data-i18n="navAbout">关于我们</a>
+      <a href="contact.html" data-i18n="navContact">联系我们</a>
+    </nav>
   </header>
 
   <main>
@@ -529,6 +733,7 @@
         homeAria: "NORMECO 首页",
         languageAria: "选择语言",
         menu: "菜单",
+        navHome: "首页",
         navProducts: "产品中心",
         navCustom: "定制服务",
         navSolutions: "产线方案",
@@ -584,6 +789,7 @@
         homeAria: "NORMECO home",
         languageAria: "Select language",
         menu: "Menu",
+        navHome: "Home",
         navProducts: "Products",
         navCustom: "Customization",
         navSolutions: "Line Solutions",
@@ -636,18 +842,17 @@
 
     const languageFlags = {
       zh: {
-        src: "https://flagcdn.com/cn.svg",
+        src: "https://flagcdn.com/w80/cn.png",
         alt: "中国国旗"
       },
       en: {
-        src: "https://flagcdn.com/us.svg",
+        src: "https://flagcdn.com/w80/us.png",
         alt: "United States flag"
       }
     };
 
-    const languageSwitcher = document.getElementById("languageSwitcher");
-    const languageButton = document.getElementById("languageButton");
-    const languageFlag = document.getElementById("languageFlag");
+    const languageTrigger = document.getElementById("languageTrigger");
+    const currentFlag = document.getElementById("currentFlag");
 
     function setLanguage(language) {
       const dictionary = translations[language] || translations.zh;
@@ -656,8 +861,8 @@
       document.title = dictionary.pageTitle;
       document.querySelector("meta[name='description']").setAttribute("content", dictionary.metaDescription);
       const flag = languageFlags[language] || languageFlags.zh;
-      languageFlag.src = flag.src;
-      languageFlag.alt = flag.alt;
+      currentFlag.src = flag.src;
+      currentFlag.alt = flag.alt;
 
       document.querySelectorAll("[data-i18n]").forEach((element) => {
         const key = element.dataset.i18n;
@@ -674,39 +879,32 @@
         if (dictionary[key]) element.setAttribute("aria-label", dictionary[key]);
       });
 
+      document.querySelectorAll(".language-option").forEach((option) => {
+        option.setAttribute("aria-current", String(option.dataset.language === language));
+      });
+
       localStorage.setItem("normeco-language", language);
     }
 
-    function setLanguageMenuState(isOpen) {
-      languageSwitcher.classList.toggle("is-open", isOpen);
-      languageButton.setAttribute("aria-expanded", String(isOpen));
-    }
-
-    languageSwitcher.addEventListener("mouseenter", () => setLanguageMenuState(true));
-    languageSwitcher.addEventListener("mouseleave", () => setLanguageMenuState(false));
-    languageSwitcher.addEventListener("focusin", () => setLanguageMenuState(true));
-    languageSwitcher.addEventListener("focusout", (event) => {
-      if (!languageSwitcher.contains(event.relatedTarget)) setLanguageMenuState(false);
-    });
-    languageButton.addEventListener("click", () => {
-      const isOpen = languageButton.getAttribute("aria-expanded") === "true";
-      setLanguageMenuState(!isOpen);
+    languageTrigger.addEventListener("click", (event) => {
+      const expanded = event.currentTarget.getAttribute("aria-expanded") === "true";
+      event.currentTarget.setAttribute("aria-expanded", String(!expanded));
     });
 
     document.querySelectorAll(".language-option").forEach((option) => {
       option.addEventListener("click", () => {
-        setLanguage(option.dataset.lang);
-        setLanguageMenuState(false);
+        setLanguage(option.dataset.language);
+        languageTrigger.setAttribute("aria-expanded", "false");
       });
     });
 
-    const menuToggle = document.getElementById("menuToggle");
-    const mobileMenu = document.getElementById("mobileMenu");
-
-    menuToggle.addEventListener("click", () => {
-      const isOpen = mobileMenu.classList.toggle("hidden") === false;
-      menuToggle.setAttribute("aria-expanded", String(isOpen));
+    document.getElementById("mobileMenuButton").addEventListener("click", (event) => {
+      const menu = document.getElementById("mobileNav");
+      const open = menu.classList.toggle("is-open");
+      event.currentTarget.setAttribute("aria-expanded", String(open));
     });
+
+    window.addEventListener("load", () => window.lucide?.createIcons());
 
     document.querySelectorAll(".faq-button").forEach((button) => {
       button.addEventListener("click", () => {

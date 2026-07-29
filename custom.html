@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NORMECO 定制服务 | 定制套筒与专业装配工具</title>
+  <meta name="description" content="NORMECO 提供定制套筒、机器人接口工具、自动化产线工具和非标连接件开发服务。支持按图纸、样件、工况与扭矩需求定制，无 MOQ，1pc 起订。">
+  <meta name="keywords" content="NORMECO,定制套筒,装配工具定制,机器人接口工具,自动化产线工具,非标工具,无MOQ">
+  <link rel="canonical" href="https://www.normeco.com/custom.html">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NORMECO 定制服务 | 从图纸与样件到专业装配工具">
+  <meta property="og:description" content="面向机器人、自动化产线、设备配套和特殊工况的专业装配工具定制服务。">
+  <meta property="og:url" content="https://www.normeco.com/custom.html">
+  <meta property="og:image" content="https://www.normeco.com/assets/product-custom-tools.png">
+  <meta name="theme-color" content="#ffffff">
+
+  <script>
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            colors: {
+              graphite: "#1f2933",
+              normBlue: "#b91c1c",
+              normGold: "#dc2626",
+              smoke: "#f8fafc"
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://unpkg.com/lucide@0.468.0/dist/umd/lucide.min.js" defer></script>
+
+  <style>
+    :root {
+      color-scheme: light;
+      --norm-red: #b91c1c;
+      --norm-red-dark: #991b1b;
+      --graphite: #1f2933;
+      --line: rgba(185, 28, 28, .16);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(circle at 18% 8%, rgba(185, 28, 28, .11), transparent 28rem),
+        radial-gradient(circle at 86% 16%, rgba(220, 38, 38, .07), transparent 26rem),
+        linear-gradient(135deg, #fff, #fff7f7 46%, #fff);
+      color: var(--graphite);
+      font-family: Arial, "Microsoft YaHei", "PingFang SC", sans-serif;
+      line-height: 1.6;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      background-image:
+        linear-gradient(rgba(185, 28, 28, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(185, 28, 28, .04) 1px, transparent 1px);
+      background-size: 72px 72px;
+      mask-image: linear-gradient(180deg, transparent, #000 10%, #000 88%, transparent);
+      opacity: .75;
+    }
+
+    a,
+    button {
+      transition: color .18s ease, background-color .18s ease, border-color .18s ease, transform .18s ease;
+    }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 3px solid rgba(185, 28, 28, .28);
+      outline-offset: 3px;
+    }
+
+    .bg-normBlue {
+      background-color: var(--norm-red);
+      color: #fff;
+    }
+
+    .bg-graphite {
+      background-color: var(--graphite);
+    }
+
+    .text-graphite {
+      color: var(--graphite);
+    }
+
+    .footer-logo {
+      width: min(62vw, 220px);
+      height: auto;
+      object-fit: contain;
+      object-position: left center;
+    }
+
+    .industrial-image {
+      background: linear-gradient(135deg, #f8fafc, #fee2e2);
+    }
+
+    .media-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #111827;
+      box-shadow: 0 30px 90px rgba(127, 29, 29, .12);
+    }
+
+    .media-frame::after {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      content: "";
+      border: 1px solid rgba(255, 255, 255, .2);
+    }
+
+    .section-label {
+      color: var(--norm-red);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .24em;
+      text-transform: uppercase;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .capability-row {
+      position: relative;
+    }
+
+    .capability-row::before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 0;
+      height: 2px;
+      content: "";
+      background: var(--norm-red);
+      transition: width .25s ease;
+    }
+
+    .capability-row:hover::before,
+    .capability-row:focus-within::before {
+      width: 100%;
+    }
+
+    .process-line {
+      background: linear-gradient(90deg, var(--norm-red), rgba(185, 28, 28, .12));
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      height: 78px;
+      border-bottom: 1px solid #e4e7eb;
+      background: rgba(255, 255, 255, .97);
+      backdrop-filter: blur(12px);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .header-inner {
+      width: min(1440px, calc(100% - 40px));
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      flex: 0 0 auto;
+    }
+
+    .brand img {
+      display: block;
+      width: 174px;
+      height: auto;
+    }
+
+    .desktop-nav {
+      display: flex;
+      align-items: stretch;
+      align-self: stretch;
+      gap: 30px;
+      margin-left: auto;
+    }
+
+    .desktop-nav a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      color: #30343a;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .desktop-nav a:hover,
+    .desktop-nav a[aria-current="page"] {
+      color: #d30b22;
+    }
+
+    .desktop-nav a[aria-current="page"]::after {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: #fff;
+      content: "";
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .language-switcher {
+      position: relative;
+      padding-bottom: 8px;
+      margin-bottom: -8px;
+    }
+
+    .language-trigger {
+      width: 42px;
+      height: 42px;
+      padding: 0;
+      overflow: hidden;
+      border: 1px solid #e4e7eb;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .language-trigger img,
+    .language-menu img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .language-menu {
+      position: absolute;
+      top: 52px;
+      right: 0;
+      z-index: 50;
+      width: 158px;
+      min-width: 0;
+      padding: 7px;
+      overflow: visible;
+      visibility: hidden;
+      opacity: 0;
+      transform: translateY(-5px);
+      border: 1px solid #e4e7eb;
+      border-radius: 6px;
+      background: #fff;
+      box-shadow: 0 14px 38px rgba(26, 30, 35, .09);
+      transition: 160ms ease;
+    }
+
+    .language-switcher:hover .language-menu,
+    .language-switcher:focus-within .language-menu {
+      visibility: visible;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .language-option {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      align-items: center;
+      gap: 10px;
+      padding: 9px;
+      border: 0;
+      border-radius: 4px;
+      color: #292d32;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .language-option:hover,
+    .language-option[aria-current="true"] {
+      color: #d30b22;
+      background: #fff0f2;
+    }
+
+    .language-option img {
+      width: 28px;
+      height: 20px;
+      border: 1px solid #d9dce0;
+    }
+
+    .mobile-menu-button {
+      display: none;
+      width: 42px;
+      height: 42px;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid #e4e7eb;
+      border-radius: 4px;
+      color: #25292e;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .mobile-nav {
+      display: none;
+      position: absolute;
+      top: 78px;
+      right: 0;
+      left: 0;
+      padding: 14px 20px 22px;
+      border-bottom: 1px solid #e4e7eb;
+      background: #fff;
+      box-shadow: 0 18px 30px rgba(20, 24, 28, .08);
+    }
+
+    .mobile-nav.is-open {
+      display: grid;
+    }
+
+    .mobile-nav a {
+      padding: 13px 4px;
+      border-bottom: 1px solid #eef0f2;
+      color: #292d32;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    @media (max-width: 1180px) {
+      .desktop-nav {
+        gap: 18px;
+      }
+    }
+
+    @media (max-width: 920px) {
+      .desktop-nav {
+        display: none;
+      }
+
+      .header-inner {
+        width: min(100% - 28px, 1440px);
+      }
+
+      .header-actions {
+        margin-left: auto;
+      }
+
+      .mobile-menu-button {
+        display: inline-flex;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .site-header {
+        height: 68px;
+      }
+
+      .brand img {
+        width: 148px;
+      }
+
+      .language-trigger,
+      .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+      }
+
+      .mobile-nav {
+        top: 68px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: .01ms !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+
+      .reveal {
+        opacity: 1;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html" aria-label="NORMECO 首页">
+        <img src="assets/normeco-logo.png" alt="NORMECO 工业装配工具品牌标志" width="348" height="110">
+      </a>
+
+      <nav class="desktop-nav" aria-label="主导航">
+        <a href="index.html" data-i18n="navHome">首页</a>
+        <a href="products.html" data-i18n="navProducts">产品中心</a>
+        <a href="custom.html" aria-current="page" data-i18n="navCustom">定制服务</a>
+        <a href="solutions.html" data-i18n="navSolutions">产线方案</a>
+        <a href="index.html#about" data-i18n="navAbout">关于我们</a>
+        <a href="contact.html" data-i18n="navContact">联系我们</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-switcher">
+          <button id="languageTrigger" class="language-trigger" type="button" aria-haspopup="menu" aria-expanded="false" aria-label="切换语言">
+            <img id="currentFlag" src="https://flagcdn.com/w80/cn.png" alt="中国国旗">
+          </button>
+          <div class="language-menu" role="menu" aria-label="语言选择">
+            <button class="language-option" type="button" role="menuitem" data-language="zh" aria-current="true">
+              <img src="https://flagcdn.com/w40/cn.png" alt="">
+              <span>简体中文</span>
+            </button>
+            <button class="language-option" type="button" role="menuitem" data-language="en" aria-current="false">
+              <img src="https://flagcdn.com/w40/us.png" alt="">
+              <span>English</span>
+            </button>
+          </div>
+        </div>
+
+        <button id="mobileMenuButton" class="mobile-menu-button" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开菜单">
+          <i data-lucide="menu" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <nav id="mobileNav" class="mobile-nav" aria-label="移动端导航">
+      <a href="index.html" data-i18n="navHome">首页</a>
+      <a href="products.html" data-i18n="navProducts">产品中心</a>
+      <a href="custom.html" aria-current="page" data-i18n="navCustom">定制服务</a>
+      <a href="solutions.html" data-i18n="navSolutions">产线方案</a>
+      <a href="index.html#about" data-i18n="navAbout">关于我们</a>
+      <a href="contact.html" data-i18n="navContact">联系我们</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="relative overflow-hidden px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+      <div class="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[.92fr_1.08fr]">
+        <div class="reveal">
+          <p class="section-label mb-5">Custom engineering · No MOQ</p>
+          <h1 class="max-w-3xl text-4xl font-bold leading-[1.08] tracking-tight text-graphite sm:text-5xl lg:text-7xl" data-i18n="heroTitle">
+            从图纸、样件到专业装配工具
+          </h1>
+          <p class="mt-6 max-w-2xl text-lg text-slate-600" data-i18n="heroDesc">
+            面向机器人、自动化产线、设备配套与特殊工况，按图纸、样件、接口、扭矩和使用环境开发定制套筒及专业装配工具。
+          </p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <a href="#requirements" class="inline-flex items-center justify-center bg-normBlue px-6 py-3 font-bold text-white hover:bg-red-800" data-i18n="heroPrimary">准备定制需求</a>
+            <a href="#process" class="inline-flex items-center justify-center border border-red-900/20 bg-white/70 px-6 py-3 font-bold text-graphite hover:border-red-800 hover:text-red-800" data-i18n="heroSecondary">了解定制流程</a>
+          </div>
+          <div class="mt-10 grid max-w-xl grid-cols-3 border-y border-red-900/15 py-5 text-sm">
+            <div>
+              <p class="text-2xl font-bold text-red-800">1pc</p>
+              <p class="mt-1 text-slate-500" data-i18n="proofOne">起订支持</p>
+            </div>
+            <div class="border-x border-red-900/15 px-5">
+              <p class="text-2xl font-bold text-red-800">No MOQ</p>
+              <p class="mt-1 text-slate-500" data-i18n="proofTwo">灵活验证</p>
+            </div>
+            <div class="pl-5">
+              <p class="text-2xl font-bold text-red-800">Global</p>
+              <p class="mt-1 text-slate-500" data-i18n="proofThree">全球服务</p>
+            </div>
+          </div>
+        </div>
+
+        <figure class="media-frame reveal">
+          <img class="industrial-image aspect-[4/4.2] h-full w-full object-cover" src="assets/product-custom-tools.png" width="1254" height="1254" loading="eager" decoding="async" alt="NORMECO 定制装配工具与非标接口件展示" data-i18n-alt="heroImageAlt">
+          <figcaption class="absolute bottom-0 left-0 right-0 border-t border-white/15 bg-slate-950/82 px-5 py-4 text-sm text-white/75 backdrop-blur-md" data-i18n="heroCaption">
+            定制套筒、转换接口与自动化装配工具示意
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="capabilities" class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-8 lg:grid-cols-[.72fr_1.28fr] lg:gap-16">
+          <div class="reveal">
+            <p class="section-label mb-3">Custom capability</p>
+            <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="capabilityTitle">围绕装配任务，而不是现成目录</h2>
+            <p class="mt-5 max-w-lg text-slate-600" data-i18n="capabilityDesc">
+              当标准产品无法满足接口、空间、扭矩或节拍要求时，我们依据实际应用条件确认结构与交付方案。
+            </p>
+          </div>
+
+          <div class="grid sm:grid-cols-2">
+            <article class="capability-row border-b border-red-900/15 p-6 sm:border-r">
+              <p class="text-sm font-bold text-red-800">01</p>
+              <h3 class="mt-8 text-xl font-bold" data-i18n="capabilityOneTitle">定制套筒与异形结构</h3>
+              <p class="mt-3 text-slate-600" data-i18n="capabilityOneDesc">按紧固件轮廓、空间限制、长度与传动接口开发专用结构。</p>
+            </article>
+            <article class="capability-row border-b border-red-900/15 p-6">
+              <p class="text-sm font-bold text-red-800">02</p>
+              <h3 class="mt-8 text-xl font-bold" data-i18n="capabilityTwoTitle">机器人及自动化接口</h3>
+              <p class="mt-3 text-slate-600" data-i18n="capabilityTwoDesc">面向机器人末端、拧紧轴、工位和自动化设备进行接口适配。</p>
+            </article>
+            <article class="capability-row border-b border-red-900/15 p-6 sm:border-b-0 sm:border-r">
+              <p class="text-sm font-bold text-red-800">03</p>
+              <h3 class="mt-8 text-xl font-bold" data-i18n="capabilityThreeTitle">延长、转换与连接件</h3>
+              <p class="mt-3 text-slate-600" data-i18n="capabilityThreeDesc">解决传动距离、方驱转换、偏置连接和特殊空间操作问题。</p>
+            </article>
+            <article class="capability-row p-6">
+              <p class="text-sm font-bold text-red-800">04</p>
+              <h3 class="mt-8 text-xl font-bold" data-i18n="capabilityFourTitle">工况与交付要求</h3>
+              <p class="mt-3 text-slate-600" data-i18n="capabilityFourDesc">结合材料、扭矩、使用频率、工作环境和采购数量评估方案。</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="requirements" class="bg-graphite px-4 py-16 text-white sm:px-6 lg:px-8 lg:py-20">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_.82fr] lg:items-center">
+        <div class="reveal">
+          <p class="mb-3 text-sm font-bold uppercase tracking-[.24em] text-red-400">Project input</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="requirementsTitle">准备这些信息，就可以开始评估</h2>
+          <p class="mt-5 max-w-2xl text-white/65" data-i18n="requirementsDesc">
+            不需要一次提供完整的工程文件。图纸、草图、样件照片或清晰的应用描述，都可以作为沟通起点。
+          </p>
+
+          <div class="mt-10 grid gap-x-8 gap-y-6 sm:grid-cols-2">
+            <div class="border-l-2 border-red-500 pl-5">
+              <h3 class="font-bold" data-i18n="inputOneTitle">图纸或样件</h3>
+              <p class="mt-2 text-sm text-white/60" data-i18n="inputOneDesc">二维图、三维模型、草图或多角度照片。</p>
+            </div>
+            <div class="border-l-2 border-red-500 pl-5">
+              <h3 class="font-bold" data-i18n="inputTwoTitle">关键接口与尺寸</h3>
+              <p class="mt-2 text-sm text-white/60" data-i18n="inputTwoDesc">方驱、轮廓、长度、设备接口与空间边界。</p>
+            </div>
+            <div class="border-l-2 border-red-500 pl-5">
+              <h3 class="font-bold" data-i18n="inputThreeTitle">扭矩与工况</h3>
+              <p class="mt-2 text-sm text-white/60" data-i18n="inputThreeDesc">目标扭矩、使用频率、环境和装配节拍。</p>
+            </div>
+            <div class="border-l-2 border-red-500 pl-5">
+              <h3 class="font-bold" data-i18n="inputFourTitle">数量与交付</h3>
+              <p class="mt-2 text-sm text-white/60" data-i18n="inputFourDesc">样品数量、预计批量和项目时间要求。</p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="border border-white/15 bg-white/[.045] p-7 reveal sm:p-9" aria-labelledby="briefTitle">
+          <p class="text-sm font-bold uppercase tracking-[.2em] text-red-400" data-i18n="briefLabel">Inquiry brief</p>
+          <h3 id="briefTitle" class="mt-4 text-2xl font-bold" data-i18n="briefTitle">定制需求清单</h3>
+          <ol class="mt-7 grid gap-4 text-sm text-white/72">
+            <li class="flex gap-4"><span class="font-bold text-red-400">01</span><span data-i18n="briefOne">应用设备或工位：</span></li>
+            <li class="flex gap-4"><span class="font-bold text-red-400">02</span><span data-i18n="briefTwo">紧固件与接口规格：</span></li>
+            <li class="flex gap-4"><span class="font-bold text-red-400">03</span><span data-i18n="briefThree">扭矩、节拍与使用环境：</span></li>
+            <li class="flex gap-4"><span class="font-bold text-red-400">04</span><span data-i18n="briefFour">图纸、照片或样件说明：</span></li>
+            <li class="flex gap-4"><span class="font-bold text-red-400">05</span><span data-i18n="briefFive">样品及预计采购数量：</span></li>
+            <li class="flex gap-4"><span class="font-bold text-red-400">06</span><span data-i18n="briefSix">期望交付时间：</span></li>
+          </ol>
+          <button id="copyBrief" type="button" class="mt-8 inline-flex w-full items-center justify-center bg-normBlue px-6 py-3 font-bold text-white hover:bg-red-700" data-i18n="copyBrief">
+            复制需求清单
+          </button>
+          <p id="copyStatus" class="mt-3 min-h-6 text-sm text-white/55" role="status" aria-live="polite"></p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="process" class="px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="max-w-3xl reveal">
+          <p class="section-label mb-3">Engineering process</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="processTitle">四步推进，从需求到交付</h2>
+          <p class="mt-5 text-slate-600" data-i18n="processDesc">每个阶段先确认关键条件，再进入下一阶段，减少非标项目中的反复与信息缺口。</p>
+        </div>
+
+        <div class="relative mt-12 grid gap-8 md:grid-cols-4">
+          <div class="process-line absolute left-0 right-0 top-5 hidden h-px md:block" aria-hidden="true"></div>
+          <article class="relative reveal">
+            <div class="relative z-10 grid h-10 w-10 place-items-center rounded-full bg-red-800 text-sm font-bold text-white">01</div>
+            <h3 class="mt-6 text-xl font-bold" data-i18n="processOneTitle">需求评估</h3>
+            <p class="mt-3 text-slate-600" data-i18n="processOneDesc">确认应用、接口、扭矩、空间与数量等基础条件。</p>
+          </article>
+          <article class="relative reveal">
+            <div class="relative z-10 grid h-10 w-10 place-items-center rounded-full bg-red-800 text-sm font-bold text-white">02</div>
+            <h3 class="mt-6 text-xl font-bold" data-i18n="processTwoTitle">工程确认</h3>
+            <p class="mt-3 text-slate-600" data-i18n="processTwoDesc">沟通结构、材料、关键尺寸和可制造性。</p>
+          </article>
+          <article class="relative reveal">
+            <div class="relative z-10 grid h-10 w-10 place-items-center rounded-full bg-red-800 text-sm font-bold text-white">03</div>
+            <h3 class="mt-6 text-xl font-bold" data-i18n="processThreeTitle">样品验证</h3>
+            <p class="mt-3 text-slate-600" data-i18n="processThreeDesc">以样品或小批量支持装机、适配与工况验证。</p>
+          </article>
+          <article class="relative reveal">
+            <div class="relative z-10 grid h-10 w-10 place-items-center rounded-full bg-red-800 text-sm font-bold text-white">04</div>
+            <h3 class="mt-6 text-xl font-bold" data-i18n="processFourTitle">正式交付</h3>
+            <p class="mt-3 text-slate-600" data-i18n="processFourDesc">根据确认方案完成项目供货与后续配套。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto grid max-w-7xl overflow-hidden border border-red-900/15 bg-white/78 lg:grid-cols-2">
+        <figure class="min-h-80 reveal">
+          <img class="industrial-image h-full w-full object-cover" src="assets/normeco-robot-tools.png" width="640" height="440" loading="lazy" decoding="async" alt="NORMECO 专业装配工具应用于机器人和自动化工位" data-i18n-alt="applicationImageAlt">
+        </figure>
+        <div class="p-8 reveal sm:p-12 lg:p-16">
+          <p class="section-label mb-3">Application</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="applicationTitle">适用于真实产线中的特殊任务</h2>
+          <p class="mt-5 text-slate-600" data-i18n="applicationDesc">服务机器人集成、自动化装配、设备厂配套、工位改造、维修替换与特殊空间作业。</p>
+          <div class="mt-8 grid gap-3 sm:grid-cols-2">
+            <p class="border-t border-red-900/15 pt-3 font-bold" data-i18n="applicationOne">机器人末端装配</p>
+            <p class="border-t border-red-900/15 pt-3 font-bold" data-i18n="applicationTwo">自动化产线与工位</p>
+            <p class="border-t border-red-900/15 pt-3 font-bold" data-i18n="applicationThree">设备厂长期配套</p>
+            <p class="border-t border-red-900/15 pt-3 font-bold" data-i18n="applicationFour">维修替换与特殊工况</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-7xl">
+        <div class="text-center reveal">
+          <p class="section-label mb-3">FAQ</p>
+          <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="faqTitle">开始定制前的常见问题</h2>
+        </div>
+
+        <div class="mx-auto mt-10 max-w-4xl border-t border-red-900/15">
+          <article class="border-b border-red-900/15 reveal">
+            <button class="faq-button flex w-full items-center justify-between gap-4 py-6 text-left" type="button" aria-expanded="false">
+              <span class="text-lg font-bold" data-i18n="faqOneQuestion">没有正式图纸可以沟通吗？</span>
+              <svg class="faq-icon h-5 w-5 shrink-0 text-red-800" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.8"></path>
+              </svg>
+            </button>
+            <div class="faq-panel hidden pb-6 text-slate-600" data-i18n="faqOneAnswer">
+              可以。草图、样件照片、关键尺寸和应用描述都可以作为初步评估信息，后续再确认工程细节。
+            </div>
+          </article>
+
+          <article class="border-b border-red-900/15 reveal">
+            <button class="faq-button flex w-full items-center justify-between gap-4 py-6 text-left" type="button" aria-expanded="false">
+              <span class="text-lg font-bold" data-i18n="faqTwoQuestion">最低订购数量是多少？</span>
+              <svg class="faq-icon h-5 w-5 shrink-0 text-red-800" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.8"></path>
+              </svg>
+            </button>
+            <div class="faq-panel hidden pb-6 text-slate-600" data-i18n="faqTwoAnswer">
+              无 MOQ，1pc 也可成交，适合样品测试、小批量验证和后续项目配套。
+            </div>
+          </article>
+
+          <article class="border-b border-red-900/15 reveal">
+            <button class="faq-button flex w-full items-center justify-between gap-4 py-6 text-left" type="button" aria-expanded="false">
+              <span class="text-lg font-bold" data-i18n="faqThreeQuestion">可以按样件或照片开发吗？</span>
+              <svg class="faq-icon h-5 w-5 shrink-0 text-red-800" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.8"></path>
+              </svg>
+            </button>
+            <div class="faq-panel hidden pb-6 text-slate-600" data-i18n="faqThreeAnswer">
+              可以先依据样件或照片了解结构和应用，但关键尺寸、接口及工况仍需在工程确认阶段核实。
+            </div>
+          </article>
+
+          <article class="border-b border-red-900/15 reveal">
+            <button class="faq-button flex w-full items-center justify-between gap-4 py-6 text-left" type="button" aria-expanded="false">
+              <span class="text-lg font-bold" data-i18n="faqFourQuestion">询价时最重要的信息是什么？</span>
+              <svg class="faq-icon h-5 w-5 shrink-0 text-red-800" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M3 10h14M10 3v14" stroke="currentColor" stroke-width="1.8"></path>
+              </svg>
+            </button>
+            <div class="faq-panel hidden pb-6 text-slate-600" data-i18n="faqFourAnswer">
+              应用设备、关键接口、目标扭矩、空间限制、数量和期望时间最有助于快速判断方案。
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="px-4 py-16 sm:px-6 lg:px-8">
+      <div class="mx-auto flex max-w-7xl flex-col gap-8 border-y border-red-900/15 py-12 md:flex-row md:items-end md:justify-between">
+        <div class="reveal">
+          <p class="section-label mb-3">Start a project</p>
+          <h2 class="max-w-3xl text-3xl font-bold sm:text-5xl" data-i18n="ctaTitle">把应用难题整理成一份清晰需求</h2>
+          <p class="mt-4 max-w-2xl text-slate-600" data-i18n="ctaDesc">先准备设备、接口、扭矩、图纸或照片与数量信息，再进入工程沟通。</p>
+        </div>
+        <div class="flex shrink-0 flex-wrap gap-4 reveal">
+          <a href="#requirements" class="inline-flex items-center justify-center bg-normBlue px-6 py-3 font-bold text-white hover:bg-red-800" data-i18n="ctaPrimary">查看需求清单</a>
+          <a href="products.html" class="inline-flex items-center justify-center border border-red-900/20 bg-white/70 px-6 py-3 font-bold text-graphite hover:border-red-800 hover:text-red-800" data-i18n="ctaSecondary">浏览产品目录</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-red-900/10 bg-white/70 px-4 py-10 sm:px-6 lg:px-8">
+    <div class="mx-auto grid max-w-7xl gap-10 md:grid-cols-3">
+      <div>
+        <img class="footer-logo" src="assets/normeco-logo.png" width="220" height="68" loading="lazy" decoding="async" alt="NORMECO 公司 logo" data-i18n-alt="logoAlt">
+        <p class="mt-3 max-w-md text-sm text-slate-500" data-i18n="footerDesc">NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。</p>
+        <p class="mt-4 text-sm text-slate-500" data-i18n="footerAddress">重庆地址占位：中国重庆市 XX 区 XX 路 XX 号</p>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-slate-700">Pages</h2>
+        <div class="mt-4 grid gap-2 text-sm text-slate-500">
+          <a class="hover:text-red-800" href="products.html" data-i18n="navProducts">产品中心</a>
+          <a class="font-bold text-red-800" href="custom.html" data-i18n="navCustom">定制服务</a>
+          <a class="hover:text-red-800" href="solutions.html" data-i18n="navSolutions">产线方案</a>
+          <a class="hover:text-red-800" href="about.html" data-i18n="navAbout">关于我们</a>
+        </div>
+      </div>
+      <div>
+        <h2 class="text-sm font-bold uppercase tracking-[.2em] text-slate-700">Social</h2>
+        <div class="mt-4 grid gap-2 text-sm text-slate-500">
+          <a class="hover:text-red-800" href="#" aria-label="NORMECO LinkedIn 占位链接">LinkedIn</a>
+          <a class="hover:text-red-800" href="#" aria-label="NORMECO YouTube 占位链接">YouTube</a>
+          <a class="hover:text-red-800" href="#" aria-label="NORMECO 微信占位链接">WeChat</a>
+        </div>
+      </div>
+    </div>
+    <div class="mx-auto mt-8 max-w-7xl border-t border-red-900/10 pt-6 text-sm text-slate-400">
+      © 2026 NORMECO. All rights reserved.
+    </div>
+  </footer>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "@id": "https://www.normeco.com/custom.html#service",
+    "name": "NORMECO 专业装配工具定制服务",
+    "serviceType": "定制套筒与专业装配工具开发",
+    "provider": {
+      "@type": "Organization",
+      "name": "NORMECO",
+      "url": "https://www.normeco.com/"
+    },
+    "areaServed": "Worldwide",
+    "description": "按图纸、样件、接口、扭矩和使用工况开发定制套筒、机器人接口工具、自动化产线工具与非标连接件。"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "没有正式图纸可以沟通吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以。草图、样件照片、关键尺寸和应用描述都可以作为初步评估信息。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "最低订购数量是多少？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "无 MOQ，1pc 也可成交，适合样品测试、小批量验证和后续项目配套。"
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "可以按样件或照片开发吗？",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "可以先依据样件或照片了解结构和应用，关键尺寸、接口及工况在工程确认阶段核实。"
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script>
+    const translations = {
+      zh: {
+        pageTitle: "NORMECO 定制服务 | 定制套筒与专业装配工具",
+        metaDescription: "NORMECO 提供定制套筒、机器人接口工具、自动化产线工具和非标连接件开发服务。支持按图纸、样件、工况与扭矩需求定制，无 MOQ，1pc 起订。",
+        navAria: "主导航",
+        homeAria: "NORMECO 首页",
+        languageAria: "选择语言",
+        flagAria: "中国国旗",
+        logoAlt: "NORMECO 公司 logo",
+        menu: "菜单",
+        navHome: "首页",
+        navProducts: "产品中心",
+        navCustom: "定制服务",
+        navSolutions: "产线方案",
+        navAbout: "关于我们",
+        navContact: "联系我们",
+        heroTitle: "从图纸、样件到专业装配工具",
+        heroDesc: "面向机器人、自动化产线、设备配套与特殊工况，按图纸、样件、接口、扭矩和使用环境开发定制套筒及专业装配工具。",
+        heroPrimary: "准备定制需求",
+        heroSecondary: "了解定制流程",
+        proofOne: "起订支持",
+        proofTwo: "灵活验证",
+        proofThree: "全球服务",
+        heroImageAlt: "NORMECO 定制装配工具与非标接口件展示",
+        heroCaption: "定制套筒、转换接口与自动化装配工具示意",
+        capabilityTitle: "围绕装配任务，而不是现成目录",
+        capabilityDesc: "当标准产品无法满足接口、空间、扭矩或节拍要求时，我们依据实际应用条件确认结构与交付方案。",
+        capabilityOneTitle: "定制套筒与异形结构",
+        capabilityOneDesc: "按紧固件轮廓、空间限制、长度与传动接口开发专用结构。",
+        capabilityTwoTitle: "机器人及自动化接口",
+        capabilityTwoDesc: "面向机器人末端、拧紧轴、工位和自动化设备进行接口适配。",
+        capabilityThreeTitle: "延长、转换与连接件",
+        capabilityThreeDesc: "解决传动距离、方驱转换、偏置连接和特殊空间操作问题。",
+        capabilityFourTitle: "工况与交付要求",
+        capabilityFourDesc: "结合材料、扭矩、使用频率、工作环境和采购数量评估方案。",
+        requirementsTitle: "准备这些信息，就可以开始评估",
+        requirementsDesc: "不需要一次提供完整的工程文件。图纸、草图、样件照片或清晰的应用描述，都可以作为沟通起点。",
+        inputOneTitle: "图纸或样件",
+        inputOneDesc: "二维图、三维模型、草图或多角度照片。",
+        inputTwoTitle: "关键接口与尺寸",
+        inputTwoDesc: "方驱、轮廓、长度、设备接口与空间边界。",
+        inputThreeTitle: "扭矩与工况",
+        inputThreeDesc: "目标扭矩、使用频率、环境和装配节拍。",
+        inputFourTitle: "数量与交付",
+        inputFourDesc: "样品数量、预计批量和项目时间要求。",
+        briefLabel: "询价信息",
+        briefTitle: "定制需求清单",
+        briefOne: "应用设备或工位：",
+        briefTwo: "紧固件与接口规格：",
+        briefThree: "扭矩、节拍与使用环境：",
+        briefFour: "图纸、照片或样件说明：",
+        briefFive: "样品及预计采购数量：",
+        briefSix: "期望交付时间：",
+        copyBrief: "复制需求清单",
+        copied: "需求清单已复制，可以直接粘贴到邮件或沟通工具中。",
+        copyFailed: "无法自动复制，请手动记录上方六项信息。",
+        processTitle: "四步推进，从需求到交付",
+        processDesc: "每个阶段先确认关键条件，再进入下一阶段，减少非标项目中的反复与信息缺口。",
+        processOneTitle: "需求评估",
+        processOneDesc: "确认应用、接口、扭矩、空间与数量等基础条件。",
+        processTwoTitle: "工程确认",
+        processTwoDesc: "沟通结构、材料、关键尺寸和可制造性。",
+        processThreeTitle: "样品验证",
+        processThreeDesc: "以样品或小批量支持装机、适配与工况验证。",
+        processFourTitle: "正式交付",
+        processFourDesc: "根据确认方案完成项目供货与后续配套。",
+        applicationImageAlt: "NORMECO 专业装配工具应用于机器人和自动化工位",
+        applicationTitle: "适用于真实产线中的特殊任务",
+        applicationDesc: "服务机器人集成、自动化装配、设备厂配套、工位改造、维修替换与特殊空间作业。",
+        applicationOne: "机器人末端装配",
+        applicationTwo: "自动化产线与工位",
+        applicationThree: "设备厂长期配套",
+        applicationFour: "维修替换与特殊工况",
+        faqTitle: "开始定制前的常见问题",
+        faqOneQuestion: "没有正式图纸可以沟通吗？",
+        faqOneAnswer: "可以。草图、样件照片、关键尺寸和应用描述都可以作为初步评估信息，后续再确认工程细节。",
+        faqTwoQuestion: "最低订购数量是多少？",
+        faqTwoAnswer: "无 MOQ，1pc 也可成交，适合样品测试、小批量验证和后续项目配套。",
+        faqThreeQuestion: "可以按样件或照片开发吗？",
+        faqThreeAnswer: "可以先依据样件或照片了解结构和应用，但关键尺寸、接口及工况仍需在工程确认阶段核实。",
+        faqFourQuestion: "询价时最重要的信息是什么？",
+        faqFourAnswer: "应用设备、关键接口、目标扭矩、空间限制、数量和期望时间最有助于快速判断方案。",
+        ctaTitle: "把应用难题整理成一份清晰需求",
+        ctaDesc: "先准备设备、接口、扭矩、图纸或照片与数量信息，再进入工程沟通。",
+        ctaPrimary: "查看需求清单",
+        ctaSecondary: "浏览产品目录",
+        footerDesc: "NORMECO 专业装配工具标件/定制，中国重庆总部，服务全球。",
+        footerAddress: "重庆地址占位：中国重庆市 XX 区 XX 路 XX 号"
+      },
+      en: {
+        pageTitle: "NORMECO Custom Services | Custom Sockets and Assembly Tools",
+        metaDescription: "NORMECO develops custom sockets, robot interface tools, automated line tooling, and non-standard connectors from drawings, samples, torque requirements, and working conditions. No MOQ, from 1pc.",
+        navAria: "Main navigation",
+        homeAria: "NORMECO home",
+        languageAria: "Choose language",
+        flagAria: "United States flag",
+        logoAlt: "NORMECO company logo",
+        menu: "Menu",
+        navHome: "Home",
+        navProducts: "Products",
+        navCustom: "Customization",
+        navSolutions: "Line Solutions",
+        navAbout: "About",
+        navContact: "Contact",
+        heroTitle: "From Drawing or Sample to a Professional Assembly Tool",
+        heroDesc: "For robots, automated lines, equipment integration, and demanding applications, we develop custom sockets and professional assembly tools around drawings, samples, interfaces, torque, and working conditions.",
+        heroPrimary: "Prepare Your Requirements",
+        heroSecondary: "See the Process",
+        proofOne: "Order support",
+        proofTwo: "Flexible validation",
+        proofThree: "Worldwide service",
+        heroImageAlt: "NORMECO custom assembly tools and non-standard interfaces",
+        heroCaption: "Custom sockets, adapters, and automated assembly tooling",
+        capabilityTitle: "Built Around the Assembly Task, Not a Fixed Catalog",
+        capabilityDesc: "When a standard product cannot meet interface, space, torque, or cycle-time requirements, we assess the structure and delivery approach from actual application conditions.",
+        capabilityOneTitle: "Custom Sockets and Geometry",
+        capabilityOneDesc: "Purpose-built structures based on fastener profile, space limits, length, and drive interface.",
+        capabilityTwoTitle: "Robot and Automation Interfaces",
+        capabilityTwoDesc: "Interface adaptation for robot end tooling, tightening spindles, stations, and automation equipment.",
+        capabilityThreeTitle: "Extensions, Adapters, and Connectors",
+        capabilityThreeDesc: "Solutions for drive distance, square-drive conversion, offset connection, and confined spaces.",
+        capabilityFourTitle: "Working and Delivery Conditions",
+        capabilityFourDesc: "Assessment based on material, torque, frequency, environment, and required quantity.",
+        requirementsTitle: "Start the Assessment With These Inputs",
+        requirementsDesc: "A complete engineering package is not required at the start. A drawing, sketch, sample photo, or clear application description can begin the conversation.",
+        inputOneTitle: "Drawing or Sample",
+        inputOneDesc: "2D drawing, 3D model, sketch, or photos from several angles.",
+        inputTwoTitle: "Key Interfaces and Dimensions",
+        inputTwoDesc: "Drive, profile, length, equipment interface, and space envelope.",
+        inputThreeTitle: "Torque and Working Conditions",
+        inputThreeDesc: "Target torque, frequency, environment, and assembly cycle.",
+        inputFourTitle: "Quantity and Delivery",
+        inputFourDesc: "Sample quantity, expected volume, and project timing.",
+        briefLabel: "Inquiry brief",
+        briefTitle: "Customization Requirement List",
+        briefOne: "Equipment or station:",
+        briefTwo: "Fastener and interface specification:",
+        briefThree: "Torque, cycle, and environment:",
+        briefFour: "Drawing, photo, or sample notes:",
+        briefFive: "Sample and expected order quantity:",
+        briefSix: "Requested delivery time:",
+        copyBrief: "Copy Requirement List",
+        copied: "Requirement list copied. Paste it into an email or your preferred communication tool.",
+        copyFailed: "Automatic copy is unavailable. Please record the six items above manually.",
+        processTitle: "Four Steps From Requirement to Delivery",
+        processDesc: "Key conditions are confirmed before each next stage, reducing rework and information gaps in non-standard projects.",
+        processOneTitle: "Requirement Review",
+        processOneDesc: "Confirm the application, interface, torque, space, and quantity.",
+        processTwoTitle: "Engineering Confirmation",
+        processTwoDesc: "Align on structure, material, critical dimensions, and manufacturability.",
+        processThreeTitle: "Sample Validation",
+        processThreeDesc: "Support installation, fit, and working-condition validation with samples or a small batch.",
+        processFourTitle: "Formal Delivery",
+        processFourDesc: "Complete project supply and follow-on support against the confirmed solution.",
+        applicationImageAlt: "NORMECO professional assembly tools for robots and automated stations",
+        applicationTitle: "For Special Tasks on Real Production Lines",
+        applicationDesc: "Supporting robot integration, automated assembly, equipment OEM supply, station upgrades, replacement, and confined-space work.",
+        applicationOne: "Robot end assembly",
+        applicationTwo: "Automated lines and stations",
+        applicationThree: "Long-term OEM supply",
+        applicationFour: "Replacement and special conditions",
+        faqTitle: "Questions Before Starting a Custom Project",
+        faqOneQuestion: "Can we start without a formal drawing?",
+        faqOneAnswer: "Yes. A sketch, sample photo, key dimensions, and application description can support an initial assessment before engineering details are confirmed.",
+        faqTwoQuestion: "What is the minimum order quantity?",
+        faqTwoAnswer: "There is no MOQ. A 1pc order is accepted for sampling, small-batch validation, and follow-on project supply.",
+        faqThreeQuestion: "Can you develop from a sample or photo?",
+        faqThreeAnswer: "A sample or photo can start the structural and application review, while critical dimensions, interfaces, and conditions are confirmed during engineering.",
+        faqFourQuestion: "What matters most for an inquiry?",
+        faqFourAnswer: "Equipment, key interfaces, target torque, space limits, quantity, and requested timing help us assess the project efficiently.",
+        ctaTitle: "Turn the Application Challenge Into a Clear Brief",
+        ctaDesc: "Prepare the equipment, interface, torque, drawing or photo, and quantity before the engineering discussion.",
+        ctaPrimary: "View Requirement List",
+        ctaSecondary: "Browse Products",
+        footerDesc: "NORMECO provides standard and custom professional assembly tools from Chongqing, China, serving worldwide.",
+        footerAddress: "Chongqing address placeholder: XX Road, XX District, Chongqing, China"
+      }
+    };
+
+    const languageTrigger = document.getElementById("languageTrigger");
+    const currentFlag = document.getElementById("currentFlag");
+    const copyBrief = document.getElementById("copyBrief");
+    const copyStatus = document.getElementById("copyStatus");
+    let currentLanguage = localStorage.getItem("normeco-language") || "zh";
+
+    function setLanguage(language) {
+      const copy = translations[language] || translations.zh;
+      currentLanguage = language;
+      document.documentElement.lang = language === "en" ? "en" : "zh-CN";
+      document.title = copy.pageTitle;
+      document.querySelector('meta[name="description"]').setAttribute("content", copy.metaDescription);
+
+      document.querySelectorAll("[data-i18n]").forEach((element) => {
+        const key = element.dataset.i18n;
+        if (copy[key]) element.textContent = copy[key];
+      });
+
+      document.querySelectorAll("[data-i18n-alt]").forEach((element) => {
+        const key = element.dataset.i18nAlt;
+        if (copy[key]) element.alt = copy[key];
+      });
+
+      document.querySelectorAll("[data-i18n-aria-label]").forEach((element) => {
+        const key = element.dataset.i18nAriaLabel;
+        if (copy[key]) element.setAttribute("aria-label", copy[key]);
+      });
+
+      currentFlag.src = language === "en"
+        ? "https://flagcdn.com/w80/us.png"
+        : "https://flagcdn.com/w80/cn.png";
+      currentFlag.alt = language === "en" ? "United States flag" : "中国国旗";
+
+      document.querySelectorAll(".language-option").forEach((option) => {
+        option.setAttribute("aria-current", String(option.dataset.language === language));
+      });
+
+      localStorage.setItem("normeco-language", language);
+      copyStatus.textContent = "";
+    }
+
+    languageTrigger.addEventListener("click", (event) => {
+      const expanded = event.currentTarget.getAttribute("aria-expanded") === "true";
+      event.currentTarget.setAttribute("aria-expanded", String(!expanded));
+    });
+
+    document.querySelectorAll(".language-option").forEach((button) => {
+      button.addEventListener("click", () => {
+        setLanguage(button.dataset.language);
+        languageTrigger.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    document.getElementById("mobileMenuButton").addEventListener("click", (event) => {
+      const menu = document.getElementById("mobileNav");
+      const open = menu.classList.toggle("is-open");
+      event.currentTarget.setAttribute("aria-expanded", String(open));
+    });
+
+    window.addEventListener("load", () => window.lucide?.createIcons());
+
+    document.querySelectorAll(".faq-button").forEach((button) => {
+      button.addEventListener("click", () => {
+        const panel = button.nextElementSibling;
+        const icon = button.querySelector(".faq-icon");
+        const isOpen = button.getAttribute("aria-expanded") === "true";
+        button.setAttribute("aria-expanded", String(!isOpen));
+        panel.classList.toggle("hidden", isOpen);
+        icon.style.transform = isOpen ? "" : "rotate(45deg)";
+      });
+    });
+
+    copyBrief.addEventListener("click", async () => {
+      const copy = translations[currentLanguage] || translations.zh;
+      const list = [
+        copy.briefOne,
+        copy.briefTwo,
+        copy.briefThree,
+        copy.briefFour,
+        copy.briefFive,
+        copy.briefSix
+      ].join("\n");
+
+      try {
+        await navigator.clipboard.writeText(list);
+        copyStatus.textContent = copy.copied;
+      } catch {
+        copyStatus.textContent = copy.copyFailed;
+      }
+    });
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: .12 });
+
+    document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
+    setLanguage(currentLanguage);
+  </script>
+</body>
+</html>

@@ -24,7 +24,13 @@ NORMECO 网站工作日志
 - 更新 llms.txt、robots.txt 和 sitemap.xml，将站点说明与索引信息统一到 NORMECO 和产品目录页。
 - 新增 .gitignore 规则，排除本地预览服务器日志文件。
 
+2026-07-29
+- 新增 custom.html 定制服务页，覆盖定制能力、需求信息、工程流程、应用场景、FAQ 和项目引导。
+- 新增定制需求清单复制功能，并补齐中英文页面内容、图片替代文本、Service 与 FAQPage 结构化数据。
+- 将首页和定制服务页顶栏与产品目录页统一，保持 Logo 尺寸、导航顺序、容器宽度、语言切换和移动端菜单排版一致。
+- 更新 llms.txt 和 sitemap.xml，将定制服务页纳入站点核心页面与搜索索引。
+
 后续建议
-- 补齐导航中 custom.html、solutions.html、about.html、contact.html 等页面，避免导航链接指向未创建页面。
+- 补齐导航中 solutions.html、about.html、contact.html 等页面，避免导航链接指向未创建页面。
 - 根据真实联系方式、公司地址和社媒链接替换页面中的占位内容。
 - 上线后检查 GitHub Pages 对大体积产品图片、WASM 和中文文件名资源的加载表现。
