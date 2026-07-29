@@ -29,6 +29,10 @@ NORMECO 网站工作日志
 - 新增定制需求清单复制功能，并补齐中英文页面内容、图片替代文本、Service 与 FAQPage 结构化数据。
 - 将首页和定制服务页顶栏与产品目录页统一，保持 Logo 尺寸、导航顺序、容器宽度、语言切换和移动端菜单排版一致。
 - 更新 llms.txt 和 sitemap.xml，将定制服务页纳入站点核心页面与搜索索引。
+- 在定制服务页新增“已定制产品实例”横向展示区，包含开口套筒、快速导入套筒、固定磁内六角套筒、起子转换头和火花塞套筒等 5 个案例。
+- 新增 assets/custom-cases.json 作为定制案例数据源，并将案例数据合并进 data/admin-catalog.json。
+- 扩展 NORMECO 后台管理页，新增“定制实例”管理视图，支持案例新增、编辑、排序、删除、图片替换、发布状态和中英文内容维护。
+- 更新 server.mjs 与 scripts/build-admin-catalog.mjs，让后台目录校验和公开 API 同时支持已发布的定制案例。
 
 后续建议
 - 补齐导航中 solutions.html、about.html、contact.html 等页面，避免导航链接指向未创建页面。

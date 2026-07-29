@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const sourcePath = resolve(projectRoot, "assets/product-catalog/catalog.json");
+const customCasesPath = resolve(projectRoot, "assets/custom-cases.json");
 const outputPath = resolve(projectRoot, "data/admin-catalog.json");
 
 const categoryGroups = [
@@ -87,6 +88,7 @@ function tagId(index) {
 }
 
 const source = JSON.parse(await readFile(sourcePath, "utf8"));
+const customCasesSource = JSON.parse(await readFile(customCasesPath, "utf8"));
 const tagNames = unique(source.products.flatMap((product) => [
   product.drive,
   product.profile,
@@ -159,7 +161,9 @@ const adminCatalog = {
   tags,
   categories,
   products,
-  selectedProductId: products[0]?.id || null
+  selectedProductId: products[0]?.id || null,
+  customCases: customCasesSource.customCases,
+  selectedCustomCaseId: customCasesSource.customCases[0]?.id || null
 };
 
 await mkdir(dirname(outputPath), { recursive: true });

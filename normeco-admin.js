@@ -7,7 +7,14 @@
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
   }[char]));
 
-  let state = { tags: [], categories: [], products: [], selectedProductId: null };
+  let state = {
+    tags: [],
+    categories: [],
+    products: [],
+    selectedProductId: null,
+    customCases: [],
+    selectedCustomCaseId: null
+  };
   let activeView = "products";
   let activeTab = "basic";
   let draggedCategoryId = null;
@@ -45,6 +52,8 @@
     if (!Array.isArray(catalog.products) || !Array.isArray(catalog.categories) || !Array.isArray(catalog.tags)) {
       throw new Error("目录数据格式不正确。");
     }
+    catalog.customCases = Array.isArray(catalog.customCases) ? catalog.customCases : [];
+    catalog.selectedCustomCaseId = catalog.selectedCustomCaseId || catalog.customCases[0]?.id || null;
     state = catalog;
     loginView.hidden = true;
     appView.hidden = false;
@@ -95,6 +104,10 @@
 
   function selectedProduct() {
     return state.products.find((item) => item.id === state.selectedProductId) || state.products[0] || null;
+  }
+
+  function selectedCustomCase() {
+    return state.customCases.find((item) => item.id === state.selectedCustomCaseId) || state.customCases[0] || null;
   }
 
   function categoryById(id) {
@@ -186,22 +199,25 @@
 
   function switchView(viewName) {
     activeView = viewName;
-    const titleMap = { products: "产品页编辑后台", categories: "分类管理", tags: "标签管理" };
+    const titleMap = { products: "产品页编辑后台", cases: "定制实例管理", categories: "分类管理", tags: "标签管理" };
     el("pageTitle").textContent = titleMap[viewName];
-    ["products", "categories", "tags"].forEach((view) => {
+    ["products", "cases", "categories", "tags"].forEach((view) => {
       el(`${view}View`).hidden = view !== viewName;
     });
     document.querySelectorAll(".nav-item").forEach((item) => item.classList.toggle("active", item.dataset.view === viewName));
     document.querySelector(".main-nav").classList.remove("open");
     if (viewName === "categories") renderCategoryTrees();
     if (viewName === "tags") renderTagManager();
+    if (viewName === "cases") renderCustomCases();
   }
 
   function renderAll() {
     if (!selectedProduct() && state.products.length) state.selectedProductId = state.products[0].id;
+    if (!selectedCustomCase() && state.customCases.length) state.selectedCustomCaseId = state.customCases[0].id;
     renderCategoryOptions();
     renderProductList();
     renderEditor();
+    renderCustomCases();
     renderCategoryTrees();
     renderTagManager();
   }
@@ -379,6 +395,173 @@
     } finally {
       el("productImageInput").value = "";
     }
+  });
+
+  function renderCustomCasePreview() {
+    const item = selectedCustomCase();
+    if (!item) {
+      el("customCasePreview").innerHTML = '<div class="mini-preview-content">暂无可预览实例</div>';
+      return;
+    }
+    const copy = item.zh || {};
+    el("customCasePreview").innerHTML = `<article class="custom-case-preview">
+      <img src="${escapeHtml(item.image || DEFAULT_IMAGE)}" alt="">
+      <h4>${escapeHtml(copy.title || "未命名实例")}</h4>
+      <dl>
+        <div><dt>需求</dt><dd>${escapeHtml(copy.requirement || "—")}</dd></div>
+        <div><dt>定制点</dt><dd>${escapeHtml(copy.customization || "—")}</dd></div>
+        <div><dt>应用</dt><dd>${escapeHtml(copy.application || "—")}</dd></div>
+      </dl>
+    </article>`;
+  }
+
+  function renderCustomCases() {
+    const item = selectedCustomCase();
+    el("customCaseCount").textContent = `${state.customCases.length} 个实例`;
+    el("customCaseList").innerHTML = state.customCases.length ? state.customCases.map((customCase, index) => `
+      <button class="product-list-item ${customCase.id === state.selectedCustomCaseId ? "active" : ""}" data-custom-case-id="${customCase.id}">
+        <img src="${escapeHtml(customCase.image || DEFAULT_IMAGE)}" alt="">
+        <span><strong>${escapeHtml(customCase.zh?.title || "未命名实例")}</strong><span>${String(index + 1).padStart(2, "0")} · ${escapeHtml(customCase.status || "草稿")}</span></span>
+      </button>`).join("") : '<p class="empty-note">尚无定制实例</p>';
+
+    el("customCaseList").querySelectorAll("[data-custom-case-id]").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.selectedCustomCaseId = button.dataset.customCaseId;
+        persist(false);
+        renderCustomCases();
+      });
+    });
+
+    const controls = document.querySelectorAll("#casesView input, #casesView textarea, #casesView select, #casesView button");
+    controls.forEach((control) => {
+      control.disabled = !item && control.id !== "addCustomCaseButton";
+    });
+    if (!item) {
+      el("customCaseEditorTitle").textContent = "暂无实例";
+      el("customCaseImagePreview").src = DEFAULT_IMAGE;
+      renderCustomCasePreview();
+      return;
+    }
+
+    item.zh ||= {};
+    item.en ||= {};
+    el("customCaseEditorTitle").textContent = item.zh.title || "未命名实例";
+    el("customCaseTitleZh").value = item.zh.title || "";
+    el("customCaseTitleEn").value = item.en.title || "";
+    el("customCaseStatus").value = item.status || "草稿";
+    el("customCaseRequirementZh").value = item.zh.requirement || "";
+    el("customCaseCustomizationZh").value = item.zh.customization || "";
+    el("customCaseApplicationZh").value = item.zh.application || "";
+    el("customCaseRequirementEn").value = item.en.requirement || "";
+    el("customCaseCustomizationEn").value = item.en.customization || "";
+    el("customCaseApplicationEn").value = item.en.application || "";
+    el("customCaseImagePreview").src = item.image || DEFAULT_IMAGE;
+
+    const index = state.customCases.findIndex((entry) => entry.id === item.id);
+    el("moveCustomCaseUpButton").disabled = index <= 0;
+    el("moveCustomCaseDownButton").disabled = index < 0 || index >= state.customCases.length - 1;
+    renderCustomCasePreview();
+  }
+
+  document.querySelectorAll("[data-case-language][data-case-field]").forEach((input) => {
+    input.addEventListener("input", () => {
+      const item = selectedCustomCase();
+      if (!item) return;
+      item[input.dataset.caseLanguage][input.dataset.caseField] = input.value;
+      if (input.dataset.caseField === "title" && input.dataset.caseLanguage === "zh") {
+        el("customCaseEditorTitle").textContent = input.value || "未命名实例";
+        renderCustomCases();
+      } else {
+        renderCustomCasePreview();
+      }
+      persist();
+    });
+  });
+
+  el("customCaseStatus").addEventListener("change", () => {
+    const item = selectedCustomCase();
+    if (!item) return;
+    item.status = el("customCaseStatus").value;
+    renderCustomCases();
+    persist();
+  });
+
+  el("customCaseImageInput").addEventListener("change", async () => {
+    const item = selectedCustomCase();
+    const file = el("customCaseImageInput").files[0];
+    if (!item || !file) return;
+    if (file.size > 5 * 1024 * 1024) {
+      showToast("图片超过 5MB，请先压缩后再试。");
+      el("customCaseImageInput").value = "";
+      return;
+    }
+    try {
+      const uploaded = await requestJson("/api/admin/image", {
+        method: "POST",
+        headers: { "content-type": file.type },
+        body: file
+      });
+      item.image = uploaded.path;
+      renderCustomCases();
+      if (await persistNow()) showToast("定制实例图片已上传并保存");
+    } catch (error) {
+      showToast(error.message);
+    } finally {
+      el("customCaseImageInput").value = "";
+    }
+  });
+
+  el("addCustomCaseButton").addEventListener("click", () => {
+    const item = {
+      id: uid("custom-case"),
+      status: "草稿",
+      image: DEFAULT_IMAGE,
+      zh: {
+        title: "未命名定制实例",
+        requirement: "请填写客户需求。",
+        customization: "请填写定制点。",
+        application: "请填写应用场景。"
+      },
+      en: {
+        title: "Untitled Custom Example",
+        requirement: "Describe the requirement.",
+        customization: "Describe the customization.",
+        application: "Describe the application."
+      }
+    };
+    state.customCases.push(item);
+    state.selectedCustomCaseId = item.id;
+    renderCustomCases();
+    persist();
+    showToast("已新增定制实例，请继续编辑");
+  });
+
+  function moveCustomCase(offset) {
+    const item = selectedCustomCase();
+    const index = state.customCases.findIndex((entry) => entry.id === item?.id);
+    const target = index + offset;
+    if (index < 0 || target < 0 || target >= state.customCases.length) return;
+    state.customCases.splice(index, 1);
+    state.customCases.splice(target, 0, item);
+    renderCustomCases();
+    persist();
+  }
+
+  el("moveCustomCaseUpButton").addEventListener("click", () => moveCustomCase(-1));
+  el("moveCustomCaseDownButton").addEventListener("click", () => moveCustomCase(1));
+
+  el("deleteCustomCaseButton").addEventListener("click", async () => {
+    const item = selectedCustomCase();
+    if (!item || !await askConfirm(`确定删除定制实例“${item.zh?.title || "未命名实例"}”吗？`)) return;
+    state.customCases = state.customCases.filter((entry) => entry.id !== item.id);
+    state.selectedCustomCaseId = state.customCases[0]?.id || null;
+    renderCustomCases();
+    persist();
+    showToast("定制实例已删除");
+  });
+
+  el("saveCustomCaseButton").addEventListener("click", async () => {
+    if (await persistNow()) showToast("定制实例已保存到正式目录");
   });
 
   el("addProductButton").addEventListener("click", () => {
@@ -701,6 +884,31 @@
   }
 
   function fullPreviewHtml() {
+    if (activeView === "cases") {
+      const item = selectedCustomCase();
+      if (!item) return '<div class="full-preview-page"><p>暂无定制实例可预览。</p></div>';
+      return `<article class="full-preview-page">
+        <header class="preview-site-header"><img src="assets/normeco-logo.png" alt="NORMECO"></header>
+        <main class="preview-main">
+          <section class="preview-product">
+            <div class="preview-product-image"><img src="${escapeHtml(item.image || DEFAULT_IMAGE)}" alt="${escapeHtml(item.zh?.title || "定制实例")}"></div>
+            <div class="preview-copy">
+              <small>定制服务 · ${escapeHtml(item.status || "草稿")}</small>
+              <h2>${escapeHtml(item.zh?.title || "未命名实例")}</h2>
+              <p class="preview-summary"><strong>需求：</strong>${escapeHtml(item.zh?.requirement || "—")}</p>
+              <p class="preview-summary"><strong>定制点：</strong>${escapeHtml(item.zh?.customization || "—")}</p>
+              <p class="preview-summary"><strong>应用：</strong>${escapeHtml(item.zh?.application || "—")}</p>
+            </div>
+          </section>
+          <section class="preview-detail">
+            <h3>${escapeHtml(item.en?.title || "Untitled Custom Example")}</h3>
+            <p><strong>Requirement:</strong> ${escapeHtml(item.en?.requirement || "—")}</p>
+            <p><strong>Customization:</strong> ${escapeHtml(item.en?.customization || "—")}</p>
+            <p><strong>Application:</strong> ${escapeHtml(item.en?.application || "—")}</p>
+          </section>
+        </main>
+      </article>`;
+    }
     const product = selectedProduct();
     if (!product) return '<div class="full-preview-page"><p>暂无产品可预览。</p></div>';
     const tags = product.tagIds.map((id) => state.tags.find((tag) => tag.id === id)).filter(Boolean);

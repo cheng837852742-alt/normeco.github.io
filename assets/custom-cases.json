@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "customCases": [
+    {
+      "id": "custom-case-001",
+      "status": "已发布",
+      "image": "assets/product-catalog/images/b7d91300-cbb3-4075-a452-35a9fe8b4bf3.jpg",
+      "zh": {
+        "title": "定制开口套筒",
+        "requirement": "紧固件周边存在管路或结构遮挡，标准闭口套筒无法直接套入。",
+        "customization": "通过开口轮廓与专用长度设计，为侧向进入和受限空间保留操作路径。",
+        "application": "管路连接、传感器安装与特殊装配工位。"
+      },
+      "en": {
+        "title": "Custom Open Socket",
+        "requirement": "Pipes or surrounding structures prevent a standard closed socket from entering the fastener directly.",
+        "customization": "An open profile and purpose-built length preserve a side-entry path in confined spaces.",
+        "application": "Pipe connections, sensor installation, and special assembly stations."
+      }
+    },
+    {
+      "id": "custom-case-002",
+      "status": "已发布",
+      "image": "assets/product-catalog/images/c49e14fd-e377-46c8-a091-fabc28418645.jpg",
+      "zh": {
+        "title": "快速导入套筒",
+        "requirement": "自动化工位需要更稳定地引导套筒进入紧固件位置。",
+        "customization": "在入口结构、导向轮廓和接口匹配上进行针对性设计。",
+        "application": "机器人拧紧、节拍化装配与重复定位。"
+      },
+      "en": {
+        "title": "Fast-entry Socket",
+        "requirement": "An automated station needs more stable guidance as the socket approaches the fastener.",
+        "customization": "The entry geometry, guiding profile, and drive interface are designed for the application.",
+        "application": "Robotic tightening, cycle-based assembly, and repeated positioning."
+      }
+    },
+    {
+      "id": "custom-case-003",
+      "status": "已发布",
+      "image": "assets/product-catalog/images/95bdc418-9859-4a2b-b0bf-e1ee02df2bc0.jpg",
+      "zh": {
+        "title": "固定磁内六角套筒",
+        "requirement": "装配过程中需要辅助保持紧固件，降低掉落和偏移风险。",
+        "customization": "将固定磁保持方式与内六角工作端组合，并按接口和空间确认结构。",
+        "application": "垂直、倒置或狭窄空间装配。"
+      },
+      "en": {
+        "title": "Fixed-magnet Hex Socket",
+        "requirement": "The fastener needs additional retention during assembly to reduce dropping and misalignment.",
+        "customization": "A fixed-magnet retention method is combined with the hex working end and matched to the interface and available space.",
+        "application": "Vertical, inverted, or confined-space assembly."
+      }
+    },
+    {
+      "id": "custom-case-004",
+      "status": "已发布",
+      "image": "assets/product-catalog/images/f9287804-6cd8-4c56-9ddb-4844469f74e1.jpg",
+      "zh": {
+        "title": "起子转换头",
+        "requirement": "装配工具需要在起子批头与设备接口之间完成稳定转换。",
+        "customization": "按输入端、输出端、连接长度与保持方式匹配转换结构。",
+        "application": "自动化工位、设备维护与多接口装配任务。"
+      },
+      "en": {
+        "title": "Screwdriver Bit Adapter",
+        "requirement": "The assembly tool needs a stable transition between the driver bit and the equipment interface.",
+        "customization": "The conversion structure is matched to the input, output, connection length, and retention method.",
+        "application": "Automated stations, equipment maintenance, and multi-interface assembly."
+      }
+    },
+    {
+      "id": "custom-case-005",
+      "status": "已发布",
+      "image": "assets/product-catalog/images/730fe3ed-e80f-4903-a214-e298f36e4a36.jpg",
+      "zh": {
+        "title": "火花塞套筒",
+        "requirement": "深孔位置需要匹配长度、外径与紧固件轮廓的专用套筒。",
+        "customization": "结合工作端深度、外部空间与内部保持要求确认结构。",
+        "application": "发动机、发电设备及相关维护工位。"
+      },
+      "en": {
+        "title": "Spark Plug Socket",
+        "requirement": "A deep recess requires a dedicated socket matched to the working length, outside diameter, and fastener profile.",
+        "customization": "The structure is defined around working-end depth, available space, and internal retention requirements.",
+        "application": "Engines, generator equipment, and related maintenance stations."
+      }
+    }
+  ]
+}

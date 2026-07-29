@@ -107,7 +107,13 @@ function isValidCatalog(catalog) {
     && Array.isArray(catalog.products)
     && Array.isArray(catalog.categories)
     && Array.isArray(catalog.tags)
-    && catalog.products.every((product) => product && typeof product.id === "string" && typeof product.name === "string");
+    && Array.isArray(catalog.customCases)
+    && catalog.products.every((product) => product && typeof product.id === "string" && typeof product.name === "string")
+    && catalog.customCases.every((item) => item
+      && typeof item.id === "string"
+      && typeof item.image === "string"
+      && item.zh && typeof item.zh.title === "string"
+      && item.en && typeof item.en.title === "string");
 }
 
 async function handleApi(request, response, url) {
@@ -191,7 +197,8 @@ async function handleApi(request, response, url) {
       updatedAt: catalog.updatedAt,
       categories: catalog.categories,
       tags: catalog.tags,
-      products: catalog.products.filter((product) => product.status === "已发布")
+      products: catalog.products.filter((product) => product.status === "已发布"),
+      customCases: catalog.customCases.filter((item) => item.status === "已发布")
     });
     return true;
   }

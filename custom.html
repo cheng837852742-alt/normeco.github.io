@@ -169,6 +169,58 @@
       background: linear-gradient(90deg, var(--norm-red), rgba(185, 28, 28, .12));
     }
 
+    .case-rail {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(20rem, calc((100% - 2rem) / 3));
+      gap: 1rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      cursor: grab;
+      overscroll-behavior-inline: contain;
+      scroll-snap-type: inline mandatory;
+      scrollbar-color: rgba(153, 27, 27, .45) rgba(153, 27, 27, .08);
+      scrollbar-width: thin;
+    }
+
+    .case-rail::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .case-rail::-webkit-scrollbar-track {
+      background: rgba(153, 27, 27, .08);
+    }
+
+    .case-rail::-webkit-scrollbar-thumb {
+      background: rgba(153, 27, 27, .45);
+    }
+
+    .case-rail.is-dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+      user-select: none;
+    }
+
+    .case-card {
+      min-width: 0;
+      border: 1px solid var(--line);
+      background: #fff;
+      scroll-snap-align: start;
+    }
+
+    .case-media {
+      aspect-ratio: 33 / 40;
+      overflow: hidden;
+      background: #fafaf9;
+    }
+
+    .case-media img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
     .site-header {
       position: sticky;
       top: 0;
@@ -366,6 +418,10 @@
         display: none;
       }
 
+      .case-rail {
+        grid-auto-columns: minmax(19rem, 72vw);
+      }
+
       .header-inner {
         width: min(100% - 28px, 1440px);
       }
@@ -396,6 +452,10 @@
 
       .mobile-nav {
         top: 68px;
+      }
+
+      .case-rail {
+        grid-auto-columns: calc(100% - 2rem);
       }
     }
 
@@ -625,6 +685,169 @@
             <p class="mt-3 text-slate-600" data-i18n="processFourDesc">根据确认方案完成项目供货与后续配套。</p>
           </article>
         </div>
+      </div>
+    </section>
+
+    <section id="cases" class="border-y border-red-900/10 bg-white/55 px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <div class="mx-auto max-w-7xl">
+        <div class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(20rem,32rem)] lg:items-end">
+          <div class="max-w-3xl reveal">
+            <p class="section-label mb-3">Custom cases</p>
+            <h2 class="text-3xl font-bold sm:text-5xl" data-i18n="casesTitle">已定制产品实例</h2>
+          </div>
+          <p class="text-slate-600 reveal" data-i18n="casesDesc">以下实例展示不同接口、结构与工况下的定制方向。具体尺寸、材料与验证要求需结合项目确认。</p>
+        </div>
+
+        <div class="mt-10 flex items-center justify-between gap-4 reveal">
+          <p class="text-sm text-slate-500" data-i18n="casesDragHint">横向拖动查看更多产品</p>
+          <div class="flex items-center gap-2">
+            <span id="casesPosition" class="min-w-12 text-center font-mono text-xs font-bold text-red-900" aria-live="polite">1 / 5</span>
+            <button id="casesPrev" class="grid h-10 w-10 place-items-center border border-red-900/20 bg-white text-red-900 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-35" type="button" aria-label="查看上一个定制产品" data-i18n-aria-label="casesPrevAria">
+              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="m12.5 4.5-5 5.5 5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+            <button id="casesNext" class="grid h-10 w-10 place-items-center border border-red-900/20 bg-white text-red-900 hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-35" type="button" aria-label="查看下一个定制产品" data-i18n-aria-label="casesNextAria">
+              <svg class="h-4 w-4" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="m7.5 4.5 5 5.5-5 5.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div id="caseRail" class="case-rail mt-5 reveal" tabindex="0" aria-label="已定制产品实例列表" data-i18n-aria-label="casesRailAria">
+          <article class="case-card flex flex-col">
+            <figure class="case-media">
+              <img class="transition duration-500 hover:scale-[1.02]" src="assets/product-catalog/images/b7d91300-cbb3-4075-a452-35a9fe8b4bf3.jpg" width="660" height="800" loading="lazy" decoding="async" alt="NORMECO 定制开口套筒产品实例" data-i18n-alt="caseOneImageAlt">
+            </figure>
+            <div class="flex flex-1 flex-col p-7 sm:p-8">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-2xl font-bold" data-i18n="caseOneTitle">定制开口套筒</h3>
+                <span class="shrink-0 font-mono text-xs font-bold text-red-800">01</span>
+              </div>
+              <dl class="mt-7 space-y-5 text-sm">
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseRequirementLabel">需求</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseOneRequirement">紧固件周边存在管路或结构遮挡，标准闭口套筒无法直接套入。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseCustomLabel">定制点</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseOneCustom">通过开口轮廓与专用长度设计，为侧向进入和受限空间保留操作路径。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseApplicationLabel">应用</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseOneApplication">管路连接、传感器安装与特殊装配工位。</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="case-card flex flex-col">
+            <figure class="case-media">
+              <img class="transition duration-500 hover:scale-[1.02]" src="assets/product-catalog/images/c49e14fd-e377-46c8-a091-fabc28418645.jpg" width="660" height="800" loading="lazy" decoding="async" alt="NORMECO 快速导入套筒产品实例" data-i18n-alt="caseTwoImageAlt">
+            </figure>
+            <div class="flex flex-1 flex-col p-7 sm:p-8">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-2xl font-bold" data-i18n="caseTwoTitle">快速导入套筒</h3>
+                <span class="shrink-0 font-mono text-xs font-bold text-red-800">02</span>
+              </div>
+              <dl class="mt-7 space-y-5 text-sm">
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseRequirementLabel">需求</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseTwoRequirement">自动化工位需要更稳定地引导套筒进入紧固件位置。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseCustomLabel">定制点</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseTwoCustom">在入口结构、导向轮廓和接口匹配上进行针对性设计。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseApplicationLabel">应用</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseTwoApplication">机器人拧紧、节拍化装配与重复定位。</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="case-card flex flex-col">
+            <figure class="case-media">
+              <img class="transition duration-500 hover:scale-[1.02]" src="assets/product-catalog/images/95bdc418-9859-4a2b-b0bf-e1ee02df2bc0.jpg" width="660" height="800" loading="lazy" decoding="async" alt="NORMECO 固定磁内六角套筒产品实例" data-i18n-alt="caseThreeImageAlt">
+            </figure>
+            <div class="flex flex-1 flex-col p-7 sm:p-8">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-2xl font-bold" data-i18n="caseThreeTitle">固定磁内六角套筒</h3>
+                <span class="shrink-0 font-mono text-xs font-bold text-red-800">03</span>
+              </div>
+              <dl class="mt-7 space-y-5 text-sm">
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseRequirementLabel">需求</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseThreeRequirement">装配过程中需要辅助保持紧固件，降低掉落和偏移风险。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseCustomLabel">定制点</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseThreeCustom">将固定磁保持方式与内六角工作端组合，并按接口和空间确认结构。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseApplicationLabel">应用</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseThreeApplication">垂直、倒置或狭窄空间装配。</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="case-card flex flex-col">
+            <figure class="case-media">
+              <img class="transition duration-500 hover:scale-[1.02]" src="assets/product-catalog/images/f9287804-6cd8-4c56-9ddb-4844469f74e1.jpg" width="660" height="800" loading="lazy" decoding="async" alt="NORMECO 起子转换头产品实例" data-i18n-alt="caseFourImageAlt">
+            </figure>
+            <div class="flex flex-1 flex-col p-7 sm:p-8">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-2xl font-bold" data-i18n="caseFourTitle">起子转换头</h3>
+                <span class="shrink-0 font-mono text-xs font-bold text-red-800">04</span>
+              </div>
+              <dl class="mt-7 space-y-5 text-sm">
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseRequirementLabel">需求</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseFourRequirement">装配工具需要在起子批头与设备接口之间完成稳定转换。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseCustomLabel">定制点</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseFourCustom">按输入端、输出端、连接长度与保持方式匹配转换结构。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseApplicationLabel">应用</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseFourApplication">自动化工位、设备维护与多接口装配任务。</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="case-card flex flex-col">
+            <figure class="case-media">
+              <img class="transition duration-500 hover:scale-[1.02]" src="assets/product-catalog/images/730fe3ed-e80f-4903-a214-e298f36e4a36.jpg" width="660" height="800" loading="lazy" decoding="async" alt="NORMECO 火花塞套筒产品实例" data-i18n-alt="caseFiveImageAlt">
+            </figure>
+            <div class="flex flex-1 flex-col p-7 sm:p-8">
+              <div class="flex items-center justify-between gap-4">
+                <h3 class="text-2xl font-bold" data-i18n="caseFiveTitle">火花塞套筒</h3>
+                <span class="shrink-0 font-mono text-xs font-bold text-red-800">05</span>
+              </div>
+              <dl class="mt-7 space-y-5 text-sm">
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseRequirementLabel">需求</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseFiveRequirement">深孔位置需要匹配长度、外径与紧固件轮廓的专用套筒。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseCustomLabel">定制点</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseFiveCustom">结合工作端深度、外部空间与内部保持要求确认结构。</dd>
+                </div>
+                <div class="border-t border-red-900/15 pt-4">
+                  <dt class="font-bold text-red-900" data-i18n="caseApplicationLabel">应用</dt>
+                  <dd class="mt-2 leading-6 text-slate-600" data-i18n="caseFiveApplication">发动机、发电设备及相关维护工位。</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+        </div>
+
+        <p class="mt-5 text-xs leading-5 text-slate-500 reveal" data-i18n="casesNote">实例用于展示定制方向，不代表所有项目采用相同结构；最终方案以工程确认结果为准。</p>
       </div>
     </section>
 
@@ -868,6 +1091,41 @@
         processThreeDesc: "以样品或小批量支持装机、适配与工况验证。",
         processFourTitle: "正式交付",
         processFourDesc: "根据确认方案完成项目供货与后续配套。",
+        casesTitle: "已定制产品实例",
+        casesDesc: "以下实例展示不同接口、结构与工况下的定制方向。具体尺寸、材料与验证要求需结合项目确认。",
+        casesDragHint: "横向拖动查看更多产品",
+        casesPrevAria: "查看上一个定制产品",
+        casesNextAria: "查看下一个定制产品",
+        casesRailAria: "已定制产品实例列表",
+        caseRequirementLabel: "需求",
+        caseCustomLabel: "定制点",
+        caseApplicationLabel: "应用",
+        caseOneImageAlt: "NORMECO 定制开口套筒产品实例",
+        caseOneTitle: "定制开口套筒",
+        caseOneRequirement: "紧固件周边存在管路或结构遮挡，标准闭口套筒无法直接套入。",
+        caseOneCustom: "通过开口轮廓与专用长度设计，为侧向进入和受限空间保留操作路径。",
+        caseOneApplication: "管路连接、传感器安装与特殊装配工位。",
+        caseTwoImageAlt: "NORMECO 快速导入套筒产品实例",
+        caseTwoTitle: "快速导入套筒",
+        caseTwoRequirement: "自动化工位需要更稳定地引导套筒进入紧固件位置。",
+        caseTwoCustom: "在入口结构、导向轮廓和接口匹配上进行针对性设计。",
+        caseTwoApplication: "机器人拧紧、节拍化装配与重复定位。",
+        caseThreeImageAlt: "NORMECO 固定磁内六角套筒产品实例",
+        caseThreeTitle: "固定磁内六角套筒",
+        caseThreeRequirement: "装配过程中需要辅助保持紧固件，降低掉落和偏移风险。",
+        caseThreeCustom: "将固定磁保持方式与内六角工作端组合，并按接口和空间确认结构。",
+        caseThreeApplication: "垂直、倒置或狭窄空间装配。",
+        caseFourImageAlt: "NORMECO 起子转换头产品实例",
+        caseFourTitle: "起子转换头",
+        caseFourRequirement: "装配工具需要在起子批头与设备接口之间完成稳定转换。",
+        caseFourCustom: "按输入端、输出端、连接长度与保持方式匹配转换结构。",
+        caseFourApplication: "自动化工位、设备维护与多接口装配任务。",
+        caseFiveImageAlt: "NORMECO 火花塞套筒产品实例",
+        caseFiveTitle: "火花塞套筒",
+        caseFiveRequirement: "深孔位置需要匹配长度、外径与紧固件轮廓的专用套筒。",
+        caseFiveCustom: "结合工作端深度、外部空间与内部保持要求确认结构。",
+        caseFiveApplication: "发动机、发电设备及相关维护工位。",
+        casesNote: "实例用于展示定制方向，不代表所有项目采用相同结构；最终方案以工程确认结果为准。",
         applicationImageAlt: "NORMECO 专业装配工具应用于机器人和自动化工位",
         applicationTitle: "适用于真实产线中的特殊任务",
         applicationDesc: "服务机器人集成、自动化装配、设备厂配套、工位改造、维修替换与特殊空间作业。",
@@ -956,6 +1214,41 @@
         processThreeDesc: "Support installation, fit, and working-condition validation with samples or a small batch.",
         processFourTitle: "Formal Delivery",
         processFourDesc: "Complete project supply and follow-on support against the confirmed solution.",
+        casesTitle: "Customized Product Examples",
+        casesDesc: "These examples show customization directions for different interfaces, structures, and working conditions. Dimensions, materials, and validation requirements are confirmed for each project.",
+        casesDragHint: "Drag horizontally to view more products",
+        casesPrevAria: "View previous customized product",
+        casesNextAria: "View next customized product",
+        casesRailAria: "Customized product examples",
+        caseRequirementLabel: "Requirement",
+        caseCustomLabel: "Customization",
+        caseApplicationLabel: "Application",
+        caseOneImageAlt: "NORMECO custom open socket example",
+        caseOneTitle: "Custom Open Socket",
+        caseOneRequirement: "Pipes or surrounding structures prevent a standard closed socket from entering the fastener directly.",
+        caseOneCustom: "An open profile and purpose-built length preserve a side-entry path in confined spaces.",
+        caseOneApplication: "Pipe connections, sensor installation, and special assembly stations.",
+        caseTwoImageAlt: "NORMECO fast-entry socket example",
+        caseTwoTitle: "Fast-entry Socket",
+        caseTwoRequirement: "An automated station needs more stable guidance as the socket approaches the fastener.",
+        caseTwoCustom: "The entry geometry, guiding profile, and drive interface are designed for the application.",
+        caseTwoApplication: "Robotic tightening, cycle-based assembly, and repeated positioning.",
+        caseThreeImageAlt: "NORMECO fixed-magnet hex socket example",
+        caseThreeTitle: "Fixed-magnet Hex Socket",
+        caseThreeRequirement: "The fastener needs additional retention during assembly to reduce dropping and misalignment.",
+        caseThreeCustom: "A fixed-magnet retention method is combined with the hex working end and matched to the interface and available space.",
+        caseThreeApplication: "Vertical, inverted, or confined-space assembly.",
+        caseFourImageAlt: "NORMECO screwdriver bit adapter example",
+        caseFourTitle: "Screwdriver Bit Adapter",
+        caseFourRequirement: "The assembly tool needs a stable transition between the driver bit and the equipment interface.",
+        caseFourCustom: "The conversion structure is matched to the input, output, connection length, and retention method.",
+        caseFourApplication: "Automated stations, equipment maintenance, and multi-interface assembly.",
+        caseFiveImageAlt: "NORMECO spark plug socket example",
+        caseFiveTitle: "Spark Plug Socket",
+        caseFiveRequirement: "A deep recess requires a dedicated socket matched to the working length, outside diameter, and fastener profile.",
+        caseFiveCustom: "The structure is defined around working-end depth, available space, and internal retention requirements.",
+        caseFiveApplication: "Engines, generator equipment, and related maintenance stations.",
+        casesNote: "Examples illustrate customization directions only. Final structures are defined through project-specific engineering confirmation.",
         applicationImageAlt: "NORMECO professional assembly tools for robots and automated stations",
         applicationTitle: "For Special Tasks on Real Production Lines",
         applicationDesc: "Supporting robot integration, automated assembly, equipment OEM supply, station upgrades, replacement, and confined-space work.",
@@ -985,7 +1278,96 @@
     const currentFlag = document.getElementById("currentFlag");
     const copyBrief = document.getElementById("copyBrief");
     const copyStatus = document.getElementById("copyStatus");
+    const caseRail = document.getElementById("caseRail");
+    const casesPrev = document.getElementById("casesPrev");
+    const casesNext = document.getElementById("casesNext");
+    const casesPosition = document.getElementById("casesPosition");
+    let caseCards = Array.from(caseRail.querySelectorAll(".case-card"));
+    let customCases = [];
     let currentLanguage = localStorage.getItem("normeco-language") || "zh";
+    let dragStartX = 0;
+    let dragStartScroll = 0;
+    let isDraggingCases = false;
+    const catalogChannel = typeof BroadcastChannel === "function"
+      ? new BroadcastChannel("normeco-catalog")
+      : null;
+    const escapeHtml = (value = "") => String(value).replace(/[&<>"']/g, (character) => ({
+      "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
+    }[character]));
+
+    function renderCustomCases() {
+      if (!customCases.length) return;
+      const copy = translations[currentLanguage] || translations.zh;
+      caseRail.innerHTML = customCases.map((item, index) => {
+        const content = item[currentLanguage] || item.zh || item.en || {};
+        const title = content.title || (currentLanguage === "en" ? "Untitled Custom Example" : "未命名定制实例");
+        return `<article class="case-card flex flex-col">
+          <figure class="case-media">
+            <img class="transition duration-500 hover:scale-[1.02]" src="${escapeHtml(item.image)}" width="660" height="800" loading="lazy" decoding="async" alt="${escapeHtml(`NORMECO ${title}`)}">
+          </figure>
+          <div class="flex flex-1 flex-col p-7 sm:p-8">
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="text-2xl font-bold">${escapeHtml(title)}</h3>
+              <span class="shrink-0 font-mono text-xs font-bold text-red-800">${String(index + 1).padStart(2, "0")}</span>
+            </div>
+            <dl class="mt-7 space-y-5 text-sm">
+              <div class="border-t border-red-900/15 pt-4">
+                <dt class="font-bold text-red-900">${escapeHtml(copy.caseRequirementLabel)}</dt>
+                <dd class="mt-2 leading-6 text-slate-600">${escapeHtml(content.requirement || "—")}</dd>
+              </div>
+              <div class="border-t border-red-900/15 pt-4">
+                <dt class="font-bold text-red-900">${escapeHtml(copy.caseCustomLabel)}</dt>
+                <dd class="mt-2 leading-6 text-slate-600">${escapeHtml(content.customization || "—")}</dd>
+              </div>
+              <div class="border-t border-red-900/15 pt-4">
+                <dt class="font-bold text-red-900">${escapeHtml(copy.caseApplicationLabel)}</dt>
+                <dd class="mt-2 leading-6 text-slate-600">${escapeHtml(content.application || "—")}</dd>
+              </div>
+            </dl>
+          </div>
+        </article>`;
+      }).join("");
+      caseCards = Array.from(caseRail.querySelectorAll(".case-card"));
+      caseRail.scrollLeft = 0;
+      updateCaseControls();
+    }
+
+    async function loadCustomCases() {
+      try {
+        let response = await fetch("/api/catalog", { cache: "no-store" });
+        if (!response.ok) response = await fetch("assets/custom-cases.json", { cache: "no-store" });
+        if (!response.ok) throw new Error("定制实例数据加载失败");
+        const payload = await response.json();
+        const items = Array.isArray(payload.customCases) ? payload.customCases : [];
+        customCases = items.filter((item) => item && item.status !== "草稿" && item.status !== "已隐藏");
+        if (customCases.length) renderCustomCases();
+      } catch (error) {
+        console.warn("使用页面内置的定制实例。", error);
+      }
+    }
+
+    function caseStep() {
+      const firstCard = caseCards[0];
+      if (!firstCard) return caseRail.clientWidth;
+      const gap = parseFloat(getComputedStyle(caseRail).columnGap) || 0;
+      return firstCard.getBoundingClientRect().width + gap;
+    }
+
+    function updateCaseControls() {
+      const maxScroll = Math.max(0, caseRail.scrollWidth - caseRail.clientWidth);
+      const current = Math.min(caseCards.length, Math.round(caseRail.scrollLeft / caseStep()) + 1);
+      casesPosition.textContent = `${current} / ${caseCards.length}`;
+      casesPrev.disabled = caseRail.scrollLeft <= 2;
+      casesNext.disabled = caseRail.scrollLeft >= maxScroll - 2;
+    }
+
+    function scrollCases(direction) {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      caseRail.scrollBy({
+        left: caseStep() * direction,
+        behavior: reduceMotion ? "auto" : "smooth"
+      });
+    }
 
     function setLanguage(language) {
       const copy = translations[language] || translations.zh;
@@ -1018,9 +1400,51 @@
         option.setAttribute("aria-current", String(option.dataset.language === language));
       });
 
+      if (customCases.length) renderCustomCases();
       localStorage.setItem("normeco-language", language);
       copyStatus.textContent = "";
     }
+
+    casesPrev.addEventListener("click", () => scrollCases(-1));
+    casesNext.addEventListener("click", () => scrollCases(1));
+
+    caseRail.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        scrollCases(-1);
+      }
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        scrollCases(1);
+      }
+    });
+
+    caseRail.addEventListener("pointerdown", (event) => {
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      isDraggingCases = true;
+      dragStartX = event.clientX;
+      dragStartScroll = caseRail.scrollLeft;
+      caseRail.classList.add("is-dragging");
+      caseRail.setPointerCapture(event.pointerId);
+    });
+
+    caseRail.addEventListener("pointermove", (event) => {
+      if (!isDraggingCases) return;
+      event.preventDefault();
+      caseRail.scrollLeft = dragStartScroll - (event.clientX - dragStartX);
+    });
+
+    function finishCaseDrag(event) {
+      if (!isDraggingCases) return;
+      isDraggingCases = false;
+      caseRail.classList.remove("is-dragging");
+      if (caseRail.hasPointerCapture(event.pointerId)) caseRail.releasePointerCapture(event.pointerId);
+    }
+
+    caseRail.addEventListener("pointerup", finishCaseDrag);
+    caseRail.addEventListener("pointercancel", finishCaseDrag);
+    caseRail.addEventListener("scroll", () => requestAnimationFrame(updateCaseControls), { passive: true });
+    window.addEventListener("resize", updateCaseControls);
 
     languageTrigger.addEventListener("click", (event) => {
       const expanded = event.currentTarget.getAttribute("aria-expanded") === "true";
@@ -1083,6 +1507,11 @@
 
     document.querySelectorAll(".reveal").forEach((element) => revealObserver.observe(element));
     setLanguage(currentLanguage);
+    updateCaseControls();
+    loadCustomCases();
+    catalogChannel?.addEventListener("message", (event) => {
+      if (event.data?.type === "catalog-updated") loadCustomCases();
+    });
   </script>
 </body>
 </html>

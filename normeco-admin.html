@@ -49,6 +49,9 @@
         <button class="nav-item active" data-view="products">
           <svg><use href="#i-products"/></svg><span>产品管理</span>
         </button>
+        <button class="nav-item" data-view="cases">
+          <svg><use href="#i-edit"/></svg><span>定制实例</span>
+        </button>
         <button class="nav-item" data-view="categories">
           <svg><use href="#i-tree"/></svg><span>分类管理</span>
         </button>
@@ -206,6 +209,84 @@
           <section class="context-panel preview-card">
             <div class="panel-heading"><h3>页面预览</h3></div>
             <div id="miniPreview"></div>
+          </section>
+        </aside>
+      </div>
+
+      <div id="casesView" class="view-shell custom-case-workspace" hidden>
+        <aside class="product-sidebar custom-case-sidebar">
+          <div class="case-sidebar-heading">
+            <strong>已定制产品实例</strong>
+            <span id="customCaseCount"></span>
+          </div>
+          <div id="customCaseList" class="product-list"></div>
+          <button id="addCustomCaseButton" class="button dashed full-width">
+            <svg><use href="#i-plus"/></svg>新增实例
+          </button>
+        </aside>
+
+        <section class="editor-pane">
+          <div class="editor-heading">
+            <div>
+              <p class="editor-path">定制服务 › 已定制产品实例</p>
+              <h2 id="customCaseEditorTitle">实例编辑</h2>
+            </div>
+            <div class="editor-actions">
+              <button id="moveCustomCaseUpButton" class="button secondary">上移</button>
+              <button id="moveCustomCaseDownButton" class="button secondary">下移</button>
+              <button id="saveCustomCaseButton" class="button primary">保存更改</button>
+              <button id="deleteCustomCaseButton" class="button danger-outline">
+                <svg><use href="#i-trash"/></svg>删除实例
+              </button>
+            </div>
+          </div>
+
+          <div class="custom-case-grid">
+            <form id="customCaseForm" class="details-form custom-case-form">
+              <div class="form-row">
+                <label>中文标题<input id="customCaseTitleZh" data-case-language="zh" data-case-field="title"></label>
+                <label>英文标题<input id="customCaseTitleEn" data-case-language="en" data-case-field="title"></label>
+              </div>
+              <label>发布状态
+                <select id="customCaseStatus" data-case-root-field="status">
+                  <option value="已发布">已发布</option>
+                  <option value="草稿">草稿</option>
+                  <option value="已隐藏">已隐藏</option>
+                </select>
+              </label>
+              <div class="case-language-block">
+                <h3>中文内容</h3>
+                <label>需求<textarea id="customCaseRequirementZh" rows="3" data-case-language="zh" data-case-field="requirement"></textarea></label>
+                <label>定制点<textarea id="customCaseCustomizationZh" rows="3" data-case-language="zh" data-case-field="customization"></textarea></label>
+                <label>应用<textarea id="customCaseApplicationZh" rows="3" data-case-language="zh" data-case-field="application"></textarea></label>
+              </div>
+              <div class="case-language-block">
+                <h3>English content</h3>
+                <label>Requirement<textarea id="customCaseRequirementEn" rows="3" data-case-language="en" data-case-field="requirement"></textarea></label>
+                <label>Customization<textarea id="customCaseCustomizationEn" rows="3" data-case-language="en" data-case-field="customization"></textarea></label>
+                <label>Application<textarea id="customCaseApplicationEn" rows="3" data-case-language="en" data-case-field="application"></textarea></label>
+              </div>
+            </form>
+
+            <section class="image-editor">
+              <h3>实例图片</h3>
+              <div class="image-stage custom-case-image-stage">
+                <img id="customCaseImagePreview" alt="当前定制实例图片">
+              </div>
+              <label class="upload-box" for="customCaseImageInput">
+                <svg><use href="#i-upload"/></svg>
+                <strong>点击选择并替换图片</strong>
+                <span>支持 JPG / PNG / WebP，单张不超过 5MB</span>
+              </label>
+              <input id="customCaseImageInput" type="file" accept="image/jpeg,image/png,image/webp" hidden>
+            </section>
+          </div>
+        </section>
+
+        <aside class="context-sidebar">
+          <section class="context-panel preview-card">
+            <div class="panel-heading"><h3>实例卡片预览</h3><span>中文</span></div>
+            <div id="customCasePreview"></div>
           </section>
         </aside>
       </div>
