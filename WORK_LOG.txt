@@ -34,6 +34,11 @@ NORMECO 网站工作日志
 - 扩展 NORMECO 后台管理页，新增“定制实例”管理视图，支持案例新增、编辑、排序、删除、图片替换、发布状态和中英文内容维护。
 - 更新 server.mjs 与 scripts/build-admin-catalog.mjs，让后台目录校验和公开 API 同时支持已发布的定制案例。
 
+2026-07-31
+- 将定制服务页新设计分支 codex/custom-case-admin-editor 合并进 main，准备作为当前 GitHub 主线版本发布。
+- 合并内容包含 custom.html 新定制服务页、已定制产品实例展示、后台定制实例编辑器、定制案例数据源和公开 API 支持。
+- 确认 main 分支包含 2026-07-29 的定制服务页设计与后台管理更新。
+
 后续建议
 - 补齐导航中 solutions.html、about.html、contact.html 等页面，避免导航链接指向未创建页面。
 - 根据真实联系方式、公司地址和社媒链接替换页面中的占位内容。
