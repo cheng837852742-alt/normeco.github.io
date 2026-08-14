@@ -39,7 +39,25 @@ NORMECO 网站工作日志
 - 合并内容包含 custom.html 新定制服务页、已定制产品实例展示、后台定制实例编辑器、定制案例数据源和公开 API 支持。
 - 确认 main 分支包含 2026-07-29 的定制服务页设计与后台管理更新。
 
+2026-08-14
+- 新增正式页面 about.html：介绍 NORMECO 品牌沿革、制造流程、核心数据、产品与自动化能力、服务行业、标准品交付与非标定制流程，支持中英文切换和移动端导航。
+- 新增正式页面 contact.html：按东南亚、中国、欧洲展示区域销售支持，加入东南亚邮箱、NORMECO Facebook、中国官网、Messenger 和快捷询价信息整理功能；未获准公开的电话、地址和邮箱不展示。
+- 更新 index.html、products.html、custom.html 的桌面端与移动端导航，将“关于我们”从首页锚点统一指向 about.html。
+- 更新首页页脚：使用已确认的中国区联系说明、NORMECO 东南亚 Facebook、Impact Socket Facebook 和联系页面入口，移除原社媒及地址占位文本。
+- 更新 sitemap.xml，将 about.html 与 contact.html 纳入正式站点索引，lastmod 为 2026-08-14。
+- 新增正式图片 assets/about-industries.png，供关于页行业应用板块使用。
+- 发布前 QA：在本地 http://127.0.0.1:4173 分别检查 About 与 Contact；桌面端和 390×844 移动端均可渲染，主导航、移动菜单、中英文切换、区域选择和懒加载图片工作正常，浏览器无相关 warning/error，页面无横向溢出。
+
+Codex 接续检查点（2026-08-14）
+- 仓库：cheng837852742-alt/normeco.github.io；远端 origin；默认分支 main。
+- 本次正式发布分支：agent/publish-about-contact-20260814；提交说明使用“Publish about and contact pages”。如 main 尚未合并该分支，先在 GitHub 查看对应 PR，再从该分支继续；如 PR 已合并，直接更新 main。
+- 本次正式范围仅包括：WORK_LOG.txt、about.html、contact.html、index.html、products.html、custom.html、sitemap.xml、assets/about-industries.png。
+- 本次明确排除且不得误提交：outputs/、spreadsheet-work/、tmp/、tools/、assets/about-concepts/、assets/about-manufacturing.png。这些是销售表格产物、检查文件、PDF/截图临时文件、辅助脚本或未采用的 About 概念素材，不属于当前网站发布包；不要删除，除非用户另行确认。
+- 已知未完成项：导航中的 solutions.html 仍未创建；欧洲区域暂未公布独立邮箱/电话，Contact 页当前引导至 Impact Socket Messenger；后续补充真实联系方式时必须先由用户确认可公开字段。
+- 页面实现注意：About/Contact 为独立 HTML/CSS/JS 页面；语言偏好存放在 localStorage 的 normeco-language；About 的滚动显现使用 IntersectionObserver；Contact 的询价表单只在浏览器端整理并复制信息，不保存到服务器。
+- 新电脑接续顺序：执行 git fetch origin；若 PR 未合并则 git switch agent/publish-about-contact-20260814 && git pull --ff-only，若已合并则 git switch main && git pull --ff-only；阅读本检查点；执行 git status -sb，确保没有把上述排除目录混入；启动 node server.mjs 后复查 about.html 与 contact.html。
+
 后续建议
-- 补齐导航中 solutions.html、about.html、contact.html 等页面，避免导航链接指向未创建页面。
+- 补齐导航中的 solutions.html，避免“产线方案”链接指向未创建页面。
 - 根据真实联系方式、公司地址和社媒链接替换页面中的占位内容。
 - 上线后检查 GitHub Pages 对大体积产品图片、WASM 和中文文件名资源的加载表现。
