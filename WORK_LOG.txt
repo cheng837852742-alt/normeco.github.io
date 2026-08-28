@@ -73,6 +73,7 @@ Codex 接续检查点（2026-08-14）
 - 更新 llms.txt，将产线方案页加入核心页面列表。
 - 新增 assets/solutions/README.md，作为另一台电脑上传产线图片、视频、规格参数、CAD 和案例资料的统一清单与目录规范。
 - 本地检查：solutions.js 通过 Node.js 语法检查；页面、CSS、JavaScript 均可由本地 server.mjs 正常返回；页面中已确认不存在上述被删除区块及失效的旧锚点。
+- 页面发布提交：24b890c（feat: publish line solutions page and handoff log），已推送到 origin/main；另一台电脑应以该提交或其后的 main 为接续基准。
 
 Codex 接续检查点（2026-08-28，覆盖此前与 solutions.html 有关的未完成说明）
 - 仓库：cheng837852742-alt/normeco.github.io；远端 origin；默认分支 main。
