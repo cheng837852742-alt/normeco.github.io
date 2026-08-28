@@ -61,3 +61,33 @@ Codex 接续检查点（2026-08-14）
 - 补齐导航中的 solutions.html，避免“产线方案”链接指向未创建页面。
 - 根据真实联系方式、公司地址和社媒链接替换页面中的占位内容。
 - 上线后检查 GitHub Pages 对大体积产品图片、WASM 和中文文件名资源的加载表现。
+
+2026-08-28
+- 新增正式页面 solutions.html，并配套 solutions.css、solutions.js，解决原导航“产线方案”链接指向空白页面的问题。
+- 页面定位为柔性机器人拧紧产线方案，核心产品为：自动切换多工位套筒、工业机器人、拧紧轴。
+- 页面沿用现有 NORMECO 红白设计体系、顶部导航、移动端菜单和中英文切换，不生成或引入新的产品图片/视频，当前全部使用工程框线占位。
+- 根据用户复核意见完成第二轮精简，当前页面仅保留：首屏方案概览、3 项生产难点、3 类核心产品、3 个典型应用场景、简短联系入口和页脚。
+- 已删除页面索引，以及以下四个长区块：“先表达可验证价值，不预设虚假数字”“从工况分析到现场验收”“六步完成一次自动拧紧循环”“三大核心产品，组成一套柔性拧紧系统”。
+- 产品说明、应用场景文案、占位高度和区块间距已压缩；页面不含询盘表单。
+- 更新 sitemap.xml，将 solutions.html 纳入站点地图，lastmod 更新为 2026-08-28。
+- 更新 llms.txt，将产线方案页加入核心页面列表。
+- 新增 assets/solutions/README.md，作为另一台电脑上传产线图片、视频、规格参数、CAD 和案例资料的统一清单与目录规范。
+- 本地检查：solutions.js 通过 Node.js 语法检查；页面、CSS、JavaScript 均可由本地 server.mjs 正常返回；页面中已确认不存在上述被删除区块及失效的旧锚点。
+
+Codex 接续检查点（2026-08-28，覆盖此前与 solutions.html 有关的未完成说明）
+- 仓库：cheng837852742-alt/normeco.github.io；远端 origin；默认分支 main。
+- 当前产线方案实现文件：solutions.html、solutions.css、solutions.js。
+- 当前页面结构顺序：Hero 方案概览 → 3 项关键难点 → 3 类核心产品 → 3 个应用场景 → 简短联系入口 → 页脚。
+- Hero 右侧、3 个产品区和 3 个场景区仍为框线占位；不要在没有用户真实资料的情况下编造产品照片、视频、客户案例、节拍、精度、扭矩范围或效率数据。
+- 待用户在另一台电脑上传的资料及命名规则见 assets/solutions/README.md。优先级最高的是：整线主视觉、自动换套筒图片/视频与参数、机器人图片/型号参数、拧紧轴图片/型号参数、3 个应用场景素材。
+- 推荐将新增素材放入 assets/solutions/ 下的 hero、socket-changer、robot、spindle、applications、documents 子目录；网页成品使用的文件名应为英文小写短横线格式。
+- GitHub 单文件不得超过 100 MB。网页视频建议使用 H.264 MP4、单个不超过 50 MB；高清原片和敏感 CAD 不要直接提交，除非用户明确确认公开范围或启用 Git LFS。
+- 客户现场图、客户 Logo、项目参数、CAD、控制界面截图在提交前必须确认公开授权；未授权客户信息需要匿名化或遮盖。
+- 本次明确排除且不得误提交：outputs/、spreadsheet-work/、tmp/、tools/、assets/about-concepts/、assets/about-manufacturing.png。这些仍是本地辅助或未采用素材，不要删除，也不要加入产线方案提交。
+- 另一台电脑接续步骤：git switch main；git pull --ff-only origin main；阅读 WORK_LOG.txt 本检查点和 assets/solutions/README.md；执行 git status -sb；按 README 上传资料；启动 node server.mjs；打开 http://127.0.0.1:4173/solutions.html；先替换占位素材，再根据真实参数更新中英文文案。
+- 素材接入时应保持当前信息架构和红白设计体系；如真实素材无法适应当前比例，可以调整单个媒体框，但不要重新加入本轮已删除的四个长区块，除非用户明确要求。
+- 本检查点发布后，旧日志中的“solutions.html 仍未创建”和“补齐 solutions.html”均视为已解决。
+
+下一步待处理
+- 等待用户从另一台电脑上传产线相关图片、视频、规格参数、CAD/布局图及可公开案例资料。
+- 收到资料后，先做资料清点与公开范围确认，再建立正式 Web 图片/视频版本，替换占位框并复核桌面端、移动端和中英文内容。

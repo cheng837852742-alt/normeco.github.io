@@ -7,6 +7,7 @@ NORMECO 是总部位于中国重庆、服务全球的专业装配工具品牌，
 - 首页：https://www.normeco.com/
 - 产品中心：https://www.normeco.com/products.html
 - 定制服务：https://www.normeco.com/custom.html
+- 产线方案：https://www.normeco.com/solutions.html
 
 ## 核心产品
 
