@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.normeco.com/sitemap.xml
+Sitemap: https://cheng837852742-alt.github.io/normeco.github.io/sitemap.xml

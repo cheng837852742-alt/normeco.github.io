@@ -92,3 +92,11 @@ Codex 接续检查点（2026-08-28，覆盖此前与 solutions.html 有关的未
 下一步待处理
 - 等待用户从另一台电脑上传产线相关图片、视频、规格参数、CAD/布局图及可公开案例资料。
 - 收到资料后，先做资料清点与公开范围确认，再建立正式 Web 图片/视频版本，替换占位框并复核桌面端、移动端和中英文内容。
+
+2026-09-01
+- 确认与本项目无关的外部 `.com` 域名不得继续作为 NORMECO 网站域名、canonical、分享地址或结构化数据地址。
+- 清理 index.html、products.html、custom.html、contact.html、about.html、solutions.html 中的相关 canonical、Open Graph 和 JSON-LD 引用。
+- 同步更新 sitemap.xml、robots.txt 和 llms.txt，暂时统一指向当前项目的 GitHub Pages 默认地址 `https://cheng837852742-alt.github.io/normeco.github.io/`。
+- 保留与本项目有关的 `normeco.com.cn` 内容，未对其页面链接、PDF OCR 记录或中国官网引用做修改。
+- 完成精确全项目扫描：当前工作树中已无该无关域名引用；sitemap.xml 通过 XML 解析，Git 差异格式检查通过。
+- 如后续确认正式公司域名，需将上述 GitHub Pages 默认地址在全站 SEO 文件中统一替换，并配置 Pages Custom domain、DNS 和 Enforce HTTPS。
