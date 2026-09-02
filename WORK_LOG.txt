@@ -100,3 +100,14 @@ Codex 接续检查点（2026-08-28，覆盖此前与 solutions.html 有关的未
 - 保留与本项目有关的 `normeco.com.cn` 内容，未对其页面链接、PDF OCR 记录或中国官网引用做修改。
 - 完成精确全项目扫描：当前工作树中已无该无关域名引用；sitemap.xml 通过 XML 解析，Git 差异格式检查通过。
 - 如后续确认正式公司域名，需将上述 GitHub Pages 默认地址在全站 SEO 文件中统一替换，并配置 Pages Custom domain、DNS 和 Enforce HTTPS。
+
+2026-09-02
+- 将用户上传至 assets 根目录的 4 张图片与 2 段 MP4 视频接入 solutions.html；本次未改动已确认的页面结构，也未恢复此前删除的长区块。
+- Hero 右侧替换为“机器人 + 自动换套筒”12 秒全流程实机视频，并加入机器人、自动切换套筒和拧紧轴三类组件图组成的媒体板。
+- “自动切换多工位套筒”产品栏加入 19 秒单套筒切换视频，以及“自切换套筒图片.png”“自切换套筒图片（加绝缘套筒）.jpg”两张实拍图。
+- “工业机器人”产品栏接入“机器人.png”；“拧紧轴”产品栏接入“拧紧枪.png”。现有产品说明保留，新增素材标题和说明已补齐中英文切换。
+- 针对全部竖幅素材调整媒体框：视频使用完整画面显示，实拍图使用受控裁切，机器人与拧紧轴产品图使用等比 contain，移动端改为视频在上、双图并列。
+- 更新 server.mjs 的静态文件类型映射，为 .mp4 返回标准 video/mp4，避免本地预览被识别为通用二进制文件。
+- 本地 QA：solutions.js 通过 Node 语法检查，git diff --check 通过；4 张图片自然尺寸加载成功；两段视频均识别为 720×1280、30fps，时长约 12.91 秒与 19.16 秒并可播放；1440px 布局与 319px 窄屏均无横向溢出；应用场景标签和中英文切换正常；浏览器无 warning/error。
+- 当前仍待补：三个应用场景真实项目素材；机器人型号、负载/臂展；拧紧轴型号、扭矩范围和曲线界面；自动换套筒规格参数。不得用推测值替代真实资料。
+- 本次 GitHub 发布范围只纳入 solutions.html、solutions.css、solutions.js、server.mjs、WORK_LOG.txt 与上述 6 个新素材，继续排除 outputs/、spreadsheet-work/、tmp/、tools/、assets/about-concepts/、assets/about-manufacturing.png。

@@ -67,19 +67,22 @@
           </dl>
         </div>
 
-        <div class="hero-frame reveal" aria-label="产线主视觉占位" data-i18n-aria-label="heroFrameAria">
-          <div class="frame-bar"><span data-i18n="heroFrameLabel">主视觉占位 · 自动化拧紧单元</span><span>16:10</span></div>
-          <div class="blueprint hero-blueprint">
-            <span class="dimension dimension-top">2800 mm</span>
-            <span class="dimension dimension-side" data-i18n="workingRadius">工作半径</span>
-            <div class="machine socket-rack"><span data-i18n="socketStationShort">多工位套筒站</span><i></i><i></i><i></i><i></i></div>
-            <div class="machine robot-outline" aria-hidden="true"><i class="robot-base"></i><i class="robot-arm arm-a"></i><i class="robot-joint joint-a"></i><i class="robot-arm arm-b"></i><i class="robot-joint joint-b"></i></div>
-            <div class="machine spindle-outline"><span data-i18n="spindleShort">拧紧轴</span></div>
-            <div class="machine fixture-outline"><span data-i18n="fixtureShort">工件 / 工装</span></div>
-            <div class="motion-path" aria-hidden="true"></div>
-            <div class="floor-line" aria-hidden="true"></div>
+        <div class="hero-frame reveal" aria-label="自动换套筒机器人全流程演示" data-i18n-aria-label="heroFrameAria">
+          <div class="frame-bar"><span data-i18n="heroFrameLabel">实机演示 · 自动换套筒与机器人协同</span><span>00:12</span></div>
+          <div class="hero-media-board">
+            <div class="hero-video-shell">
+              <video controls autoplay muted loop playsinline preload="metadata" poster="assets/自切换套筒图片（加绝缘套筒）.jpg" aria-label="自动换套筒与机器人协同全流程视频" data-i18n-aria-label="fullProcessVideoAria">
+                <source src="assets/自切换演示视频全流程（+机器人）.mp4" type="video/mp4">
+                <span data-i18n="videoFallback">您的浏览器暂不支持视频播放。</span>
+              </video>
+            </div>
+            <div class="hero-component-board" aria-label="柔性拧紧单元组成" data-i18n-aria-label="componentBoardAria">
+              <figure class="hero-component hero-robot"><img src="assets/机器人.png" alt="工业机器人产品图"><figcaption data-i18n="robotTitle">工业机器人</figcaption></figure>
+              <figure class="hero-component hero-socket"><img src="assets/自切换套筒图片（加绝缘套筒）.jpg" alt="自动切换多工位套筒实拍图"><figcaption data-i18n="socketTitle">自动切换多工位套筒</figcaption></figure>
+              <figure class="hero-component hero-spindle"><img src="assets/拧紧枪.png" alt="拧紧轴产品图"><figcaption data-i18n="spindleTitle">拧紧轴</figcaption></figure>
+            </div>
           </div>
-          <p class="frame-caption" data-i18n="heroFrameCaption">后续替换：真实产线渲染、现场照片或运行视频。当前阶段仅确认画面比例、设备关系和信息层级。</p>
+          <p class="frame-caption" data-i18n="heroFrameCaption">真实设备演示：机器人取放套筒并完成自动切换。</p>
         </div>
       </div>
     </section>
@@ -102,32 +105,41 @@
       <div class="wrap">
         <div class="section-heading reveal">
           <div><p class="eyebrow">Core products</p><h2 id="productsTitle" data-i18n="productsTitle">三类核心产品</h2></div>
-          <p data-i18n="productsLead">先明确设备职责，后续补充真实产品图和参数。</p>
+          <p data-i18n="productsLead">已接入产品实拍与演示视频，具体型号和参数待资料确认后补充。</p>
         </div>
 
         <article class="product-row reveal">
-          <div class="product-placeholder socket-placeholder">
-            <div class="placeholder-bar"><span>01</span><span data-i18n="productImagePlaceholder">产品视觉占位</span></div>
-            <div class="rack-wireframe" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-            <p data-i18n="socketMediaNote">建议素材：套筒站整体图 + 机器人取放动作</p>
+          <div class="product-placeholder real-product-media socket-media">
+            <div class="placeholder-bar"><span>01</span><span data-i18n="socketMediaLabel">实拍与单机演示</span></div>
+            <div class="socket-media-grid">
+              <div class="socket-demo-video">
+                <video controls muted playsinline preload="metadata" poster="assets/自切换套筒图片.png" aria-label="单套筒自动切换展示视频" data-i18n-aria-label="socketVideoAria">
+                  <source src="assets/自切换套筒展示视频（单套筒无机器人）.mp4" type="video/mp4">
+                  <span data-i18n="videoFallback">您的浏览器暂不支持视频播放。</span>
+                </video>
+                <span class="media-tag" data-i18n="singleUnitDemo">单套筒切换演示</span>
+              </div>
+              <figure><img src="assets/自切换套筒图片.png" alt="三工位自动切换套筒机构实拍"><figcaption data-i18n="socketDetailPhoto">切换机构细节</figcaption></figure>
+              <figure><img src="assets/自切换套筒图片（加绝缘套筒）.jpg" alt="带绝缘套筒的多工位自动切换套筒站实拍"><figcaption data-i18n="socketAssemblyPhoto">多工位套筒站</figcaption></figure>
+            </div>
           </div>
           <div class="product-copy"><p class="product-number">01 / DIFFERENTIATOR</p><h3 data-i18n="socketTitle">自动切换多工位套筒</h3><p data-i18n="socketDescription">集中管理多种套筒，由机器人自动取放并确认到位。</p><ul><li data-i18n="socketPointOne">多规格集中管理</li><li data-i18n="socketPointTwo">自动取放与防错</li><li data-i18n="socketPointThree">工位可按项目扩展</li></ul></div>
         </article>
 
         <article class="product-row reverse reveal">
-          <div class="product-placeholder robot-placeholder">
-            <div class="placeholder-bar"><span>02</span><span data-i18n="productImagePlaceholder">产品视觉占位</span></div>
-            <div class="robot-wireframe" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-            <p data-i18n="robotMediaNote">建议素材：机器人本体图 + 工作半径示意</p>
+          <div class="product-placeholder real-product-media product-image-media robot-media">
+            <div class="placeholder-bar"><span>02</span><span data-i18n="productPhotoLabel">产品图</span></div>
+            <div class="product-image-stage"><img src="assets/机器人.png" alt="工业机器人产品图"></div>
+            <p data-i18n="robotMediaNote">工业机器人本体；型号与工作半径参数待补充。</p>
           </div>
           <div class="product-copy"><p class="product-number">02 / MOTION</p><h3 data-i18n="robotTitle">工业机器人</h3><p data-i18n="robotDescription">按工件、点位、负载和节拍选型，覆盖多个位置与角度。</p><ul><li data-i18n="robotPointOne">多位置、多角度作业</li><li data-i18n="robotPointTwo">程序化产品换型</li><li data-i18n="robotPointThree">按臂展与负载选型</li></ul></div>
         </article>
 
         <article class="product-row reveal">
-          <div class="product-placeholder spindle-placeholder">
-            <div class="placeholder-bar"><span>03</span><span data-i18n="productImagePlaceholder">产品视觉占位</span></div>
-            <div class="spindle-wireframe" aria-hidden="true"><i></i><i></i><i></i></div>
-            <p data-i18n="spindleMediaNote">建议素材：拧紧轴产品图 + 拧紧曲线界面</p>
+          <div class="product-placeholder real-product-media product-image-media spindle-media">
+            <div class="placeholder-bar"><span>03</span><span data-i18n="productPhotoLabel">产品图</span></div>
+            <div class="product-image-stage"><img src="assets/拧紧枪.png" alt="拧紧轴产品图"></div>
+            <p data-i18n="spindleMediaNote">拧紧轴本体；型号、扭矩范围与曲线界面待补充。</p>
           </div>
           <div class="product-copy"><p class="product-number">03 / PROCESS</p><h3 data-i18n="spindleTitle">拧紧轴</h3><p data-i18n="spindleDescription">执行拧紧程序，并向控制系统反馈结果。</p><ul><li data-i18n="spindlePointOne">扭矩与角度控制</li><li data-i18n="spindlePointTwo">多段拧紧程序</li><li data-i18n="spindlePointThree">结果判断与异常反馈</li></ul></div>
         </article>
