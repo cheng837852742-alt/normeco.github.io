@@ -1,6 +1,8 @@
 # NORMECO 产线方案素材交接说明
 
-本目录用于另一台电脑上传 `solutions.html` 所需的正式图片、视频、规格参数、CAD/布局图和项目案例。上传前请阅读根目录 `WORK_LOG.txt` 中的“Codex 接续检查点（2026-08-28）”。
+本目录用于另一台电脑上传 `solutions.html` 所需的正式图片、视频、规格参数、CAD/布局图和项目案例。上传前请先阅读根目录 `WORK_LOG.txt` 最新检查点。
+
+2026-09-04 更新：用户已要求删除“典型应用场景”板块，该板块及首屏入口已移除，三个场景素材不再属于当前必需资料；未经用户明确要求，不要恢复该板块。
 
 ## 建议目录
 
@@ -10,7 +12,6 @@ assets/solutions/
 ├─ socket-changer/     自动切换多工位套筒
 ├─ robot/              工业机器人
 ├─ spindle/            拧紧轴及控制器
-├─ applications/       三个典型应用场景
 └─ documents/          参数表、布局图、公开版 CAD/PDF
 ```
 
@@ -22,7 +23,6 @@ socket-changer/socket-changer-front.webp
 socket-changer/socket-change-demo.mp4
 robot/robot-working-envelope.webp
 spindle/tightening-spindle-front.webp
-applications/mixed-model-line.webp
 documents/socket-changer-specification.xlsx
 ```
 
@@ -50,13 +50,6 @@ documents/socket-changer-specification.xlsx
 - 轴体、控制器、接口、机器人安装状态及可公开的拧紧曲线界面。
 - 参数：品牌、型号、扭矩范围、转速、扭矩/角度精度、输出接口、拧紧策略、控制器、通讯协议、数据记录能力、尺寸、重量和防护等级。
 
-### 5. 三个应用场景
-
-- 多型号混线生产：不同产品共线或型号切换照片。
-- 多规格螺栓装配：同一工件不同规格紧固件及自动换套筒照片。
-- 大型结构件拧紧：大型工件、分散点位或复杂角度照片。
-- 每个场景至少 1 张横向图片，并附 2–4 句真实项目说明。
-
 ## 第二优先级：增强资料
 
 - 公开版 STEP/STP、DWG/DXF、PDF 布局图或安装尺寸图。
@@ -78,6 +71,6 @@ documents/socket-changer-specification.xlsx
 2. 汇总文件、尺寸、格式、缺失参数和公开风险。
 3. 在 `WORK_LOG.txt` 追加上传日期、文件清单和仍缺资料。
 4. 将原始素材转换为网页版本，保留原文件，不覆盖用户资料。
-5. 替换 `solutions.html` 中的 Hero、产品和场景占位框。
+5. 按现有结构补充 `solutions.html` 的 Hero 与产品素材；不要恢复已删除的应用场景板块。
 6. 更新中英文产品文案，只使用已确认参数。
 7. 本地验证桌面端、移动端、中英文、视频加载和交互后再提交。

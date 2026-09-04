@@ -112,3 +112,12 @@ Codex 接续检查点（2026-08-28，覆盖此前与 solutions.html 有关的未
 - 当前仍待补：三个应用场景真实项目素材；机器人型号、负载/臂展；拧紧轴型号、扭矩范围和曲线界面；自动换套筒规格参数。不得用推测值替代真实资料。
 - 本次 GitHub 发布范围只纳入 solutions.html、solutions.css、solutions.js、server.mjs、WORK_LOG.txt 与上述 6 个新素材，继续排除 outputs/、spreadsheet-work/、tmp/、tools/、assets/about-concepts/、assets/about-manufacturing.png。
 - 页面与素材发布提交：b2b8b70（feat: add tightening line media），已推送到 origin/main；另一台电脑应先更新 main，并以该提交或其后的日志提交作为接续基准。
+
+2026-09-04
+- 按用户要求删除 solutions.html 的“典型应用场景”整个板块，包含三个场景标签、说明和占位框；同步删除首屏“查看应用场景”按钮，避免遗留失效锚点。
+- 清理 solutions.css 的场景专用样式与移动端规则，以及 solutions.js 中对应的中英文翻译、旧索引字段和场景切换事件。
+- 当前结构：Hero 方案概览 → 3 项关键难点 → 3 类核心产品 → 简短联系入口 → 页脚。原有 4 张图片、2 段视频和产品内容均保留，没有删除素材文件。
+- 更新 assets/solutions/README.md：三个应用场景素材不再属于当前必需资料；本条覆盖旧日志中的场景素材待办，未经用户明确要求，不要恢复已删除板块。后续重点仍为三类产品的真实型号与规格参数。
+- 验证：Node 语法检查和 git diff --check 通过；本地 http://127.0.0.1:4173/solutions.html 在 Chrome/Playwright 的 1440×900 与 390×844 下无横向溢出，核心产品区直接衔接联系入口；产品锚点、中英文切换、移动菜单正常，图片和视频元数据加载成功。
+- 浏览器检查方式：当前会话未提供 Browser 技能（Browser plugin not available），使用已有 Playwright 与本机 Chrome。无页面脚本错误或框架报错；仅发现原有 /favicon.ico 返回 404，与本次删除无关，未扩大修改范围。
+- 发布范围：solutions.html、solutions.css、solutions.js、assets/solutions/README.md、WORK_LOG.txt；检查脚本和截图保存在系统临时目录，未加入仓库，原有排除目录保持不变。

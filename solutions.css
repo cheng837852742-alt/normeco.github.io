@@ -129,7 +129,7 @@ h1, h2, h3, p { margin-top: 0; }
 .section-nav a:hover { color: var(--red); }
 
 .section-dark { color: #fff; background: var(--dark); }
-.challenge-section, .applications-section { padding: clamp(64px,7vw,96px) 0; }
+.challenge-section { padding: clamp(64px,7vw,96px) 0; }
 .section-heading { display: grid; grid-template-columns: minmax(0,1fr) minmax(280px,470px); gap: 44px; align-items: end; margin-bottom: 34px; }
 .section-heading h2 { max-width: 780px; margin: 0; font-size: clamp(2rem,4.2vw,3.8rem); line-height: 1.1; letter-spacing: -.04em; }
 .section-heading > p { margin: 0; color: var(--muted); }
@@ -220,25 +220,6 @@ h1, h2, h3, p { margin-top: 0; }
 .spindle-wireframe i:nth-child(2) { top: 68px; width: 56px; height: 96px; border-color: var(--red); }
 .spindle-wireframe i:nth-child(3) { top: 160px; width: 15px; height: 66px; background: #707a85; }
 
-.scenario-workspace { display: grid; grid-template-columns: 310px minmax(0,1fr); border: 1px solid #3c4651; background: #202731; }
-.scenario-tabs { border-right: 1px solid #3c4651; }
-.scenario-tab { width: 100%; min-height: 94px; display: grid; grid-template-columns: 34px 1fr; gap: 12px; align-items: center; padding: 18px 20px; border: 0; border-bottom: 1px solid #3c4651; color: #dfe5eb; background: transparent; text-align: left; cursor: pointer; }
-.scenario-tab span { color: #7f8a96; font-family: Consolas, monospace; font-size: .72rem; }
-.scenario-tab strong { font-size: .92rem; }
-.scenario-tab:hover, .scenario-tab.is-active { color: #fff; background: #2a333e; }
-.scenario-tab.is-active { box-shadow: inset 4px 0 0 var(--red); }
-.scenario-tab.is-active span { color: #ff6678; }
-.scenario-stage { min-width: 0; }
-.scenario-panel { display: grid; grid-template-columns: minmax(0,1.35fr) minmax(260px,.65fr); min-height: 350px; }
-.scenario-panel[hidden] { display: none; }
-.scenario-placeholder { position: relative; min-height: 350px; display: grid; place-items: center; overflow: hidden; color: #8e99a5; border-right: 1px solid #3c4651; background-image: linear-gradient(#303945 1px,transparent 1px),linear-gradient(90deg,#303945 1px,transparent 1px); background-size: 34px 34px; font-size: .76rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-.scenario-placeholder i { position: absolute; bottom: 65px; width: 18%; height: 30%; border: 1px solid #78838e; }
-.scenario-placeholder i:nth-of-type(1) { left: 13%; }
-.scenario-placeholder i:nth-of-type(2) { left: 41%; height: 46%; border-color: #d14b5c; }
-.scenario-placeholder i:nth-of-type(3) { right: 13%; height: 24%; }
-.scenario-panel > div:last-child { align-self: end; padding: 36px; }
-.scenario-panel h3 { margin-bottom: 12px; font-size: 1.65rem; }
-.scenario-panel p { margin: 0; color: #aeb7c2; }
 
 .value-grid { display: grid; grid-template-columns: repeat(3,1fr); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
 .value-grid article { min-height: 220px; padding: 27px; border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); background: rgba(255,255,255,.78); }
@@ -286,9 +267,6 @@ h1, h2, h3, p { margin-top: 0; }
   .hero-frame { width: 100%; }
   .architecture-grid { grid-template-columns: 1fr; }
   .module-panel { border-top: 1px solid var(--line); border-left: 0; }
-  .scenario-workspace { grid-template-columns: 250px minmax(0,1fr); }
-  .scenario-panel { grid-template-columns: 1fr; }
-  .scenario-placeholder { border-right: 0; border-bottom: 1px solid #3c4651; }
 }
 
 @media (max-width: 980px) {
@@ -349,11 +327,6 @@ h1, h2, h3, p { margin-top: 0; }
   .product-image-media { min-height: 370px; }
   .product-image-stage { height: 290px; }
   .robot-wireframe { transform: translate(-50%,-50%) scale(.75); }
-  .scenario-workspace { grid-template-columns: 1fr; }
-  .scenario-tabs { display: grid; grid-template-columns: 1fr; border-right: 0; }
-  .scenario-tab { min-height: 82px; }
-  .scenario-stage { border-top: 1px solid #3c4651; }
-  .scenario-placeholder { min-height: 300px; }
   .value-grid { grid-template-columns: 1fr; }
   .delivery-list li { grid-template-columns: 42px 1fr; }
   .closing-actions { width: 100%; }
